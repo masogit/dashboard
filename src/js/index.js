@@ -2,19 +2,10 @@ import '../scss/index.scss';
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { App, Box } from 'grommet';
-
-class Main extends Component {
-  render () {
-    return (
-      <App centered={false}>
-        <Box>TEST MY FRAMEWORK</Box>
-      </App>
-    );
-  }
-};
+import { Router, browserHistory } from 'react-router';
+import routes from './routes';
 
 let element = document.getElementById('content');
-ReactDOM.render(React.createElement(Main), element);
+ReactDOM.render(<Router history={browserHistory} routes={routes} />, element);
 
 document.body.classList.remove('loading');

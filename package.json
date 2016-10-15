@@ -11,7 +11,9 @@
   "dependencies": {
     "grommet": "^1.0.0",
     "react": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "react-dom": "^15.0.2",
+    "react-router": "^2.8.1",
+    "rethinkdb": "^2.3.3"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
