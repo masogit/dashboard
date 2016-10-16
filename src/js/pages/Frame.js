@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box, Header, Footer, Sidebar } from 'grommet';
+import { Box, Header, Footer } from 'grommet';
 
 export default class Frame extends Component {
   render () {
@@ -14,4 +14,4 @@ export default class Frame extends Component {
       </Box>
     );
   }
-};
+}
