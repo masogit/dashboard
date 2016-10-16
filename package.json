@@ -12,7 +12,11 @@
     "grommet": "^1.0.0",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
+    "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-router": "^2.1.2",
+    "redux-thunk": "^2.1.0",
     "rethinkdb": "^2.3.3"
   },
   "devDependencies": {
@@ -20,6 +24,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.5.2",
     "grommet-toolbox": "^0.4.5",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "redux-devtools": "^3.3.1"
   }
 }
