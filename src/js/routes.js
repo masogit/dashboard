@@ -1,6 +1,6 @@
-import Frame from './pages/Frame';
-import Home from './pages/Home';
-import NoFound from './pages/NoFound';
+import Frame from './containers/Frame';
+import Home from './containers/Home';
+import NoFound from './containers/NoFound';
 
 export default {
   path: '/',
