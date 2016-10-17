@@ -1,4 +1,4 @@
-# Grommet full project
+# Demo of Grommet Font End Framework
 
 This project has an todo list with a dashboard that illustrates basic usage
 of grommet.
@@ -15,6 +15,7 @@ To run this application, execute the following commands:
 
     ```
     $ gulp dev
+    // or $ npm start
     ```
 
   3. Create the app distribution to be used by the back-end server
