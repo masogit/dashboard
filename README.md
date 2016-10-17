@@ -1,7 +1,6 @@
 # Demo of Grommet Font End Framework
 
-This project has an todo list with a dashboard that illustrates basic usage
-of grommet.
+This project is built by React and Redux framework, to demo a real time dashboard web application use RethinkDB.
 
 To run this application, execute the following commands:
 
@@ -13,7 +12,7 @@ To run this application, execute the following commands:
 
   2. Start the development server:
 
-    ```
+    ``
     $ gulp dev
     // or $ npm start
     ```
