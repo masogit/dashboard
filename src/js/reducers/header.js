@@ -1,7 +1,7 @@
 const initialState = {
   logo: 'demo.png',
   title: 'Demo',
-  modules: [{title: 'Home', router: '/home'}, {title: 'Produce', router: '/product'}],
+  modules: [{title: 'Home', router: '/home'}, {title: 'Module', router: '/module'}],
   activeIndex: 0,
   user: {
     name: 'Admin',

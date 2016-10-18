@@ -1,6 +1,7 @@
 import Login from './containers/Login';
 import Frame from './containers/Frame';
 import Home from './containers/Home';
+import Module from './containers/Module';
 import NoFound from './containers/NoFound';
 
 export default [{
@@ -11,7 +12,8 @@ export default [{
   component: Frame,
   indexRoute: { component: Home },
   childRoutes: [
-    { path: 'home', component: Home }
+    { path: 'home', component: Home },
+    { path: 'module', component: Module }
   ]
 },{
   path: '*',
