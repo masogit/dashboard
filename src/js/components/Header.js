@@ -10,6 +10,12 @@ export default class HeaderArea extends Component {
           {
             modules && modules.map((module, index) => {
               return <Anchor key={index} tag={Link} to={module.router} label={module.title} primary={index==active} onClick={() => setActive(index)}/>;
+              /**
+               * Link to
+               * browserHistory.push
+               *
+               * <Anchor key={index} tag={Link} label={module.title} primary={index==active} onClick={() => { setActive(index); browserHistory.push(module.router); }}/>;
+               * */
             })
           }
         </Header>
