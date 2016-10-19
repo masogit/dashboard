@@ -17,8 +17,8 @@ export default class Sidebar extends Component {
                     {
                       menus[group] && menus[group].map((menu, index) => {
                         return (
-                          <ListItem>
-                            <Anchor key={index} tag={Link} label={menu.title} to={menu.router} />
+                          <ListItem key={index}>
+                            <Anchor tag={Link} label={menu.title} to={menu.router} />
                           </ListItem>
                         );
                       })

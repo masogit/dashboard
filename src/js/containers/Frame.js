@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Box } from 'grommet';
 import { Header, Footer, Sidebar } from '../components';
-import { types } from '../reducers/index';
+import { types } from '../reducers';
 
 class Frame extends Component {
   render () {
@@ -12,7 +12,7 @@ class Frame extends Component {
         <Header modules={modules} active={active} setActive={setActive} user={user} title={title}/>
         <Box flex={true} direction="row">
           <Sidebar menus={menus} />
-          <Box>{this.props.children}</Box>
+          <Box flex={true}>{this.props.children}</Box>
         </Box>
         <Footer />
       </Box>

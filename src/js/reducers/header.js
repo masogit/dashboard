@@ -4,10 +4,9 @@ const initialState = {
   logo: 'demo.png',
   title: 'Demo',
   modules: [
-    {title: 'Home', router: '/home'},
-    {title: 'Module1', router: '/module'},
-    {title: 'Module2', router: '/module'},
-    {title: 'Help', router: '/module'}
+    {title: 'HOME', router: '/home'},
+    {title: 'DEVICES', router: '/device'},
+    {title: 'ADMINISTRATION', router: '/module'}
   ],
   activeIndex: 0,
   user: {
@@ -16,7 +15,7 @@ const initialState = {
   },
   menus: {
     Users: [{title: 'General', router: '/home'}],
-    'Device Groups': [{title: 'Device', router: '/device'}, {title: 'user', router: '/user'}],
+    'Device Groups': [{title: 'Device', router: '/device'}, {title: 'User', router: '/user'}],
     Settings: [{title: 'Equipment', router: '/module'}],
     Reservations: [{title: 'Compliance', router: '/module'}],
     Licenses: [{title: 'Compliance', router: '/module'}]
