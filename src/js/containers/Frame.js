@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Box } from 'grommet';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { Header, Footer, Sidebar } from '../components';
 import { types } from '../reducers/index';
 
 class Frame extends Component {
   render () {
-    const { modules, active, setActive, user } = this.props;
+    const { modules, active, setActive, user, title, menus } = this.props;
     return (
       <Box full={true}>
-        <Header modules={modules} active={active} setActive={setActive} user={user}/>
+        <Header modules={modules} active={active} setActive={setActive} user={user} title={title}/>
         <Box flex={true} direction="row">
-          <Box separator="right" style={{width: '200px'}}>Sidebar</Box>
+          <Sidebar menus={menus} />
           <Box>{this.props.children}</Box>
         </Box>
         <Footer />
@@ -25,7 +24,9 @@ let mapStateToProps = (state) => {
   return {
     modules: state.header.modules,
     active: state.header.activeIndex,
-    user: state.header.user
+    user: state.header.user,
+    title: state.header.title,
+    menus: state.header.menus
   };
 };
 
