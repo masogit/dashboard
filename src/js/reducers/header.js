@@ -10,7 +10,7 @@ const initialState = {
   menus: []
 };
 
-export default function reducer(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case 'module_active':
       return { ...state, ...{activeIndex: action.index} };
