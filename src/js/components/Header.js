@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
-import { Anchor, Header } from 'grommet';
+import { Anchor, Header, Box } from 'grommet';
 import { Link } from 'react-router';
 
 export default class HeaderArea extends Component {
   render() {
-    const {modules, active, setActive} = this.props;
+    const {modules, active, setActive, user} = this.props;
     return (
-        <Header separator="bottom">
-          {
-            modules && modules.map((module, index) => {
-              return <Anchor key={index} tag={Link} to={module.router} label={module.title} primary={index==active} onClick={() => setActive(index)}/>;
-              /**
-               * Link to
-               * browserHistory.push
-               *
-               * <Anchor key={index} tag={Link} label={module.title} primary={index==active} onClick={() => { setActive(index); browserHistory.push(module.router); }}/>;
-               * */
-            })
-          }
+        <Header separator="bottom" justify="between">
+          <Box direction="row" pad="small">
+            {
+              modules && modules.map((module, index) => {
+                return <Anchor key={index} tag={Link} to={module.router} label={module.title} primary={index==active} onClick={() => setActive(index)}/>;
+                /**
+                 * Link to
+                 * browserHistory.push
+                 *
+                 * <Anchor key={index} tag={Link} label={module.title} primary={index==active} onClick={() => { setActive(index); browserHistory.push(module.router); }}/>;
+                 * */
+              })
+            }
+          </Box>
+          <Box>{user.name}</Box>
         </Header>
     );
   }

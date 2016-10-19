@@ -16,6 +16,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case types.ACTIVE:
       return { ...state, ...{activeIndex: action.index} };
+    case types.LOGIN:
+      return { ...state, ...{user: {name: action.login}}};
     default:
       return state;
   }
