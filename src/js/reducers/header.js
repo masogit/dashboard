@@ -1,3 +1,5 @@
+import { types } from './index';
+
 const initialState = {
   logo: 'demo.png',
   title: 'Demo',
@@ -12,10 +14,9 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case 'module_active':
+    case types.ACTIVE:
       return { ...state, ...{activeIndex: action.index} };
     default:
       return state;
   }
 }
-

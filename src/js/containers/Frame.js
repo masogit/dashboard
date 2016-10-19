@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Box } from 'grommet';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { types } from '../reducers/index';
 
 class Frame extends Component {
   render () {
@@ -29,7 +30,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchProps = (dispatch) => {
   return {
-    setActive: (index) => dispatch({type: 'module_active', index: index})
+    setActive: (index) => dispatch({type: types.ACTIVE, index: index})
   };
 };
 
