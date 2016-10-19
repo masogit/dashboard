@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Anchor, Header, Title, Menu, Search } from 'grommet';
 import { Link } from 'react-router';
+import UserIcon from 'grommet/components/icons/base/User';
 
 export default class HeaderArea extends Component {
   render() {
     const {modules, active, setActive, user, title} = this.props;
     return (
       <Header justify="between" separator='bottom'>
-        <Title> {title} </Title>
+        <Title> <img src='img/mobile-app-icon.png' width='30px'/> {title} </Title>
         <Menu direction="row" align="center" responsive={false}>
           {
             modules && modules.map((module, index) => {
@@ -19,6 +20,9 @@ export default class HeaderArea extends Component {
             })
           }
           <Search dropAlign={{ "right": "right" }} />
+          <Menu icon={<UserIcon />} label={user.name}>
+            <Anchor label="Logout" tag={Link} to={'/login'}/>
+          </Menu>
         </Menu>
       </Header>
     );

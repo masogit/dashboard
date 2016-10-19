@@ -14,12 +14,13 @@ const initialState = {
     name: 'Admin',
     email: 'admin@abc.com'
   },
-  menus: [
-    {title: 'General', router: '/home'},
-    {title: 'Assets', router: '/module'},
-    {title: 'Equipment', router: '/module'},
-    {title: 'Compliance', router: '/module'}
-  ]
+  menus: {
+    Users: [{title: 'General', router: '/home'}],
+    'Device Groups': [{title: 'Device', router: '/device'}, {title: 'user', router: '/user'}],
+    Settings: [{title: 'Equipment', router: '/module'}],
+    Reservations: [{title: 'Compliance', router: '/module'}],
+    Licenses: [{title: 'Compliance', router: '/module'}]
+  }
 };
 
 export default function (state = initialState, action) {
