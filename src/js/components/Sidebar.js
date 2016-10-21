@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Anchor, Box, Accordion, AccordionPanel, List, ListItem } from 'grommet';
+import { Anchor, Sidebar, Header, Title, Accordion, AccordionPanel, List, ListItem } from 'grommet';
 import { Link } from 'react-router';
 
-export default class Sidebar extends Component {
+export default class SideBar extends Component {
   render() {
     const { menus } = this.props;
     const groups = Object.keys(menus);
     return (
-      <Box separator="right" style={{ width: '250px' }} pad="small">
+      <Sidebar full={false} pad="small" separator="right">
+        <Header justify="between">
+          <Title>
+            SideBar
+          </Title>
+        </Header>
         <Accordion animate={false}>
           {
             groups.map((group, index) => {
@@ -29,7 +34,7 @@ export default class Sidebar extends Component {
             })
           }
         </Accordion>
-      </Box>
+      </Sidebar>
     );
   }
 }
