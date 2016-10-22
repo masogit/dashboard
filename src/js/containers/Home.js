@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tile, Box, Tiles, Columns } from 'grommet';
+import { Tile, Box, Tiles} from 'grommet';
 import {
   TopCenter,
   TopLeft,
@@ -43,14 +43,14 @@ export default class Home extends Component {
         </Box>
         <Box style={{flexGrow: 1}}>
           <Tiles fill={true} flex={true}>
-            <Tile  align="center" pad="medium" margin="small"  style={{flexGrow: 6}}>
-              <BottomLeft />
+            <Tile size='large' align='start'>
+              <BottomLeft title='SYSTEM HEALTH SUMMARY'/>
             </Tile>
-            <Tile  align="center" pad="medium" margin="small">
-              <BottomCenter/>
+            <Tile size='small'>
+              <BottomCenter title='RECENT EVENTS'/>
             </Tile>
-            <Tile  align="center" pad="medium" margin="small">
-              <BottomRight/>
+            <Tile size='small'>
+              <BottomRight title='USERS FEEDBACK'/>
             </Tile>
           </Tiles>
         </Box>
