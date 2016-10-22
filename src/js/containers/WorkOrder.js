@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Box } from 'grommet';
 
-export default class Module extends Component {
+export default class Settings extends Component {
   render() {
     return (
         <Box>
-            This a Module page.
+            This is WorkOrder.
         </Box>
     );
   }

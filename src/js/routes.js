@@ -1,4 +1,4 @@
-import { Device, Frame, Home, Login, Module, NoFound } from './containers';
+import { Device, Frame, Home, Login, Settings, WorkOrder, NoFound } from './containers';
 
 export default [{
   path: '/login',
@@ -9,8 +9,9 @@ export default [{
   indexRoute: { component: Home },
   childRoutes: [
     { path: 'home', component: Home },
-    { path: 'module', component: Module },
-    { path: 'device', component: Device }
+    { path: 'device', component: Device },
+    { path: 'workorder', component: WorkOrder },
+    { path: 'settings', component: Settings }
   ]
 },{
   path: '*',

@@ -5,11 +5,18 @@ import { Header, Footer, Sidebar } from '../components';
 import { types } from '../reducers';
 
 class Frame extends Component {
+
   render () {
-    const { modules, active, setActive, user, title, menus } = this.props;
+    const { modules, user, title, location } = this.props;
+    let module = modules.filter((module) => {
+      return module.router == location.pathname;
+    })[0];
+
+    let menus = module && module.menus ? module.menus : null;
+
     return (
       <Box full={true}>
-        <Header modules={modules} active={active} setActive={setActive} user={user} title={title}/>
+        <Header modules={modules} active={location.pathname} user={user} title={title}/>
         <Box flex={true} direction="row">
           <Sidebar menus={menus} />
           <Box flex={true}>{this.props.children}</Box>
@@ -23,10 +30,8 @@ class Frame extends Component {
 let mapStateToProps = (state) => {
   return {
     modules: state.header.modules,
-    active: state.header.activeIndex,
     user: state.header.user,
-    title: state.header.title,
-    menus: state.header.menus
+    title: state.header.title
   };
 };
 

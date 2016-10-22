@@ -1,7 +1,8 @@
 import Login from './Login';
 import Frame from './Frame';
 import Home from './Home';
-import Module from './Module';
+import Settings from './Settings';
+import WorkOrder from './WorkOrder';
 import NoFound from './NoFound';
 import Device from './Device';
 
@@ -9,7 +10,8 @@ export {
   Login,
   Frame,
   Home,
-  Module,
+  Settings,
+  WorkOrder,
   NoFound,
   Device
 };
