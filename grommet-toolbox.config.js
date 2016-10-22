@@ -11,5 +11,8 @@ export default {
   jsAssets: ['src/js/**/*.js'],
   mainJs: 'src/js/index.js',
   mainScss: 'src/scss/index.scss',
-  devServerPort: 9001
+  devServerPort: 9001,
+  webpack: {
+    devtool: 'cheap-source-map'
+  }
 };
