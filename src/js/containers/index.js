@@ -5,6 +5,7 @@ import Settings from './Settings';
 import WorkOrder from './WorkOrder';
 import NoFound from './NoFound';
 import Device from './Device';
+import DeviceModel from './DeviceModel';
 
 export {
   Login,
@@ -13,5 +14,6 @@ export {
   Settings,
   WorkOrder,
   NoFound,
-  Device
+  Device,
+  DeviceModel
 };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tile, Box, Tiles, Columns } from 'grommet';
+import { Tile, Box, Tiles } from 'grommet';
 import {
   TopCenter,
   TopLeft,

@@ -9,7 +9,7 @@ class Frame extends Component {
   render () {
     const { modules, user, title, location } = this.props;
     let module = modules.filter((module) => {
-      return module.router == location.pathname;
+      return location.pathname.indexOf(module.router) === 0;
     })[0];
 
     let menus = module && module.menus ? module.menus : null;

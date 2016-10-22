@@ -25,5 +25,5 @@ export {
   MiddleRight,
   BottomCenter,
   BottomLeft,
-  BottomRight,
+  BottomRight
 };
