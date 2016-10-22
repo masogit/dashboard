@@ -16,9 +16,9 @@ const initialState = {
     {title: 'WORKORDER', router: '/workorder'},
     {title: 'SETTINGS', router: '/settings',
       menus: {
-        Device: [{title: 'DeviceA', router: '/device/model/A'}, {title: 'DeviceB', router: '/device/model/B'}],
-        Customer: [{title: 'CustomerA', router: '/customer/A'}, {title: 'CustomerB', router: '/customer/B'}],
-        Status: [{title: 'Normal', router: '/status/normal'}, {title: 'Alarm', router: '/status/alarm'}]
+        Device: [{title: 'DeviceA', router: '/settings/device/A'}, {title: 'DeviceB', router: '/settings/device/B'}],
+        Customer: [{title: 'CustomerA', router: '/settings/customer/A'}, {title: 'CustomerB', router: '/settings/customer/B'}],
+        Status: [{title: 'Normal', router: '/settings/status/normal'}, {title: 'Alarm', router: '/settings/status/alarm'}]
       }
     }
   ],
