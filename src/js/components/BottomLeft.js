@@ -2,7 +2,7 @@
  * Created by huling on 10/22/2016.
  */
 import React, { Component } from 'react';
-import { Box, Heading, Header, Menu, Anchor, Value, Meter} from 'grommet';
+import { Box, Heading, Header, Menu, Anchor, Meter} from 'grommet';
 import Chart, { Layers, Base, Area, Marker, MarkerLabel,Grid,
   HotSpots, Axis } from 'grommet/components/chart/Chart';
 import Status from 'grommet/components/icons/Status';
