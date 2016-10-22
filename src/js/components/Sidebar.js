@@ -6,6 +6,9 @@ export default class SideBar extends Component {
   render() {
     const { menus } = this.props;
     const groups = Object.keys(menus);
+    if (groups.length == 0) {
+      return null;
+    }
     return (
       <Sidebar full={false} pad="small" separator="right">
         <Header justify="between">
