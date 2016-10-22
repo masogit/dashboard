@@ -6,6 +6,10 @@ import WorkOrder from './WorkOrder';
 import NoFound from './NoFound';
 import Device from './Device';
 import DeviceModel from './DeviceModel';
+import DeviceAlarm from './DeviceAlarm';
+import DeviceHistory from './DeviceHistory';
+import DeviceStatus from './DeviceStatus';
+import Customer from './Customer';
 
 export {
   Login,
@@ -15,5 +19,9 @@ export {
   WorkOrder,
   NoFound,
   Device,
-  DeviceModel
+  DeviceModel,
+  DeviceAlarm,
+  DeviceHistory,
+  DeviceStatus,
+  Customer
 };
