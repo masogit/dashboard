@@ -12,14 +12,16 @@ export default class TopCenter extends Component {
         <Header>
           <Heading tag='h3' strong={true}>WORLDWIDE DEVICE DISTRIBUTION</Heading>
         </Header>
-        <WorldMap series={[
-            { continent: 'NorthAmerica', colorIndex: 'graph-1' },
-            { continent: 'SouthAmerica', colorIndex: 'accent-1' },
-            { continent: 'Europe', colorIndex: 'unset' },
-            { continent: 'Africa', colorIndex: 'graph-2' },
-            { continent: 'Asia', colorIndex: 'graph-3' },
-            { continent: 'Australia', colorIndex: 'graph-4' }
-        ]} />
+        <Box size="large">
+          <WorldMap series={[
+              { continent: 'NorthAmerica', colorIndex: 'graph-1' },
+              { continent: 'SouthAmerica', colorIndex: 'accent-1' },
+              { continent: 'Europe', colorIndex: 'unset' },
+              { continent: 'Africa', colorIndex: 'graph-2' },
+              { continent: 'Asia', colorIndex: 'graph-3' },
+              { continent: 'Australia', colorIndex: 'graph-4' }
+          ]} />
+        </Box>
       </Box>
     );
   }
