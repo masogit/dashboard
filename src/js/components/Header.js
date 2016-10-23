@@ -5,7 +5,7 @@ import UserIcon from 'grommet/components/icons/base/User';
 
 export default class HeaderArea extends Component {
   render() {
-    const {modules, active, user, title} = this.props;
+    const {modules, path, user, title} = this.props;
     return (
       <Header justify="between" separator='bottom'>
         <Title> <img src='img/mobile-app-icon.png' width='30px'/> {title} </Title>
@@ -14,7 +14,7 @@ export default class HeaderArea extends Component {
             modules && modules.map((module, index) => {
               return (
                 <Anchor key={index} tag={Link} to={module.router}
-                        label={module.title} className={module.router == active ? 'active' : ''} />
+                        label={module.title} className={path.indexOf(module.router) == 0 ? 'active' : ''} />
               );
             })
           }

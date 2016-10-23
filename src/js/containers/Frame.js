@@ -16,7 +16,7 @@ class Frame extends Component {
 
     return (
       <Box full={true}>
-        <Header modules={modules} active={location.pathname} user={user} title={title}/>
+        <Header modules={modules} path={location.pathname} user={user} title={title}/>
         <Box flex={true} direction="row">
           <Sidebar menus={menus} />
           <Box flex={true}>{this.props.children}</Box>
