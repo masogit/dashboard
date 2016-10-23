@@ -17,26 +17,26 @@ export default class Home extends Component {
       <Box flex={true}>
         <Box style={{flexGrow: 1}}>
           <Tiles fill={true} flex={true}>
-            <Tile  align="center" pad="medium" margin="small" >
+            <Tile pad="medium" margin="small" >
               <TopLeft/>
             </Tile>
-            <Tile  align="center" pad="medium" margin="small" >
+            <Tile pad="medium" margin="small" >
               <TopCenter/>
             </Tile>
-            <Tile  align="center" pad="medium" margin="small" >
+            <Tile pad="medium" margin="small" >
               <TopRight/>
             </Tile>
           </Tiles>
         </Box>
         <Box style={{flexGrow: 1}}>
           <Tiles fill={true} flex={true}>
-            <Tile  align="center" pad="medium" margin="small" >
+            <Tile pad="medium" margin="small" >
               <MiddleLeft/>
             </Tile>
-            <Tile  align="center" pad="medium" margin="small" >
+            <Tile pad="medium" margin="small" >
               <MiddleCenter/>
             </Tile>
-            <Tile  align="center" pad="medium" margin="small" >
+            <Tile pad="medium" margin="small" >
               <MiddleRight/>
             </Tile>
           </Tiles>
