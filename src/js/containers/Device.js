@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import GoogleMap from 'google-map-react';
 import { connect } from 'react-redux';
-import { Anchor, Box, Header, Menu, Search } from 'grommet';
+import { Box, Tabs, Tab } from 'grommet';
+import WorldMap from 'grommet/components/WorldMap';
 import { Table } from '../components';
 
 class Device extends Component {
@@ -9,21 +9,23 @@ class Device extends Component {
     const { records, labels } = this.props;
     return (
       <Box pad="small">
-        <Header pad={{horizontal: 'large'}} justify="between">
-          <Menu inline={true} direction="row">
-            <Anchor href="#" className="active" label="Location" />
-            <Anchor href="#" label="Model" />
-            <Anchor href="#" label="Customer" />
-          </Menu>
-          <Search />
-        </Header>
-        <GoogleMap
-          center={{lat: 59.938043, lng: 30.337157}} zoom={9} minZoom={4}
-          bootstrapURLKeys={{
-            key: 'AIzaSyBeNcGEweF_9m1IlCkQjTN3JLqE7RsV5UY',
-            language: 'en'
-          }} />
-        <Table data={records} fields={labels} />
+        <Tabs>
+          <Tab title="Location">
+            <WorldMap series={[
+                { continent: 'NorthAmerica', colorIndex: 'graph-1' },
+                { continent: 'SouthAmerica', colorIndex: 'accent-1' },
+                { continent: 'Europe', colorIndex: 'unset' },
+                { continent: 'Africa', colorIndex: 'graph-2' },
+                { continent: 'Asia', colorIndex: 'graph-3' },
+                { continent: 'Australia', colorIndex: 'graph-4' }
+            ]} />
+            <Table data={records} fields={labels} />
+          </Tab>
+          <Tab title="Model">
+          </Tab>
+          <Tab title="Customer">
+          </Tab>
+        </Tabs>
       </Box>
     );
   }
