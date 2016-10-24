@@ -10,6 +10,7 @@ import DeviceAlarm from './DeviceAlarm';
 import DeviceHistory from './DeviceHistory';
 import DeviceStatus from './DeviceStatus';
 import Customer from './Customer';
+import Status from './Status';
 
 export {
   Login,
@@ -23,5 +24,6 @@ export {
   DeviceAlarm,
   DeviceHistory,
   DeviceStatus,
-  Customer
+  Customer,
+  Status
 };
