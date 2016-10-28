@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import header from './header';
 import device from './device';
 
@@ -14,4 +15,4 @@ const reducers = combineReducers({
   device
 });
 
-export default createStore(reducers);
+export default createStore(reducers, applyMiddleware(thunkMiddleware));
