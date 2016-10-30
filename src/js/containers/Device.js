@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Box, Tabs, Tab } from 'grommet';
-import WorldMap from 'grommet/components/WorldMap';
+import { Map } from 'react-d3-map';
 import { Table } from '../components';
+
+const mapConf = {
+  width: 1400,
+  height: 600,
+  scale: 4000,
+  scaleExtent: [1 << 12, 1 << 13],
+  center: [111, 36]
+};
 
 class Device extends Component {
   render() {
@@ -12,14 +20,7 @@ class Device extends Component {
         <Tabs>
           <Tab title="Location">
             <Box size="large">
-              <WorldMap series={[
-                  { continent: 'NorthAmerica', colorIndex: 'graph-1' },
-                  { continent: 'SouthAmerica', colorIndex: 'accent-1' },
-                  { continent: 'Europe', colorIndex: 'unset' },
-                  { continent: 'Africa', colorIndex: 'graph-2' },
-                  { continent: 'Asia', colorIndex: 'graph-3' },
-                  { continent: 'Australia', colorIndex: 'graph-4' }
-              ]} />
+              <Map {...mapConf}/>
             </Box>
             <Table data={records} fields={labels} />
           </Tab>
