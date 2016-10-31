@@ -14,7 +14,7 @@ const ohlcData = [
               { x: myDate.setMonth(myDate.getMonth() + 2), open: 138, high: 453.21, low: 435.86 , close: 449.83 },
               { x: myDate.setMonth(myDate.getMonth() + 3), open: 366, high: 453.21, low: 300 , close: 449.83 },
               { x: myDate.setMonth(myDate.getMonth() + 4), open: 100, high: 400, low: 200 , close: 200 }
-            ]
+    ]
   }
 ];
 
