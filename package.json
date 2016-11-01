@@ -26,6 +26,7 @@
     "babel-register": "^6.5.2",
     "grommet-toolbox": "^0.4.5",
     "gulp": "^3.9.0",
+    "node-sass": "^3.10.1",
     "redux-devtools": "^3.3.1"
   }
 }
