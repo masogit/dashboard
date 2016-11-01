@@ -33,7 +33,7 @@ export default function (state = initialState, action) {
     case types.LOGIN:
       return { ...state, ...{user: {name: action.login}}};
     case types.INIT_DEVICE_TYPE: {
-      let deviceTypes = ['燃烧器', '锅炉', '天气检测'];
+      let deviceTypes = action.deviceTypes;
       // let deviceTypes = action.deviceTypes;
       let modules = state.modules;
       let menuDevice = modules.filter((module) => {

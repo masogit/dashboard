@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Box } from 'grommet';
 import { Header, Footer, Sidebar } from '../components';
-import { types } from '../reducers';
+import { deviceActions } from '../actions';
 
 class Frame extends Component {
 
@@ -41,8 +41,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchProps = (dispatch) => {
   return {
-    setActive: (index) => dispatch({type: types.ACTIVE, index: index}),
-    initDeviceTypes: () => dispatch({ type: types.INIT_DEVICE_TYPE })
+    initDeviceTypes: () => dispatch(deviceActions.loadDeviceTypes())
   };
 };
 
