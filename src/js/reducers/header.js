@@ -16,7 +16,7 @@ const initialState = {
     {title: 'WORKORDER', router: '/workorder'},
     {title: 'SETTINGS', router: '/settings',
       menus: {
-        Device: [{title: 'Model A', router: '/settings/device/A'}, {title: 'Model B', router: '/settings/device/B'}],
+        Device: [],
         Customer: [{title: 'Customer A', router: '/settings/customer/A'}, {title: 'Customer B', router: '/settings/customer/B'}],
         Status: [{title: 'Normal', router: '/settings/status/normal'}, {title: 'Alarm', router: '/settings/status/alarm'}]
       }
@@ -32,6 +32,22 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case types.LOGIN:
       return { ...state, ...{user: {name: action.login}}};
+    case types.INIT_DEVICE_TYPE: {
+      let deviceTypes = ['燃烧器', '锅炉', '天气检测'];
+      // let deviceTypes = action.deviceTypes;
+      let modules = state.modules;
+      let menuDevice = modules.filter((module) => {
+        return module.title === 'SETTINGS';
+      })[0].menus.Device;
+
+      deviceTypes.forEach((type) => {
+        menuDevice.push({
+          title: type, router: '/settings/device/' + type
+        });
+      });
+
+      return { ...state, ...{'modules': modules}};
+    }
     default:
       return state;
   }

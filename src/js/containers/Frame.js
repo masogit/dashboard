@@ -6,6 +6,10 @@ import { types } from '../reducers';
 
 class Frame extends Component {
 
+  componentDidMount() {
+    this.props.initDeviceTypes();
+  }
+
   render () {
     const { modules, user, title, location } = this.props;
     let module = modules.filter((module) => {
@@ -37,7 +41,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchProps = (dispatch) => {
   return {
-    setActive: (index) => dispatch({type: types.ACTIVE, index: index})
+    setActive: (index) => dispatch({type: types.ACTIVE, index: index}),
+    initDeviceTypes: () => dispatch({ type: types.INIT_DEVICE_TYPE })
   };
 };
 

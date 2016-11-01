@@ -4,6 +4,7 @@ import header from './header';
 import device from './device';
 
 const types = {
+  INIT_DEVICE_TYPE: 'init_device_type',
   ACTIVE: 'module_active',
   LOGIN: 'app_login'
 };
