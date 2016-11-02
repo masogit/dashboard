@@ -8,11 +8,8 @@ import { Table } from '../components';
 const initialState = {
   records: [
     {'NO.': '123123', NAME: 'Device 01', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'}
   ],
-  labels: "NO.,NAME,PRESSURE,TEMP,TIME,AGENT"
+  labels: "NO.,NAME,PRESSURE"
 };
 
 export default class MiddleCenter extends Component {

@@ -1,17 +1,32 @@
-import { types } from '../reducers';
+import { TYPE } from '../constants';
 import { Rest } from 'grommet';
+import { URL } from '../constants';
 
-const url_deviceTypes = "http://www.zhiyuninfo.com:8080/devicemanager-1.0/dmrest/devicetypes";
 export function loadDeviceTypes() {
-  Rest.default.setHeader('Access-Control-Allow-Origin', 'http://www.zhiyuninfo.com');
-  Rest.default.get(url_deviceTypes).then((data) => {
-    console.log(data);
-  }, (reason) => {
-    console.log(reason);
-  });
-  let deviceTypes = ['燃烧器', '锅炉', '天气检测'];
-  return {
-    type: types.INIT_DEVICE_TYPE,
-    deviceTypes
+  return dispatch => {
+    Rest.default.get(URL.DEVICE_TYPES).then((res) => {
+      let deviceTypes = res.body;
+      let deviceTypesMenus = deviceTypes.map((type) => {
+        return type.name;
+      });
+      return dispatch({
+        type: TYPE.INIT_DEVICE_TYPE,
+        deviceTypesMenus,
+        deviceTypes
+      });
+    });
+  };
+};
+
+export function loadDevices() {
+  return dispatch => {
+    Rest.default.get(URL.DEVICES).then((res) => {
+      let devices = res.body;
+      console.log(devices);
+      return dispatch({
+        type: TYPE.LOAD_ALL_DEVICES,
+        devices
+      });
+    });
   };
 };

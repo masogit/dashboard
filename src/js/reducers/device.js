@@ -1,26 +1,17 @@
-import { types } from './index';
+import { TYPE } from '../constants';
 
 const initialState = {
-  records: [
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'},
-    {'NO.': '123123', NAME: 'Device 01', PROVIDER: 'HPE', CONSUMER: 'ABC', PRESSURE: '123p', TEMP: '38C', TIME: '2016-10-10 20:00:00', AGENT: 'DDD'}
-  ],
-  labels: "NO.,NAME,PROVIDER,CONSUMER,PRESSURE,TEMP,TIME,AGENT"
+  records: [],
+  types: []
+};
+
+const handlers = {
+  [TYPE.LOAD_ALL_DEVICES]: (state, action) => ({records: action.devices}),
+  [TYPE.INIT_DEVICE_TYPE]: (state, action) => ({types: action.deviceTypes})
 };
 
 export default function (state = initialState, action) {
-  switch (action.type) {
-    case types.ACTIVE:
-      return { ...state, ...{activeIndex: action.index} };
-    case types.LOGIN:
-      return { ...state, ...{user: {name: action.login}}};
-    default:
-      return state;
-  }
-}
+  let handler = handlers[action.type];
+  if (!handler) return state;
+  return {...state, ...handler(state, action)};
+};

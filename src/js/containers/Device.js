@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Box, Tabs, Tab } from 'grommet';
 import { Map } from 'react-d3-map';
 import { Table } from '../components';
+import { deviceActions } from '../actions';
 
 const mapConf = {
   width: 1400,
@@ -13,8 +15,12 @@ const mapConf = {
 };
 
 class Device extends Component {
+  componentDidMount() {
+    this.props.actions.loadDevices();
+  }
+
   render() {
-    const { records, labels } = this.props;
+    const { records } = this.props;
     return (
       <Box pad="small">
         <Tabs>
@@ -22,7 +28,7 @@ class Device extends Component {
             <Box size="large">
               <Map {...mapConf}/>
             </Box>
-            <Table data={records} fields={labels} />
+            <Table data={records}/>
           </Tab>
           <Tab title="Model" />
           <Tab title="Customer" />
@@ -34,9 +40,12 @@ class Device extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    records: state.device.records,
-    labels: state.device.labels
+    records: state.device.records
   };
 };
 
-export default connect(mapStateToProps)(Device);
+let mapDispatchProps = (dispatch) => ({
+  actions: bindActionCreators(deviceActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchProps)(Device);

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Box } from 'grommet';
+import { bindActionCreators } from 'redux';
 import { Header, Footer, Sidebar } from '../components';
 import { deviceActions } from '../actions';
 
 class Frame extends Component {
 
   componentDidMount() {
-    this.props.initDeviceTypes();
+    this.props.actions.loadDeviceTypes();
   }
 
   render () {
@@ -39,11 +40,9 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchProps = (dispatch) => {
-  return {
-    initDeviceTypes: () => dispatch(deviceActions.loadDeviceTypes())
-  };
-};
+let mapDispatchProps = (dispatch) => ({
+  actions: bindActionCreators(deviceActions, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchProps)(Frame);
 

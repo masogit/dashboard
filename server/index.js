@@ -1,21 +1,22 @@
 var express = require('express');
 var http = require('http-proxy');
-// var path = require('path');
+var path = require('path');
 var app = express();
-var router = express.Router();
 var proxy = http.createProxyServer();
+var bodyParser = require('body-parser');
 
-app.use(router);
+app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
+app.use(express.static(__dirname + '/../dist'));
 
-// http://www.zhiyuninfo.com:8080/devicemanager-1.0/dmrest/devicetypes
 app.use('/devicemanager', (req, res) => {
+  // http://www.zhiyuninfo.com:8080/devicemanager-1.0/dmrest/devicetypes
   proxy.web(req, res, {target: "http://www.zhiyuninfo.com:8080/devicemanager-1.0/dmrest"});
 });
 
-// router.get('/*', function(req, res) {
-//   console.log('----');
-//   res.sendFile(path.resolve(path.join(__dirname, '/../dist/index.html')));
-// });
+app.get('/*', function(req, res) {
+  res.sendFile(path.resolve(path.join(__dirname, '/../dist/index.html')));
+});
 
 app.listen(9000, function () {
   console.log('Example app listening on port 9000!');
