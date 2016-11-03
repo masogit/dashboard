@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Box, Tabs, Tab } from 'grommet';
-import { Map } from 'react-d3-map';
+import { Map, MarkerGroup } from 'react-d3-map';
 import { Table } from '../components';
 import { deviceActions } from '../actions';
 
@@ -19,6 +19,22 @@ class Device extends Component {
     this.props.actions.loadDevices();
   }
 
+  renderMarkerGroup(records) {
+    return records.map((record) => {
+      var data = {
+          "type": "Feature",
+          "properties": {
+            "text": record.name
+          },
+          "geometry": {
+              "type": "Point",
+              "coordinates": [record.longitude, record.latitude]
+          }
+      }
+      return <MarkerGroup data={data}/>
+    });
+  }
+
   render() {
     const { records } = this.props;
     return (
@@ -26,7 +42,9 @@ class Device extends Component {
         <Tabs>
           <Tab title="Location">
             <Box size="large">
-              <Map {...mapConf}/>
+              <Map {...mapConf}>
+                { this.renderMarkerGroup(records) }
+              </Map>
             </Box>
             <Table data={records}/>
           </Tab>
