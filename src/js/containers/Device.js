@@ -22,16 +22,16 @@ class Device extends Component {
   renderMarkerGroup(records) {
     return records.map((record) => {
       var data = {
-          "type": "Feature",
-          "properties": {
-            "text": record.name
-          },
-          "geometry": {
-              "type": "Point",
-              "coordinates": [record.longitude, record.latitude]
-          }
-      }
-      return <MarkerGroup data={data}/>
+        "type": "Feature",
+        "properties": {
+          "text": record.name
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [record.longitude, record.latitude]
+        }
+      };
+      return <MarkerGroup data={data}/>;
     });
   }
 
