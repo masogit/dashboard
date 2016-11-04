@@ -1,28 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Box, Tabs, Tab } from 'grommet';
-import { Map } from 'react-d3-map';
+import { bindActionCreators } from 'redux';
+import { Box, Tabs, Tab, Sidebar, Legend, Heading } from 'grommet';
+import { Map, MarkerGroup } from 'react-d3-map';
 import { Table } from '../components';
+import { deviceActions } from '../actions';
 
 const mapConf = {
-  width: 1400,
+  width: 1200,
   height: 600,
   scale: 4000,
   scaleExtent: [1 << 12, 1 << 13],
-  center: [111, 36]
+  center: [100, 36]
 };
 
 class Device extends Component {
+  componentDidMount() {
+    this.props.actions.loadDevices();
+  }
+
+  renderMarkerGroup(records) {
+    return records.map((data) => {
+      return <MarkerGroup data={data}/>;
+    });
+  }
+
+  renderLegends(legends) {
+    return Object.keys(legends).map((key) => {
+      return (
+        <Box pad="small">
+          <Heading uppercase={true} tag="h3">{key}</Heading>
+          <Legend series={legends[key]} total={true} />
+        </Box>
+      );
+    });
+  }
+
   render() {
-    const { records, labels } = this.props;
+    const { records, markers, legends } = this.props;
     return (
       <Box pad="small">
         <Tabs>
           <Tab title="Location">
-            <Box size="large">
-              <Map {...mapConf}/>
+            <Box direction="row">
+              <Sidebar full={false}>
+                { this.renderLegends(legends) }
+              </Sidebar>
+              <Map {...mapConf}>
+                { this.renderMarkerGroup(markers) }
+              </Map>
             </Box>
-            <Table data={records} fields={labels} />
+            <Table data={records}/>
           </Tab>
           <Tab title="Model" />
           <Tab title="Customer" />
@@ -35,8 +63,13 @@ class Device extends Component {
 let mapStateToProps = (state) => {
   return {
     records: state.device.records,
-    labels: state.device.labels
+    markers: state.device.markers,
+    legends: state.device.legends
   };
 };
 
-export default connect(mapStateToProps)(Device);
+let mapDispatchProps = (dispatch) => ({
+  actions: bindActionCreators(deviceActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchProps)(Device);

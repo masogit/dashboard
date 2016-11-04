@@ -1,4 +1,4 @@
-import { types } from './index';
+import { TYPE } from '../constants';
 
 const initialState = {
   logo: 'demo.png',
@@ -16,7 +16,7 @@ const initialState = {
     {title: 'WORKORDER', router: '/workorder'},
     {title: 'SETTINGS', router: '/settings',
       menus: {
-        Device: [{title: 'Model A', router: '/settings/device/A'}, {title: 'Model B', router: '/settings/device/B'}],
+        Device: [],
         Customer: [{title: 'Customer A', router: '/settings/customer/A'}, {title: 'Customer B', router: '/settings/customer/B'}],
         Status: [{title: 'Normal', router: '/settings/status/normal'}, {title: 'Alarm', router: '/settings/status/alarm'}]
       }
@@ -28,11 +28,27 @@ const initialState = {
   }
 };
 
-export default function (state = initialState, action) {
-  switch (action.type) {
-    case types.LOGIN:
-      return { ...state, ...{user: {name: action.login}}};
-    default:
-      return state;
+const handlers = {
+  [TYPE.LOGIN]: (state, action) => ({user: {name: action.login}}),
+  [TYPE.INIT_DEVICE_TYPE]: (state, action) => {
+    let deviceTypes = action.deviceTypesMenus;
+    let modules = state.modules;
+    let menuDevice = modules.filter((module) => {
+      return module.title === 'SETTINGS';
+    })[0].menus.Device;
+
+    deviceTypes.forEach((type) => {
+      menuDevice.push({
+        title: type, router: '/settings/device/' + type
+      });
+    });
+
+    return {'modules': modules};
   }
-}
+};
+
+export default function (state = initialState, action) {
+  let handler = handlers[action.type];
+  if (!handler) return state;
+  return {...state, ...handler(state, action)};
+};

@@ -57,6 +57,8 @@ export default class GTable extends Component {
       return <div>Loading...</div>;
     } else if (!isArray(data)) {
       return <div>Data type is incorrect</div>;
+    } else if (data.length == 0) {
+      return <div>No Data</div>;
     }
 
     return (

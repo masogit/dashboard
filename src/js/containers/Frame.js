@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Box } from 'grommet';
+import { bindActionCreators } from 'redux';
 import { Header, Footer, Sidebar } from '../components';
-import { types } from '../reducers';
+import { deviceActions } from '../actions';
 
 class Frame extends Component {
+
+  componentDidMount() {
+    this.props.actions.loadDeviceTypes();
+  }
 
   render () {
     const { modules, user, title, location } = this.props;
@@ -35,11 +40,9 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchProps = (dispatch) => {
-  return {
-    setActive: (index) => dispatch({type: types.ACTIVE, index: index})
-  };
-};
+let mapDispatchProps = (dispatch) => ({
+  actions: bindActionCreators(deviceActions, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchProps)(Frame);
 
