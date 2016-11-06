@@ -1,7 +1,8 @@
 const params = {
   URL: {
     DEVICE_TYPES: '/devicemanager/devicetypes',
-    DEVICES: '/devicemanager/devices'
+    DEVICES: '/devicemanager/devices',
+    MAP_DATA: '/mapdata/'
   },
   TYPE: {
     INIT_DEVICE_TYPE: 'init_device_type',

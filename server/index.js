@@ -14,6 +14,10 @@ app.use('/devicemanager', (req, res) => {
   proxy.web(req, res, {target: "http://www.zhiyuninfo.com:8080/devicemanager-1.0/dmrest"});
 });
 
+app.get('/mapdata/:filename', function(req, res) {
+  res.sendFile(path.resolve(path.join(__dirname, '/../map_data/' + req.params.filename + '.json')));
+});
+
 app.get('/*', function(req, res) {
   res.sendFile(path.resolve(path.join(__dirname, '/../dist/index.html')));
 });

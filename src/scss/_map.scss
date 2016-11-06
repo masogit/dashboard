@@ -1,0 +1,29 @@
+.subunit {
+  fill: #3f454e;
+  stroke: #80744E;
+  stroke-linejoin: round;
+  stroke-dasharray: 1, 1;
+}
+
+.subunit-label {
+  fill: #fff;
+  fill-opacity: .5;
+  font-size: 20px;
+  font-weight: 300;
+  text-anchor: middle;
+}
+
+.subunit-boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
+}
+
+.subunit-boundary.IRL {
+  stroke: #aaa;
+}
+
+.place, .place-label {
+  fill: #fff;
+}
