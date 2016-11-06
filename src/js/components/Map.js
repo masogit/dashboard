@@ -2,7 +2,7 @@
  * Created by huling on 11/5/2016.
  */
 
-import 'react-d3/node_modules/d3/d3.js';
+import 'd3';
 import React, { Component } from 'react';
 import {getMapJson/*, getUKMap*/} from '../actions/map.js';
 
@@ -14,16 +14,16 @@ export default class Map extends Component {
     };
   }
   componentDidMount() {
-    const width = 960, height = 1160;
+    const width = 960, height = 700;
 
     const mapContainer = d3.select("#map").append("svg")
       .attr("width", width)
       .attr("height", height);
 
     const projection = d3.geo.mercator()
-      .center([107, 31])
+      .center([106, 31])
       .scale(850)
-      .translate([width/2, height / 2]);
+      .translate([500, 465]);
 
     const path = d3.geo.path().projection(projection);
 

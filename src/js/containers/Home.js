@@ -3,54 +3,35 @@ import { Tile, Box, Tiles} from 'grommet';
 import {
   TopCenter,
   TopLeft,
-  TopRight,
-  MiddleCenter,
   MiddleLeft,
   MiddleRight,
-  BottomCenter,
-  BottomLeft,
-  BottomRight} from '../components/index';
+  BottomLeft
+} from '../components/index';
 
 export default class Home extends Component {
   render() {
     return (
-      <Box flex={true}>
+      <Box flex={true} colorIndex="light-2">
         <Box style={{flexGrow: 1}}>
           <Tiles fill={true} flex={true}>
-            <Tile pad="medium" margin="small" >
-              <TopLeft/>
+            <Tile pad={{vertical: 'medium'}}>
+              <Box justify="start">
+                <TopLeft/>
+                <MiddleLeft/>
+              </Box>
             </Tile>
             <Tile pad="medium" margin="small" >
               <TopCenter/>
             </Tile>
-            <Tile pad="medium" margin="small" >
-              <TopRight/>
-            </Tile>
           </Tiles>
         </Box>
         <Box style={{flexGrow: 1}}>
           <Tiles fill={true} flex={true}>
-            <Tile pad="medium" margin="small" >
-              <MiddleLeft/>
-            </Tile>
-            <Tile pad="medium" margin="small" >
-              <MiddleCenter/>
+            <Tile pad={{vertical: 'medium'}}>
+              <Box margin={{left: 'large'}} flex={true}><BottomLeft title='SYSTEM HEALTH SUMMARY'/></Box>
             </Tile>
             <Tile pad="medium" margin="small" >
               <MiddleRight/>
-            </Tile>
-          </Tiles>
-        </Box>
-        <Box style={{flexGrow: 1}}>
-          <Tiles fill={true} flex={true}>
-            <Tile size='large' align='start'>
-              <BottomLeft title='SYSTEM HEALTH SUMMARY'/>
-            </Tile>
-            <Tile size='small'>
-              <BottomCenter title='RECENT EVENTS'/>
-            </Tile>
-            <Tile size='small'>
-              <BottomRight title='USERS FEEDBACK'/>
             </Tile>
           </Tiles>
         </Box>
