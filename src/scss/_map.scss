@@ -27,3 +27,11 @@
 .place, .place-label {
   fill: #fff;
 }
+
+.map {
+  position: relative;
+  .layer {
+    position: absolute;
+  }
+}
+

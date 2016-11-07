@@ -3,6 +3,8 @@
  */
 import React, { Component } from 'react';
 import Map from './Map.js';
+import { Box } from 'grommet';
+import BottomRight from './BottomRight.js';
 
 export default class TopCenter extends Component {
 
@@ -19,7 +21,11 @@ export default class TopCenter extends Component {
       }
     }];
     return (
-      <Map events={events}/>
+      <Map events={events}>
+        <Box size='large' colorIndex='brand'>
+          <BottomRight />
+        </Box>
+      </Map>
     );
   }
 }

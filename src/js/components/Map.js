@@ -4,6 +4,7 @@
 
 import 'd3';
 import React, { Component, PropTypes } from 'react';
+import { Box } from 'grommet';
 import {getMapJson} from '../actions/map.js';
 
 export default class Map extends Component {
@@ -11,11 +12,12 @@ export default class Map extends Component {
     super();
     this.state = {
       features: null,
-      points: null
+      points: null,
+      showLayer: false
     };
   }
   componentDidMount() {
-    const width = 800, height = 600;
+    const width = 950, height = 680;
 
     this.mapContainer = d3.select("#map").append("svg")
       .attr("width", width)
@@ -58,7 +60,12 @@ export default class Map extends Component {
         .attr("class", 'subunit')
         .attr("d", path)
         .on('click', (d, a) => {
-          console.log(d);
+          const layer = this.layer.boxContainerRef;
+          layer.style.left = d3.event.pageX + "px";
+          layer.style.top = (d3.event.pageY - 60) + "px";
+
+          this.setState({ showLayer: true }/*, () =>
+            setTimeout(() => this.setState({ showLayer: false }), 3000)*/);
         });
       events.map((pre, curent) => {
         subunit.on(pre.name, (d, a) => pre.func(subunit, d, a));
@@ -74,10 +81,10 @@ export default class Map extends Component {
          .attr("d", path)
          .attr("class", "place")
          .on("mouseenter", (d, a) => {
-           mapContainer.select(".place-label_" + a)[0][0].style.opacity = 1;
+          //  mapContainer.select(".place-label_" + a)[0][0].style.opacity = 1;
          })
          .on("mouseout", (d, a) => {
-           mapContainer.select(".place-label_" + a)[0][0].style.opacity = 0;
+          //  mapContainer.select(".place-label_" + a)[0][0].style.opacity = 0;
          });
     }
   }
@@ -106,7 +113,7 @@ export default class Map extends Component {
   }
 
   render() {
-    const {showLabel, showPoints, events} = this.props;
+    const {showLabel, showPoints, events, children} = this.props;
     this.renderMap();
     if (showPoints) {
       this.renderPoints();
@@ -115,7 +122,14 @@ export default class Map extends Component {
     if (showLabel) {
       this.renderLabel();
     }
-    return <div id='map'/>;
+    return (
+      <Box className='map'>
+        <div id='map' />
+        <Box className='layer' ref={node => this.layer = node}>
+          {this.state.showLayer && children}
+        </Box>
+      </Box>  
+    );
   }
 }
 
