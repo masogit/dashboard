@@ -52,7 +52,6 @@ export default class Map extends Component {
     const {mapContainer, path, projection} = this;
     const features = this.state.features;
     if (features) {
-      const events = this.props.events;
       // draw subunit
       let subunit = mapContainer.selectAll("path")
         .data(features)
@@ -67,9 +66,13 @@ export default class Map extends Component {
           this.setState({ showLayer: true }/*, () =>
             setTimeout(() => this.setState({ showLayer: false }), 3000)*/);
         });
-      events.map((pre, curent) => {
-        subunit.on(pre.name, (d, a) => pre.func(subunit, d, a));
-      });
+        
+      const events = this.props.events;
+      if (events) {
+        events.map((pre, curent) => {
+          subunit.on(pre.name, (d, a) => pre.func(subunit, d, a));
+        });
+      }
     }
   }
 

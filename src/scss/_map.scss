@@ -3,6 +3,10 @@
   stroke: #80744E;
   stroke-linejoin: round;
   stroke-dasharray: 1, 1;
+
+  &:hover {
+    fill-opacity: .9;
+  }
 }
 
 .subunit-label {
