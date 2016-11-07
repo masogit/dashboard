@@ -3,53 +3,91 @@
  */
 
 import 'd3';
-import React, { Component } from 'react';
-import {getMapJson/*, getUKMap*/} from '../actions/map.js';
+import React, { Component, PropTypes } from 'react';
+import {getMapJson} from '../actions/map.js';
 
 export default class Map extends Component {
   constructor() {
     super();
     this.state = {
-      finished: false
+      features: null,
+      points: null
     };
   }
   componentDidMount() {
-    const width = 960, height = 700;
+    const width = 800, height = 600;
 
-    const mapContainer = d3.select("#map").append("svg")
+    this.mapContainer = d3.select("#map").append("svg")
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
+      .attr('viewBox', '0 0 950 680');
 
-    const projection = d3.geo.mercator()
+    this.projection = d3.geo.mercator()
       .center([106, 31])
       .scale(850)
       .translate([500, 465]);
 
-    const path = d3.geo.path().projection(projection);
+    this.path = d3.geo.path().projection(this.projection);
 
     getMapJson('china').then((place) => {
-      const feature = place.features;
+      const features = place.features;
+      const points = {
+        type: "GeometryCollection",
+        geometries: features.map(f => ({
+          type: "Point",
+          coordinates: f.properties.cp
+        }))
+      };
 
+      this.setState({
+        features,
+        points
+      });
+    });
+  }
+
+  renderMap() {
+    const {mapContainer, path, projection} = this;
+    const features = this.state.features;
+    if (features) {
+      const events = this.props.events;
       // draw subunit
-      mapContainer.selectAll("path")
-        .data(feature)
+      let subunit = mapContainer.selectAll("path")
+        .data(features)
         .enter().append("path")
         .attr("class", 'subunit')
         .attr("d", path)
-        .on("mouseenter", (d, a) => {
-          mapContainer.select(".place-label_" + a).style("opacity", 1);
-        })
-        .on("mouseout", (d, a) => {
-          mapContainer.select(".place-label_" + a).style("opacity", 0);
-        })
         .on('click', (d, a) => {
           console.log(d);
         });
+      events.map((pre, curent) => {
+        subunit.on(pre.name, (d, a) => pre.func(subunit, d, a));
+      });
+    }
+  }
 
+  renderPoints() {  
+    if (this.state.points) {
+       const {mapContainer, path} = this;
+       mapContainer.append("path")
+         .datum(this.state.points)
+         .attr("d", path)
+         .attr("class", "place")
+         .on("mouseenter", (d, a) => {
+           mapContainer.select(".place-label_" + a)[0][0].style.opacity = 1;
+         })
+         .on("mouseout", (d, a) => {
+           mapContainer.select(".place-label_" + a)[0][0].style.opacity = 0;
+         });
+    }
+  }
 
+  renderLabel() {
+    if (this.state.features) {
+      const {mapContainer, projection} = this;
       // draw tooltip
       mapContainer.selectAll(".place-label")
-        .data(feature)
+        .data(this.state.features)
         .enter().append("text")
         .attr("class", (d, index) => "place-label place-label_" + index)
         .attr("transform", d => `translate(${projection(d.properties.cp)})`)
@@ -59,31 +97,35 @@ export default class Map extends Component {
         .style("text-anchor", d => d.geometry.coordinates[0] > -1 ? "start" : "end")
         .style("opacity", 0)
         .on("mouseenter", (d, a) => {
-          mapContainer.select(".place-label_" + a).style("opacity", 1);
+          mapContainer.select(".place-label_" + a)[0][0].style.opacity = 1;
         })
         .on("mouseout", (d, a) => {
-          mapContainer.select(".place-label_" + a).style("opacity", 0);
+          mapContainer.select(".place-label_" + a)[0][0].style.opacity = 0;
         });
-
-
-      // draw point
-      const geometryCollection = {
-        type: "GeometryCollection",
-        geometries: feature.map(f => ({
-          type: "Point",
-          coordinates: f.properties.cp
-        }))
-      };
-
-      mapContainer.append("path")
-        .datum(geometryCollection)
-        .attr("d", path)
-        .attr("class", "place");
-
-    });
+    }
   }
 
   render() {
+    const {showLabel, showPoints, events} = this.props;
+    this.renderMap();
+    if (showPoints) {
+      this.renderPoints();
+    }
+
+    if (showLabel) {
+      this.renderLabel();
+    }
     return <div id='map'/>;
   }
 }
+
+Map.propTypes = {
+  showPoints: PropTypes.bool,
+  showLabel: PropTypes.bool,
+  events: PropTypes.array
+};
+
+Map.defaultProps = {
+  showPoints: true,
+  showLabel: true
+};
