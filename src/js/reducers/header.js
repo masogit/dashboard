@@ -5,6 +5,7 @@ const initialState = {
   title: 'CLOUD DEVICE',
   modules: [
     {title: 'HOME', router: '/home'},
+    {title: 'DECK', router: '/deck'},
     {title: 'DEVICE', router: '/device',
       menus: [
         {title: 'Overview', router: '/device'},

@@ -11,8 +11,10 @@ import DeviceHistory from './DeviceHistory';
 import DeviceStatus from './DeviceStatus';
 import Customer from './Customer';
 import Status from './Status';
+import Deck from './Deck';
 
 export {
+  Deck,
   Login,
   Frame,
   Home,

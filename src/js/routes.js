@@ -1,4 +1,4 @@
-import { Customer, Device, DeviceModel, DeviceAlarm, DeviceHistory, DeviceStatus, Frame, Home, Login, Settings, WorkOrder, NoFound, Status } from './containers';
+import { Deck, Customer, Device, DeviceModel, DeviceAlarm, DeviceHistory, DeviceStatus, Frame, Home, Login, Settings, WorkOrder, NoFound, Status } from './containers';
 
 export default [{
   path: '/login',
@@ -8,6 +8,7 @@ export default [{
   component: Frame,
   indexRoute: { component: Home },
   childRoutes: [
+    { path: 'deck', component: Deck },
     { path: 'home', component: Home },
     { path: 'device', component: Device },
     { path: 'device/alarm', component: DeviceAlarm },
