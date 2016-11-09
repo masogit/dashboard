@@ -2,7 +2,7 @@ import { TYPE } from '../constants';
 
 const initialState = {
   logo: 'demo.png',
-  title: 'CLOUD DEVICE',
+  title: 'Dashboard Platform',
   modules: [
     {title: 'HOME', router: '/home'},
     {title: 'DECK', router: '/deck'}
