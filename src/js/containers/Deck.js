@@ -21,7 +21,11 @@ export default class Deck extends Component {
   }
 
   addBox(box, root, direction) {
+    // clean parent
     box.props.direction = direction;
+    box.props.justify = null;
+    box.props.align = null;
+
     if (!box.child)
       box.child = [{
         key: getID(),
@@ -96,7 +100,7 @@ export default class Deck extends Component {
     }
 
     return (
-      <Box separator="all" flex={true} {...box.props}>
+      <Box separator="all" flex={true} justify="center" align="center" {...box.props}>
         {!box.child && this.buildMenu(box, root)}
         {child}
       </Box>
@@ -122,7 +126,7 @@ export default class Deck extends Component {
   render() {
     let { box } = this.state;
     return (
-        <Box pad="medium" flex={true}>
+        <Box flex={true}>
             {this.buildBox(box, box)}
         </Box>
     );
