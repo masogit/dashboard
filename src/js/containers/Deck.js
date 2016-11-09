@@ -1,43 +1,131 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Box/*, Menu, CheckBox, Button, Icons*/ } from 'grommet';
-// const { More, Close, Shift } = Icons.Base;
-// import { TYPE } from '../constants';
+import { Box, Menu, Button, Icons } from 'grommet';
+const { More, Close, Shift } = Icons.Base;
+import { BoxPropsMenu } from '../components';
+import { remove } from 'lodash';
 
-class Deck extends Component {
-  renderDeck() {
+function getID() {
+  return (Math.random() + 1).toString(36).substring(7);
+};
 
+export default class Deck extends Component {
+  constructor() {
+    super();
+    this.state = {
+      box: {
+        key: getID(),
+        props:{},
+        child: null
+      }
+    };
+  }
+
+  addBox(box, root, direction) {
+    box.props.direction = direction;
+    if (!box.child)
+      box.child = [{
+        key: getID(),
+        props:{},
+        child: null
+      }, {
+        key: getID(),
+        props:{},
+        child: null
+      }];
+    else if (box.child instanceof Array)
+      box.child.push({
+        key: getID(),
+        props:{},
+        child: null
+      });
+    else {
+      var child = box.child;
+      box.child = [{
+        key: getID(),
+        props:{},
+        child: child
+      }, {
+        key: getID(),
+        props:{},
+        child: null
+      }];
+    }
+
+    this.setState({
+      box: root
+    });
+  }
+
+  deleteBox(box, root) {
+    if (box.child) {
+      box.child = null;
+    } else if (root.key != box.key) {
+      this.removeFromRoot(box.key, root, root);
+    }
+    // For render root
+    this.setState({
+      box: root
+    });
+  }
+
+  removeFromRoot(key, box, root) {
+    if (box.child && box.child instanceof Array) {
+      let removed = remove(box.child, child => {
+        return child.key == key;
+      });
+
+      if (box.child.length == 0)
+        box.child = null;
+
+      if (removed.length == 0)
+        box.child.forEach(child => {
+          this.removeFromRoot(key, child, root);
+        });
+    }
+  }
+
+  buildBox(box, root) {
+    let child;
+    if (box.child && box.child instanceof Array) {
+      box.props.separator = "none";
+      child = (
+        <Box {...box.props} flex={true}>
+          { box.child.map((child) => this.buildBox(child, root))}
+        </Box>
+      );
+    }
+
+    return (
+      <Box separator="all" flex={true} {...box.props}>
+        {!box.child && this.buildMenu(box, root)}
+        {child}
+      </Box>
+    );
+  }
+
+  buildMenu(box, root) {
+    return (
+      <Menu icon={<More />} closeOnClick={false} inline={true} direction="row" justify="between">
+        <Box direction="row">
+          <Button icon={<Shift className="icon_rotate90"/>} onClick={this.addBox.bind(this, box, root, 'column')}/>
+          <Button icon={<Shift />} onClick={this.addBox.bind(this, box, root, 'row')}/>
+          {
+            !(box.child instanceof Array && box.child.length > 0) &&
+            <Button icon={<Close />} onClick={this.deleteBox.bind(this, box, root)}/>
+          }
+        </Box>
+        <BoxPropsMenu />
+      </Menu>
+    );
   }
 
   render() {
-    let { deck } = this.props;
+    let { box } = this.state;
     return (
-        <Box pad="medium">
-            {this.renderDeck(deck)}
+        <Box pad="medium" flex={true}>
+            {this.buildBox(box, box)}
         </Box>
     );
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    deck: state.deck
-  };
-};
-
-// let mapDispatchProps = (dispatch) => ({
-//   addBox: (key) => dispatch({type: TYPE.DECK_ADD_BOX, key}),
-//   setBox: (box) => dispatch({type: TYPE.DECK_SET_BOX, box}),
-//   delBox: (key) => dispatch({type: TYPE.DECK_DEL_BOX, key}),
-//   tglDir: (box, root) => {
-//     if (box.direction == 'row')
-//       box.direction = 'column';
-//     else
-//       box.direction = 'row';
-//     return dispatch({type: TYPE.DECK_SET_BOX, box: root});
-//   }
-// });
-
-export default connect(mapStateToProps
-                    //  , mapDispatchProps
-)(Deck);

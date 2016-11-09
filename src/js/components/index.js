@@ -11,8 +11,10 @@ import MiddleRight from './MiddleRight';
 import BottomCenter from './BottomCenter';
 import BottomLeft from './BottomLeft';
 import BottomRight from './BottomRight';
+import BoxPropsMenu from './BoxPropsMenu';
 
 export {
+  BoxPropsMenu,
   Footer,
   Header,
   Sidebar,
