@@ -8,7 +8,7 @@ import { deviceActions } from '../actions';
 class Frame extends Component {
 
   componentDidMount() {
-    this.props.actions.loadDeviceTypes();
+    // this.props.actions.loadDeviceTypes();
   }
 
   render () {

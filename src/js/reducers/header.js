@@ -5,23 +5,7 @@ const initialState = {
   title: 'CLOUD DEVICE',
   modules: [
     {title: 'HOME', router: '/home'},
-    {title: 'DECK', router: '/deck'},
-    {title: 'DEVICE', router: '/device',
-      menus: [
-        {title: 'Overview', router: '/device'},
-        {title: 'Status', router: '/device/status'},
-        {title: 'History', router: '/device/history'},
-        {title: 'Alarm', router: '/device/alarm'}
-      ]
-    },
-    {title: 'WORKORDER', router: '/workorder'},
-    {title: 'SETTINGS', router: '/settings',
-      menus: {
-        Device: [],
-        Customer: [{title: 'Customer A', router: '/settings/customer/A'}, {title: 'Customer B', router: '/settings/customer/B'}],
-        Status: [{title: 'Normal', router: '/settings/status/normal'}, {title: 'Alarm', router: '/settings/status/alarm'}]
-      }
-    }
+    {title: 'DECK', router: '/deck'}
   ],
   user: {
     name: 'Admin',
