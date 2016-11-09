@@ -32,14 +32,11 @@ export default class Map extends Component {
     this.path = d3.geo.path().projection(this.projection);
 
     getMapJson('china').then((place) => {
-      const features = place.features;
-      const points = {
-        type: "GeometryCollection",
-        geometries: features.map(f => ({
+      const features = place.features.slice(0, 3);
+      const points = features.map(f => ({
           type: "Point",
           coordinates: f.properties.cp
-        }))
-      };
+        }));
 
       this.setState({
         features,
@@ -80,15 +77,17 @@ export default class Map extends Component {
   renderPoints() {  
     if (this.state.points) {
        const {mapContainer, path} = this;
-       mapContainer.append("path")
-         .datum(this.state.points)
+       mapContainer.selectAll('point')
+         .data(this.state.points)
+         .enter().append("path")
          .attr("d", path)
+         .style("fill", (d, a) => 'yellow')
          .attr("class", "place")
          .on("mouseenter", (d, a) => {
-          //  mapContainer.select(".place-label_" + a)[0][0].style.opacity = 1;
+            mapContainer.select(".place-label_" + a)[0][0].style.opacity = 1;
          })
          .on("mouseout", (d, a) => {
-          //  mapContainer.select(".place-label_" + a)[0][0].style.opacity = 0;
+            mapContainer.select(".place-label_" + a)[0][0].style.opacity = 0;
          });
     }
   }
@@ -127,7 +126,7 @@ export default class Map extends Component {
       this.renderLabel();
     }
     return (
-      <Box className='map'>
+      <Box className='map'>0
         <div id='map' />
         <Box className='layer' ref={node => this.layer = node}>
           {this.state.showLayer && children}
