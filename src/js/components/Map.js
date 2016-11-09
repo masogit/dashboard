@@ -58,6 +58,7 @@ export default class Map extends Component {
         .enter().append("path")
         .attr("class", 'subunit')
         .attr("d", path)
+        .style("fill", (d, a) => d.properties.color)
         .on('click', (d, a) => {
           const layer = this.layer.boxContainerRef;
           layer.style.left = d3.event.pageX + "px";

@@ -14,8 +14,19 @@ app.use('/devicemanager', (req, res) => {
   proxy.web(req, res, {target: "http://www.zhiyuninfo.com:8080/devicemanager-1.0/dmrest"});
 });
 
-app.get('/mapdata/:filename', function(req, res) {
-  res.sendFile(path.resolve(path.join(__dirname, '/../map_data/' + req.params.filename + '.json')));
+app.get('/mapdata/:filename', function (req, res) {
+  var map_china = require('../map_data/china.json');
+  var map_color = require('../map_data/color.json');
+  map_color.map(color => {
+    for (var i = 0; i < map_china.features.length; i++) {
+      if (map_china.features[i].id == color.id) {
+        Object.assign(map_china.features[i].properties, color.properties);
+        break;
+      }
+    }
+    
+  })
+  res.send(map_china);
 });
 
 app.get('/*', function(req, res) {
