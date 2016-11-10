@@ -22,6 +22,7 @@ export default class Map extends Component {
     this.mapContainer = d3.select("#map").append("svg")
       .attr("width", width)
       .attr("height", height)
+      .style('background', 'rgba(47, 53, 63, 0.43)')
       .attr('viewBox', '0 0 950 680');
 
     this.projection = d3.geo.mercator()
@@ -82,27 +83,29 @@ export default class Map extends Component {
     
     if (this.state.points) {
       const {mapContainer, path} = this;
-      mapContainer.selectAll('point1')
-        .data(this.state.points)
-        .enter().append("circle")
-        .attr('class', 'circle')
-        .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
-        .attr("r", function (d) { return radius(d.number) });
-      
-      mapContainer.selectAll('point2')
-        .data(this.state.points)
-        .enter().append("circle")
-        .attr('class', 'circle')
-        .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
-        .attr("r", function (d) { return radius(d.number) * 1.2 });
-      
-       mapContainer.selectAll('point3')
-        .data(this.state.points)
-        .enter().append("circle")
-        .attr('class', 'circle')
-        .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
-        .attr("r", function (d) { return radius(d.number) * 1.8 });
-         
+      const circleNumber = 3;
+      for(let i = 0; i < circleNumber; i++) {
+         mapContainer.selectAll('point' + i)
+          .data(this.state.points)
+          .enter().append("circle")
+          .attr('class', 'circle')
+          .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
+          .attr("r", function (d) { return radius(d.number) * (1 + i/4) })
+          .on('click', (d, a) => {
+            const layer = this.layer.boxContainerRef;
+            layer.style.left = d3.event.pageX + "px";
+            layer.style.top = (d3.event.pageY - 60) + "px";
+
+            this.setState({ showLayer: true }/*, () =>
+              setTimeout(() => this.setState({ showLayer: false }), 3000)*/);
+          })
+          .on('mouseenter', (d, i)=> {
+            mapContainer.selectAll(".subunit")[0][i].style.opacity = 0.9;
+          })
+          .on('mouseout', (d, i)=> {
+            mapContainer.selectAll(".subunit")[0][i].style.opacity = 1;
+          });
+      }
     }
   }
 
@@ -137,7 +140,7 @@ export default class Map extends Component {
     }
 
     if (showLabel) {
-      this.renderLabel();
+      //this.renderLabel();
     }
     return (
       <Box className='map'>
