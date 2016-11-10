@@ -32,10 +32,11 @@ export default class Map extends Component {
     this.path = d3.geo.path().projection(this.projection);
 
     getMapJson('china').then((place) => {
-      const features = place.features.slice(0, 3);
+      const features = place.features;
       const points = features.map(f => ({
           type: "Point",
-          coordinates: f.properties.cp
+          coordinates: f.properties.cp,
+          number: f.properties.childNum
         }));
 
       this.setState({
@@ -75,20 +76,33 @@ export default class Map extends Component {
   }
 
   renderPoints() {  
+    var radius = d3.scale.sqrt()
+    .domain([0, 40])
+      .range([0, 15]);
+    
     if (this.state.points) {
-       const {mapContainer, path} = this;
-       mapContainer.selectAll('point')
-         .data(this.state.points)
-         .enter().append("path")
-         .attr("d", path)
-         .style("fill", (d, a) => 'yellow')
-         .attr("class", "place")
-         .on("mouseenter", (d, a) => {
-            mapContainer.select(".place-label_" + a)[0][0].style.opacity = 1;
-         })
-         .on("mouseout", (d, a) => {
-            mapContainer.select(".place-label_" + a)[0][0].style.opacity = 0;
-         });
+      const {mapContainer, path} = this;
+      mapContainer.selectAll('point1')
+        .data(this.state.points)
+        .enter().append("circle")
+        .attr('class', 'circle')
+        .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
+        .attr("r", function (d) { return radius(d.number) });
+      
+      mapContainer.selectAll('point2')
+        .data(this.state.points)
+        .enter().append("circle")
+        .attr('class', 'circle')
+        .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
+        .attr("r", function (d) { return radius(d.number) * 1.2 });
+      
+       mapContainer.selectAll('point3')
+        .data(this.state.points)
+        .enter().append("circle")
+        .attr('class', 'circle')
+        .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
+        .attr("r", function (d) { return radius(d.number) * 1.8 });
+         
     }
   }
 
@@ -126,7 +140,7 @@ export default class Map extends Component {
       this.renderLabel();
     }
     return (
-      <Box className='map'>0
+      <Box className='map'>
         <div id='map' />
         <Box className='layer' ref={node => this.layer = node}>
           {this.state.showLayer && children}
