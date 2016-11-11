@@ -18,9 +18,16 @@ export default class Deck extends Component {
         child: null
       }
     };
+    this.onUpdate.bind(this);
   }
 
-  addBox(box, root, direction) {
+  onUpdate(box, props) {
+    props.flex = false;
+    Object.assign(box.props, props);
+    this.setState({ box: this.state.box });
+  }
+
+  addBox(box, direction) {
     // clean parent
     box.props.direction = direction;
     box.props.justify = null;
@@ -55,24 +62,20 @@ export default class Deck extends Component {
       }];
     }
 
-    this.setState({
-      box: root
-    });
+    this.setState({ box: this.state.box });
   }
 
-  deleteBox(box, root) {
+  deleteBox(box) {
     if (box.child) {
       box.child = null;
-    } else if (root.key != box.key) {
-      this.removeFromRoot(box.key, root, root);
+    } else if (this.state.box.key != box.key) {
+      this.removeFromRoot(box.key, this.state.box);
     }
-    // For render root
-    this.setState({
-      box: root
-    });
+
+    this.setState({ box: this.state.box });
   }
 
-  removeFromRoot(key, box, root) {
+  removeFromRoot(key, box) {
     if (box.child && box.child instanceof Array) {
       let removed = remove(box.child, child => {
         return child.key == key;
@@ -83,42 +86,42 @@ export default class Deck extends Component {
 
       if (removed.length == 0)
         box.child.forEach(child => {
-          this.removeFromRoot(key, child, root);
+          this.removeFromRoot(key, child);
         });
     }
   }
 
-  buildBox(box, root) {
+  buildBox(box) {
     let child;
     if (box.child && box.child instanceof Array) {
       box.props.separator = "none";
       child = (
         <Box {...box.props} flex={true}>
-          { box.child.map((child) => this.buildBox(child, root))}
+          { box.child.map((child) => this.buildBox(child))}
         </Box>
       );
     }
 
     return (
       <Box separator="all" flex={true} justify="center" align="center" {...box.props}>
-        {!box.child && this.buildMenu(box, root)}
+        {!box.child && this.buildMenu(box)}
         {child}
       </Box>
     );
   }
 
-  buildMenu(box, root) {
+  buildMenu(box) {
     return (
       <Menu icon={<More />} closeOnClick={false} inline={true} direction="row" justify="between">
         <Box direction="row">
-          <Button icon={<Shift className="icon_rotate90"/>} onClick={this.addBox.bind(this, box, root, 'column')}/>
-          <Button icon={<Shift />} onClick={this.addBox.bind(this, box, root, 'row')}/>
+          <Button icon={<Shift className="icon_rotate90"/>} onClick={this.addBox.bind(this, box, 'column')}/>
+          <Button icon={<Shift />} onClick={this.addBox.bind(this, box, 'row')}/>
           {
             !(box.child instanceof Array && box.child.length > 0) &&
-            <Button icon={<Close />} onClick={this.deleteBox.bind(this, box, root)}/>
+            <Button icon={<Close />} onClick={this.deleteBox.bind(this, box)}/>
           }
         </Box>
-        <BoxPropsMenu />
+        <BoxPropsMenu onUpdate={(props) => this.onUpdate(box, props)} boxProps={box.props}/>
       </Menu>
     );
   }
@@ -127,7 +130,7 @@ export default class Deck extends Component {
     let { box } = this.state;
     return (
         <Box flex={true}>
-            {this.buildBox(box, box)}
+            {this.buildBox(box)}
         </Box>
     );
   }
