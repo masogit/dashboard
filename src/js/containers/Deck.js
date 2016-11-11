@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Box, Menu, Button, Icons } from 'grommet';
-const { More, Close, Shift } = Icons.Base;
+const { Trash, Shift, AddCircle } = Icons.Base;
 import { BoxPropsMenu } from '../components';
 import { remove } from 'lodash';
 
@@ -27,9 +27,9 @@ export default class Deck extends Component {
     this.setState({ box: this.state.box });
   }
 
-  addBox(box, direction) {
+  addBox(box) {
     // clean parent
-    box.props.direction = direction;
+    // box.props.direction = direction;
     box.props.justify = null;
     box.props.align = null;
 
@@ -103,8 +103,8 @@ export default class Deck extends Component {
     }
 
     return (
-      <Box separator="all" flex={true} justify="center" align="center" {...box.props}>
-        {!box.child && this.buildMenu(box)}
+      <Box separator={!box.child ? 'all' : 'none'} flex={true} justify="center" align="center" {...box.props}>
+        {/*!box.child && */this.buildMenu(box)}
         {child}
       </Box>
     );
@@ -112,18 +112,31 @@ export default class Deck extends Component {
 
   buildMenu(box) {
     return (
-      <Menu icon={<More />} closeOnClick={false} inline={true} direction="row" justify="between">
-        <Box direction="row">
-          <Button icon={<Shift className="icon_rotate90"/>} onClick={this.addBox.bind(this, box, 'column')}/>
-          <Button icon={<Shift />} onClick={this.addBox.bind(this, box, 'row')}/>
+      <Menu closeOnClick={false} direction="row" justify="between" colorIndex={box.child ? 'grey-4-a' : ''}
+            inline={!box.props.direction || (box.props.direction == 'column') || !box.child} >
+        <Box direction={box.direction == 'row' ? 'column' : 'row'}>
+          <Button icon={<Shift className={(!box.props.direction || box.props.direction == 'column') ? 'icon_rotate90' : ''}/>}
+                  onClick={this.toggleDirection.bind(this, box)}/>
+          <Button icon={<AddCircle />} onClick={this.addBox.bind(this, box)}/>
           {
             !(box.child instanceof Array && box.child.length > 0) &&
-            <Button icon={<Close />} onClick={this.deleteBox.bind(this, box)}/>
+            <Button icon={<Trash />} onClick={this.deleteBox.bind(this, box)}/>
           }
         </Box>
         <BoxPropsMenu onUpdate={(props) => this.onUpdate(box, props)} boxProps={box.props}/>
       </Menu>
     );
+  }
+
+  toggleDirection(box) {
+    if (!box.props.direction)
+      box.props.direction = 'row';
+    else if (box.props.direction == 'row')
+      box.props.direction = 'column';
+    else
+      box.props.direction = 'row';
+
+    this.setState({ box: this.state.box });
   }
 
   render() {
