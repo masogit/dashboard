@@ -44,7 +44,6 @@ export default class BoxPropsMenu extends Component {
           { this.renderSize('height') }
           { this.renderSize('width') }
         </Box>
-        {this.renderPropsMenus()}
       </Menu>
     );
   }

@@ -81,8 +81,11 @@ export default class Deck extends Component {
         return child.key == key;
       });
 
-      if (box.child.length == 0)
+      if (box.child.length == 0) {
         box.child = null;
+        box.props.justify = 'center';
+        box.props.align = 'center';
+      }
 
       if (removed.length == 0)
         box.child.forEach(child => {
