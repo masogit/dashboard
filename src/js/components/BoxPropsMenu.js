@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Anchor, Box, Menu, Title, Icons } from 'grommet';
+import { Anchor, Box, Menu, Header, Title, Icons, CheckBox } from 'grommet';
 const { Down } = Icons.Base;
 
 const FIXED_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
@@ -14,21 +14,41 @@ export default class BoxPropsMenu extends Component {
     };
   }
 
-  updateSize(label, value) {
+  updateSize(key, value) {
     let { boxProps } = this.props;
     const {size: size = {}} = boxProps;
-    size[label] = value;
+    size[key] = value;
 
     Object.assign(boxProps, {size});
     this.props.onUpdate(boxProps);
   }
 
-  renderSize(label) {
+  renderSize(key) {
     let { boxProps: {size: size = {}} } = this.props;
     const items = SIZES.map((size, i) => {
-      return <Anchor key={i} label={size} onClick={this.updateSize.bind(this, label, size)}/>;
+      return <Anchor key={i} label={size} onClick={this.updateSize.bind(this, key, size)}/>;
     });
-    return <Menu closeOnClick={false} label={`${label}: ${size[label] || ''}`}>{items}</Menu>;
+    return <Menu closeOnClick={false} label={`${key}: ${size[key] || ''}`}>{items}</Menu>;
+  }
+
+  updateBool(key, value) {
+    let { boxProps } = this.props;
+    boxProps[key] = value;
+
+    this.props.onUpdate(boxProps);
+  }
+
+  // reverse, primary, responsive, announce, appCentered, focusable, wrap
+  renderBool(type) {
+    const prop = this.props[type];
+    return (
+      <Header pad="small">
+        <Title>{type}</Title>
+        <CheckBox toggle={true} label={type} checked={prop} onChange={(e) => {
+          this.updateBoole.bind(this, type, e.target.checked);
+        }} />
+      </Header>
+    );
   }
 
   renderPropsMenus() {
@@ -40,10 +60,14 @@ export default class BoxPropsMenu extends Component {
   render() {
     return (
       <Menu inline={false} closeOnClick={false} dropAlign={{ right: 'right', top: 'top' }} icon={<Down />}>
-        <Box direction="row">
+        <Header pad="small">
+          <Title>size</Title>
           { this.renderSize('height') }
           { this.renderSize('width') }
-        </Box>
+        </Header>
+        { this.renderBool('flex') }
+        { this.renderBool('primary') }
+        { this.renderBool('focusable') }
       </Menu>
     );
   }
