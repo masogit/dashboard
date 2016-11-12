@@ -1,6 +1,8 @@
 import echarts from 'echarts';
 import React, { Component } from 'react';
 import { getMapJson, getBusinessJson } from '../actions/map.js';
+import {brush } from './Map_brush.js';
+
 let charts = {};
 export default class Map extends Component {
   componentWillMount() {
@@ -29,7 +31,7 @@ export default class Map extends Component {
   }
   
   initState(props = {}) {
-    const {height = 800, width = 600} = props;
+    const {height = 600, width = 800} = props;
     Object.assign(this.state, {
       isMapDataReady: false,
       height,
@@ -47,7 +49,7 @@ export default class Map extends Component {
       div.id = name;
       div.style.width = this.state.width + 'px';
       div.style.height = this.state.height + 'px';
-      document.getElementById('chart').appendChild(div);
+      document.getElementById('map_chart').appendChild(div);
       const chart = echarts.init(div);
       this.chart = chart;
       this.chart.showLoading();
@@ -63,6 +65,7 @@ export default class Map extends Component {
           isMapDataReady: false
         }, this.loadMap);
       });
+      // this.addFunction();
       charts[name] = { chart };
     }
 
@@ -75,6 +78,27 @@ export default class Map extends Component {
     })
   }
   
+  addFunction() {
+    // const {onBrushSelected} = this.props;
+    // if (onBrushSelected) {
+    //   this.chart.on('brushselected', onBrushSelected);
+
+    //   this.chart.setOption({
+    //     toolbox: {
+    //       iconStyle: {
+    //         normal: {
+    //           borderColor: '#fff'
+    //         },
+    //         emphasis: {
+    //           borderColor: '#b1e4ff'
+    //         },
+    //         brush: brush
+    //       }
+    //     }
+    //   })
+    // }  
+  }
+
   loadMap(map = this.state.map, business = this.state.business) {
     const promises = [
       getMapJson(map).then((china) => {
@@ -122,10 +146,25 @@ export default class Map extends Component {
     if (this.state.isMapDataReady == false) {
       return;
     }
-    const data = this.getData();   
+    const data = this.getData();
     const top5 = this.getData(this.state.data.sort(function (a, b) {
       return b.value - a.value;
     }).slice(0, 2));
+    const moveLines = [{
+        "fromName": "辽宁",
+        "toName": "江苏",
+        "coords": [
+            [123.42944, 41.835441],
+            [118.763232, 32.061707]
+        ]
+    }, {
+        "fromName": "广州",
+        "toName": "湖北",
+        "coords": [
+            [113.264435, 23.129163],
+            [114.341862, 30.546498]
+        ]
+    }];
     this.chart.setOption({
       backgroundColor: '#404a59',
       title: {
@@ -140,9 +179,11 @@ export default class Map extends Component {
       tooltip: {
         trigger: 'item'
       },
+      //brush: brush,
       toolbox: {
         show: true,
         feature: {
+          restore: {},
           myBack: {
             show: !!this.state.parent.map,
             title: 'Back',
@@ -154,7 +195,16 @@ export default class Map extends Component {
               this.setState({ geoCoordMap, data, map, business, parent });
             }
           },
-        }     
+        }
+        //,
+        // iconStyle: {
+        //   normal: {
+        //     borderColor: '#fff'
+        //   },
+        //   emphasis: {
+        //     borderColor: '#b1e4ff'
+        //   }
+        // }
       },
       legend: {
         orient: 'vertical',
@@ -184,7 +234,7 @@ export default class Map extends Component {
         },
         scaleLimit: {
           min: 0.5,
-          max:2
+          max: 2
         }
       },
       series: [
@@ -240,15 +290,43 @@ export default class Map extends Component {
             }
           },
           zlevel: 1
-        }]
+        }, {
+          name: '线路',
+          type: 'lines',
+          coordinateSystem: 'geo',
+          zlevel: 2,
+          large: true,
+          effect: {
+            show: true,
+            constantSpeed: 30,
+            symbol: 'pin',
+            symbolSize: 3,
+            trailLength: 0,
+          },
+          lineStyle: {
+            normal: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: '#58B3CC'
+              }, {
+                offset: 1,
+                color: '#F58158'
+              }], false),
+              width: 1,
+              opacity: 0.2,
+              curveness: 0.1
+            }
+          },
+          data: moveLines
+         }
+      ]
     });
-
-
   }
+
   render() {
     const {width,height} = this.state;
     
-    return <div id='chart' style={{ width, height}}/>;
+    return <div id='map_chart' style={{ width, height}}/>;
   }
 }
 
