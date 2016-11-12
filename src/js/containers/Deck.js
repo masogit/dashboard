@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Box, Menu, Button, Icons, Layer } from 'grommet';
-const { Trash, Shift, AddCircle, Configure, Play } = Icons.Base;
+const { Trash, Shift, AddCircle, Configure } = Icons.Base;
 import { BoxPropsMenu, Widgets } from '../components';
 import { connect } from 'react-redux';
 import { TYPE } from '../constants';
-import { browserHistory } from 'react-router';
 
 class Deck extends Component {
   constructor(props) {
@@ -60,10 +59,6 @@ class Deck extends Component {
             <Button icon={<Trash />} onClick={this.props.deleteBox.bind(this, box, this.props.box)}/>
           }
           <Button icon={<Configure />} onClick={this.showConfigure.bind(this, box)}/>
-          {
-            box.key == this.props.box.key &&
-            <Button icon={<Play />} onClick={() => browserHistory.push('/preview')} />
-          }
         </Box>
       </Menu>
     );

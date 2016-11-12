@@ -5,7 +5,8 @@ const initialState = {
   title: 'Dashboard Platform',
   modules: [
     {title: 'HOME', router: '/home'},
-    {title: 'DECK', router: '/deck'}
+    {title: 'DECK', router: '/deck'},
+    {title: 'Preview', router: '/preview'}
   ],
   user: {
     name: 'Admin',
