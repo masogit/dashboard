@@ -4,9 +4,9 @@ const initialState = {
   logo: 'demo.png',
   title: 'Dashboard Platform',
   modules: [
-    {title: 'HOME', router: '/home'},
-    {title: 'DECK', router: '/deck'},
-    {title: 'Preview', router: '/preview'}
+    {title: 'LIBRARY', router: '/home'},
+    {title: 'COMPOSE', router: '/deck'},
+    {title: 'PERFORM', router: '/preview'}
   ],
   user: {
     name: 'Admin',

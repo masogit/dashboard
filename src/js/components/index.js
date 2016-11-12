@@ -2,7 +2,6 @@ import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Table from './Table';
-import TopCenter from './TopCenter';
 import TopLeft from './TopLeft';
 import TopRight from './TopRight';
 import MiddleCenter from './MiddleCenter';
@@ -16,7 +15,8 @@ import Map from './Map_chart';
 import Grid from './Grid_chart';
 
 const Widgets = {
-  TopCenter,
+  Grid,
+  Map,
   TopLeft,
   TopRight,
   MiddleCenter,
@@ -24,9 +24,7 @@ const Widgets = {
   MiddleRight,
   BottomCenter,
   BottomLeft,
-  BottomRight,
-  Grid,
-  Map
+  BottomRight
 };
 
 const WidgetNames = Object.keys(Widgets);
