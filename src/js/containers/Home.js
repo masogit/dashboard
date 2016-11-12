@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 // import { Tile, Box, Tiles} from 'grommet';
-import {
-  TopCenter//,
-  // TopLeft,
-  // MiddleLeft,
-  // MiddleRight,
-  // BottomLeft
-} from '../components/index';
-import {renderBrushed } from '../components/Map_brush.js';
-import Map from '../components/Map_chart';
-import Grid from '../components/Grid_chart';
+import { renderBrushed } from '../constants/Map_brush';
+import { Widgets } from '../components';
+const { Map, Grid } = Widgets;
 // import echarts from 'echarts';
 export default class Home extends Component {
 
@@ -19,7 +12,7 @@ export default class Home extends Component {
   //   chart1.group = 'group1';
   //   chart2.group = 'group1';
   //   echarts.connect('group1');
-    
+
   // }
   render() {
     return (

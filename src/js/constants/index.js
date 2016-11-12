@@ -1,3 +1,5 @@
+import Map_brush from './Map_brush';
+
 const params = {
   URL: {
     DEVICE_TYPES: '/devicemanager/devicetypes',
@@ -16,8 +18,7 @@ const params = {
     ACTIVE: 'module_active',
     LOGIN: 'app_login'
   },
-  ROOT_NAME: '/',
-  HEADER_COLOR: 'neutral-1-t'
+  Map_brush
 };
 
 module.exports = params;

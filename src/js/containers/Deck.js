@@ -88,7 +88,6 @@ class Deck extends Component {
 
   render() {
     let { box } = this.props;
-    console.log(box);
     return (
         <Box flex={true}>
           { this.buildBox(box) }

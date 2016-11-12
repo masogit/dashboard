@@ -1,7 +1,6 @@
 import echarts from 'echarts';
 import React, { Component } from 'react';
 import { getMapJson, getBusinessJson } from '../actions/map.js';
-import {brush } from './Map_brush.js';
 
 let charts = {};
 export default class Map extends Component {
@@ -21,7 +20,7 @@ export default class Map extends Component {
   componentDidMount() {
     this.initChart();
   }
-  
+
   componentDidUpdate() {
     this.renderMap();
   }
@@ -29,7 +28,7 @@ export default class Map extends Component {
   componentWillUnmont() {
     charts = {};
   }
-  
+
   initState(props = {}) {
     const {height = 600, width = 800} = props;
     Object.assign(this.state, {
@@ -75,9 +74,9 @@ export default class Map extends Component {
       } else {
         document.getElementById(id).style.display = 'block';
       }
-    })
+    });
   }
-  
+
   addFunction() {
     // const {onBrushSelected} = this.props;
     // if (onBrushSelected) {
@@ -96,7 +95,7 @@ export default class Map extends Component {
     //       }
     //     }
     //   })
-    // }  
+    // }
   }
 
   loadMap(map = this.state.map, business = this.state.business) {
@@ -113,20 +112,20 @@ export default class Map extends Component {
       getBusinessJson(business).then(data => {
         return data || [];
       })];
-    
+
     Promise.all(promises).then(([geoCoordMap, data]) => {
       this.chart.hideLoading();
       if (geoCoordMap) {
         this.setState({ geoCoordMap, data, map, business, isMapDataReady: true });
-        
+
         charts[map].geoCoordMap = geoCoordMap;
         charts[map].data = data;
       } else {
         const {map, business, parent} = this.state.parent;
         this.setState({ map, business, parent, isMapDataReady: true });
-      }  
+      }
     });
-  }  
+  }
 
   getData(data = this.state.data, geoCoordMap = this.state.geoCoordMap) {
     var res = [];
@@ -141,7 +140,7 @@ export default class Map extends Component {
     }
     return res;
   };
-  
+
   renderMap() {
     if (this.state.isMapDataReady == false) {
       return;
@@ -325,7 +324,7 @@ export default class Map extends Component {
 
   render() {
     const {width,height} = this.state;
-    
+
     return <div id='map_chart' style={{ width, height}}/>;
   }
 }

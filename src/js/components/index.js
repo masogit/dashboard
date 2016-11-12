@@ -12,11 +12,10 @@ import BottomCenter from './BottomCenter';
 import BottomLeft from './BottomLeft';
 import BottomRight from './BottomRight';
 import BoxPropsMenu from './BoxPropsMenu';
-import Map_chart from './Map_chart';
-import Map from './Map';
+import Map from './Map_chart';
+import Grid from './Grid_chart';
 
 const Widgets = {
-  Map_chart,
   TopCenter,
   TopLeft,
   TopRight,
@@ -26,8 +25,12 @@ const Widgets = {
   BottomCenter,
   BottomLeft,
   BottomRight,
-  Map };
+  Grid,
+  Map
+};
+
 const WidgetNames = Object.keys(Widgets);
+
 export {
   BoxPropsMenu,
   Footer,

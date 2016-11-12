@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Anchor, Box, Menu, Header, Title, Icons, CheckBox } from 'grommet';
-const { Down } = Icons.Base;
 import { WidgetNames } from './index';
 
 const FIXED_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
@@ -65,7 +64,7 @@ export default class BoxPropsMenu extends Component {
     return (
       <Header pad="small">
         <Title>Widgets</Title>
-        <Menu label={`Component: ${component || ''}`} dropAlign={{right: 'right', top: 'top'}}>{menus}</Menu>
+        <Menu label={`Component: ${component || ''}`}>{menus}</Menu>
       </Header>
     );
   }
