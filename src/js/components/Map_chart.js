@@ -1,9 +1,9 @@
 import echarts from 'echarts';
 import React, { Component } from 'react';
 import { getMapJson, getBusinessJson } from '../actions/map.js';
-
+import ChartComponent from './ChartComponent';
 let charts = {};
-export default class Map extends Component {
+export default class Map extends ChartComponent {
   componentWillMount() {
     this.state = {
       geoCoordMap: [],
@@ -44,12 +44,7 @@ export default class Map extends Component {
       this.chart = chart;
       this.setState({ geoCoordMap, data });
     } else {
-      const div = document.createElement('div');
-      div.id = name;
-      div.style.width = this.state.width + 'px';
-      div.style.height = this.state.height + 'px';
-      document.getElementById('map_chart').appendChild(div);
-      const chart = echarts.init(div);
+      const chart = this.getChart('map_chart', name);
       this.chart = chart;
       this.chart.showLoading();
       this.chart.on('click', params => {

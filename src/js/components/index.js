@@ -5,7 +5,7 @@ import Table from './Table';
 import TopLeft from './TopLeft';
 import TopRight from './TopRight';
 import MiddleCenter from './MiddleCenter';
-import MiddleLeft from './MiddleLeft';
+import Bar_chart from './Bar_chart';
 import MiddleRight from './MiddleRight';
 import BottomCenter from './BottomCenter';
 import BottomLeft from './BottomLeft';
@@ -20,7 +20,7 @@ const Widgets = {
   TopLeft,
   TopRight,
   MiddleCenter,
-  MiddleLeft,
+  Bar_chart,
   MiddleRight,
   BottomCenter,
   BottomLeft,

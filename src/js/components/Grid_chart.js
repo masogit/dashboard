@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import echarts from 'echarts';
+import ChartComponent from './ChartComponent';
 
-export default class Grid_chart extends Component {
-
+export default class Grid_chart extends ChartComponent {
   componentDidMount() {
-    const chart = echarts.init(document.getElementById('grid_chart'));
-    this.chart = chart;
+    this.chart = this.getChart('grid_chart');
     this.chart.setOption({
       color: ['#ebd282', '#70d2e2', '#e97993'], //设置颜色调色盘
       backgroundColor: '#eee',
@@ -100,7 +98,7 @@ export default class Grid_chart extends Component {
   }
 
   render() {
-    const {height = 300, width = 800} = this.props;
+    const {height, width} = this.state;
     
     return <div id='grid_chart' style={{ width, height }} />;
   } 

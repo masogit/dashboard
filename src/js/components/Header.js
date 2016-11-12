@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Anchor, Header, Title, Menu, Search } from 'grommet';
 import { Link } from 'react-router';
 import UserIcon from 'grommet/components/icons/base/User';
+
+Anchor.propTypes.tag = PropTypes.oneOfType([PropTypes.string, PropTypes.func]);
 
 export default class HeaderArea extends Component {
   render() {

@@ -3,7 +3,6 @@
  */
 import React, { Component } from 'react';
 import { Box, Heading, Header, Menu, Anchor, Meter} from 'grommet';
-import Chart, { Axis } from 'grommet/components/chart/Chart';
 import Status from 'grommet/components/icons/Status';
 import { AreaChart } from 'react-d3';
 
@@ -68,23 +67,6 @@ export default class BottomLeft extends Component {
             }}
             xAxisTickInterval={{unit: 'year', interval: 2}}
           />
-          <Chart>
-            <Axis vertical={true} ticks={true} count={6} labels={axis_x}/>
-            <Chart vertical={true}>
-              <Box direction='row'>
-                <Status value='ok' /><Box pad={{horizontal: 'small'}}>Database</Box>
-                <Meter vertical={false} label={false} max={100} min={0} value={50} active={false}/>
-              </Box>
-              <Box direction='row'>
-                <Status value='critical' /><Box pad={{horizontal: 'small'}}>Mail Server</Box>
-                <Meter vertical={false} label={false} max={100} min={0} value={50} active={false}/>
-              </Box>
-              <Box direction='row'>
-                <Status value='warning' /><Box pad={{horizontal: 'small'}}>Web Server</Box>
-                <Meter vertical={false} label={false} max={100} min={0} value={50} active={false}/>
-              </Box>
-            </Chart>
-          </Chart>
         </Box>
       </Box>
     );
