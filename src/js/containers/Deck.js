@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Box, Menu, Button, Icons } from 'grommet';
-const { Trash, Shift, AddCircle } = Icons.Base;
-import { BoxPropsMenu } from '../components';
+import { Box, Menu, Button, Icons, Layer } from 'grommet';
+const { Trash, Shift, AddCircle, Configure } = Icons.Base;
+import { BoxPropsMenu, Widgets } from '../components';
 import { remove } from 'lodash';
 
 function getID() {
@@ -15,15 +15,20 @@ export default class Deck extends Component {
       box: {
         key: getID(),
         props:{},
-        child: null
+        child: null,
+        component: null
       }
     };
     this.onUpdate.bind(this);
   }
 
   onUpdate(box, props) {
-    props.flex = false;
     Object.assign(box.props, props);
+    this.setState({ box: this.state.box });
+  }
+
+  onBind(box, compName) {
+    box.component = compName;
     this.setState({ box: this.state.box });
   }
 
@@ -104,11 +109,12 @@ export default class Deck extends Component {
         </Box>
       );
     }
-
+    let Widget = box.component && Widgets[box.component];
     return (
       <Box separator={!box.child ? 'all' : 'none'} flex={true} justify="center" align="center" {...box.props}>
         {/*!box.child && */this.buildMenu(box)}
         {child}
+        {box.component && <Widget />}
       </Box>
     );
   }
@@ -125,8 +131,8 @@ export default class Deck extends Component {
             !(box.child instanceof Array && box.child.length > 0) &&
             <Button icon={<Trash />} onClick={this.deleteBox.bind(this, box)}/>
           }
+          <Button icon={<Configure />} onClick={this.showConfigure.bind(this, box)}/>
         </Box>
-        <BoxPropsMenu onUpdate={(props) => this.onUpdate(box, props)} boxProps={box.props}/>
       </Menu>
     );
   }
@@ -142,11 +148,26 @@ export default class Deck extends Component {
     this.setState({ box: this.state.box });
   }
 
+  showConfigure(box) {
+    const layer = (
+      <Layer align="center" closer={true} onClose={this.closeConfigure.bind(this)}>
+        <BoxPropsMenu onUpdate={(props) => this.onUpdate(box, props)} boxProps={box.props}
+                      onBind={(compName) => this.onBind(box, compName)} component={box.component}/>
+      </Layer>
+    );
+    this.setState({ layer });
+  }
+
+  closeConfigure() {
+    this.setState({ layer: null });
+  }
+
   render() {
     let { box } = this.state;
     return (
         <Box flex={true}>
-            {this.buildBox(box)}
+          { this.buildBox(box) }
+          { this.state.layer }
         </Box>
     );
   }

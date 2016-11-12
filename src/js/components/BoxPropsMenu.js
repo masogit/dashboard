@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Anchor, Box, Menu, Header, Title, Icons, CheckBox } from 'grommet';
 const { Down } = Icons.Base;
+import { WidgetNames } from './index';
 
 const FIXED_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
 const RELATIVE_SIZES = ['full', '1/2', '1/3', '2/3', '1/4', '3/4'];
@@ -19,7 +20,7 @@ export default class BoxPropsMenu extends Component {
     const {size: size = {}} = boxProps;
     size[key] = value;
 
-    Object.assign(boxProps, {size});
+    Object.assign(boxProps, {size, flex: false});
     this.props.onUpdate(boxProps);
   }
 
@@ -34,19 +35,18 @@ export default class BoxPropsMenu extends Component {
   updateBool(key, value) {
     let { boxProps } = this.props;
     boxProps[key] = value;
+    boxProps.size = {};
 
     this.props.onUpdate(boxProps);
   }
 
   // reverse, primary, responsive, announce, appCentered, focusable, wrap
   renderBool(type) {
-    const prop = this.props[type];
+    const prop = this.props.boxProps[type];
     return (
       <Header pad="small">
         <Title>{type}</Title>
-        <CheckBox toggle={true} label={type} checked={prop} onChange={(e) => {
-          this.updateBoole.bind(this, type, e.target.checked);
-        }} />
+        <CheckBox toggle={true} label={type} checked={prop} onChange={(e) => this.updateBool(type, e.target.checked)} />
       </Header>
     );
   }
@@ -57,18 +57,30 @@ export default class BoxPropsMenu extends Component {
     });
   }
 
+  renderWidgetsMenus() {
+    const { component, onBind } = this.props;
+    let menus = WidgetNames.map((key, index) => {
+      return <Anchor key={index} label={key} onClick={() => onBind(key)}/>;
+    });
+    return (
+      <Header pad="small">
+        <Title>Widgets</Title>
+        <Menu label={`Component: ${component || ''}`} dropAlign={{right: 'right', top: 'top'}}>{menus}</Menu>
+      </Header>
+    );
+  }
+
   render() {
     return (
-      <Menu inline={false} closeOnClick={false} dropAlign={{ right: 'right', top: 'top' }} icon={<Down />}>
+      <Box size="large">
         <Header pad="small">
           <Title>size</Title>
           { this.renderSize('height') }
           { this.renderSize('width') }
         </Header>
+        { this.renderWidgetsMenus() }
         { this.renderBool('flex') }
-        { this.renderBool('primary') }
-        { this.renderBool('focusable') }
-      </Menu>
+      </Box>
     );
   }
 }
