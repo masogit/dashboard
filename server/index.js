@@ -15,7 +15,11 @@ app.use('/devicemanager', (req, res) => {
 });
 
 app.get('/data/:folder/:filename', function (req, res) {
-  var data = require('../data/' + req.params.folder + '/' + req.params.filename + '.json');
+  try {
+    var data = require('../data/' + req.params.folder + '/' + req.params.filename + '.json');
+  } catch (e) {
+    res.send(null);
+  }  
   res.send(data);
 });
 

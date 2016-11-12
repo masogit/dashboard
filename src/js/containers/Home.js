@@ -11,6 +11,8 @@ import {
 import Map from '../components/Map_chart';
 
 export default class Home extends Component {
+
+
   render() {
     return <Map />;
     // return (

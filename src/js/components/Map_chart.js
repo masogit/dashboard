@@ -1,45 +1,108 @@
 import echarts from 'echarts';
 import React, { Component } from 'react';
 import { getMapJson, getBusinessJson } from '../actions/map.js';
-      
+let charts = {};
 export default class Map extends Component {
   componentWillMount() {
     this.state = {
-      isMapDataReady: false,
       geoCoordMap: [],
       data: [],
-      map: 'china',
-      business: 'item'
+      map: '中国',
+      business: '中国',
+      parent: {}
     };
-    const promises = [
-      getMapJson(this.state.map).then((china) => {
-        echarts.registerMap(this.state.map, china);
-        const geoCoordMap = {};
-        china.features.map(f => geoCoordMap[f.properties.name] = f.properties.cp);
-        return geoCoordMap;
-      }),
-      getBusinessJson(this.state.business).then(data => {
-        return data;
-      })];
-    
-    Promise.all(promises).then(([geoCoordMap,data]) => {
-      this.chart.hideLoading();
-      this.setState({ geoCoordMap, data, isMapDataReady: true });
-    });
+    this.initState();
+    this.loadMap = this.loadMap.bind(this);
+    this.loadMap();
   }
 
   componentDidMount() {
-    this.chart = echarts.init(document.getElementById('chart'));
-    this.chart.showLoading();
+    this.initChart();
   }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({ map: nextProps.map, business: nextProps.business });
-  } 
   
   componentDidUpdate() {
     this.renderMap();
   }
+
+  componentWillUnmont() {
+    charts = {};
+  }
+  
+  initState(props = {}) {
+    const {height = 800, width = 600} = props;
+    Object.assign(this.state, {
+      isMapDataReady: false,
+      height,
+      width
+    });
+  }
+
+  initChart(name = this.state.map) {
+    if (charts[name]) {
+      const {chart, geoCoordMap, data} = charts[name];
+      this.chart = chart;
+      this.setState({ geoCoordMap, data });
+    } else {
+      const div = document.createElement('div');
+      div.id = name;
+      div.style.width = this.state.width + 'px';
+      div.style.height = this.state.height + 'px';
+      document.getElementById('chart').appendChild(div);
+      const chart = echarts.init(div);
+      this.chart = chart;
+      this.chart.showLoading();
+      this.chart.on('click', params => {
+        this.setState({
+          map: params.name,
+          business: params.name,
+          parent: {
+            map: this.state.map,
+            business: this.state.business,
+            parent: this.state.parent
+          },
+          isMapDataReady: false
+        }, this.loadMap);
+      });
+      charts[name] = { chart };
+    }
+
+    Object.keys(charts).map(id => {
+      if (id != name) {
+        document.getElementById(id).style.display = 'none';
+      } else {
+        document.getElementById(id).style.display = 'block';
+      }
+    })
+  }
+  
+  loadMap(map = this.state.map, business = this.state.business) {
+    const promises = [
+      getMapJson(map).then((china) => {
+        if (china) {
+          this.initChart(map);
+          echarts.registerMap(map, china);
+          const geoCoordMap = {};
+          china.features.map(f => geoCoordMap[f.properties.name] = f.properties.cp);
+          return geoCoordMap;
+        }
+      }),
+      getBusinessJson(business).then(data => {
+        return data || [];
+      })];
+    
+    Promise.all(promises).then(([geoCoordMap, data]) => {
+      this.chart.hideLoading();
+      if (geoCoordMap) {
+        this.setState({ geoCoordMap, data, map, business, isMapDataReady: true });
+        
+        charts[map].geoCoordMap = geoCoordMap;
+        charts[map].data = data;
+      } else {
+        const {map, business, parent} = this.state.parent;
+        this.setState({ map, business, parent, isMapDataReady: true });
+      }  
+    });
+  }  
 
   getData(data = this.state.data, geoCoordMap = this.state.geoCoordMap) {
     var res = [];
@@ -66,9 +129,9 @@ export default class Map extends Component {
     this.chart.setOption({
       backgroundColor: '#404a59',
       title: {
-        text: '全国主要城市空气质量',
-        subtext: 'data from PM25.in',
-        sublink: 'http://www.pm25.in',
+        text: `${this.state.map}燃烧器分布图`,
+        subtext: 'Equipment Operation System',
+        sublink: 'http://www.echarts.baidu.com',
         left: 'center',
         textStyle: {
           color: '#fff'
@@ -76,6 +139,22 @@ export default class Map extends Component {
       },
       tooltip: {
         trigger: 'item'
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          myBack: {
+            show: !!this.state.parent.map,
+            title: 'Back',
+            icon: 'path://M432.45,595.444c0,2.177-4.661,6.82-11.305,6.82c-6.475,0-11.306-4.567-11.306-6.82s4.852-6.812,11.306-6.812C427.841,588.632,432.452,593.191,432.45,595.444L432.45,595.444z M421.155,589.876c-3.009,0-5.448,2.495-5.448,5.572s2.439,5.572,5.448,5.572c3.01,0,5.449-2.495,5.449-5.572C426.604,592.371,424.165,589.876,421.155,589.876L421.155,589.876z M421.146,591.891c-1.916,0-3.47,1.589-3.47,3.549c0,1.959,1.554,3.548,3.47,3.548s3.469-1.589,3.469-3.548C424.614,593.479,423.062,591.891,421.146,591.891L421.146,591.891zM421.146,591.891',
+            onclick: () => {
+              const {map, business, parent} = this.state.parent;
+              const {chart, geoCoordMap, data} = charts[map];
+              // this.chart = chart;
+              this.setState({ geoCoordMap, data, map, business, parent });
+            }
+          },
+        }     
       },
       legend: {
         orient: 'vertical',
@@ -93,7 +172,7 @@ export default class Map extends Component {
             show: false
           }
         },
-        roam: true,
+        roam: 'scale',
         itemStyle: {
           normal: {
             areaColor: 'rgb(82,89,101)',
@@ -102,6 +181,10 @@ export default class Map extends Component {
           emphasis: {
             areaColor: 'rgba(82,89,101,.8)'
           }
+        },
+        scaleLimit: {
+          min: 0.5,
+          max:2
         }
       },
       series: [
@@ -159,9 +242,11 @@ export default class Map extends Component {
           zlevel: 1
         }]
     });
+
+
   }
   render() {
-    const {width = 800, height = 600} = this.props;
+    const {width,height} = this.state;
     
     return <div id='chart' style={{ width, height}}/>;
   }
