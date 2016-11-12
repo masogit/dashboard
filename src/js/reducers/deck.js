@@ -70,8 +70,8 @@ const handlers = {
   },
   [TYPE.DECK_DEL_BOX]: (state, action) => {
     let box = action.box;
-    if (box.child) {
-      box.child = null;
+    if (box.component) {
+      box.component = null;
     } else if (action.root.key != box.key) {
       removeFromRoot(box.key, action.root);
     }

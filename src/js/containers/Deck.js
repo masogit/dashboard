@@ -50,7 +50,10 @@ class Deck extends Component {
         <Box direction={box.direction == 'row' ? 'column' : 'row'}>
           <Button icon={<Shift className={(!box.props.direction || box.props.direction == 'column') ? 'icon_rotate90' : ''}/>}
                   onClick={this.toggleDirection.bind(this, box)}/>
-          <Button icon={<AddCircle />} onClick={this.props.addBox.bind(this, box, this.props.box)}/>
+          {
+            !box.component &&
+            <Button icon={<AddCircle />} onClick={this.props.addBox.bind(this, box, this.props.box)}/>
+          }
           {
             !(box.child instanceof Array && box.child.length > 0) &&
             <Button icon={<Trash />} onClick={this.props.deleteBox.bind(this, box, this.props.box)}/>
