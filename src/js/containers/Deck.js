@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Box, Menu, Button, Icons, Layer } from 'grommet';
-const { Trash, Shift, AddCircle, Configure } = Icons.Base;
+const { Trash, Shift, AddCircle, Configure, Play } = Icons.Base;
 import { BoxPropsMenu, Widgets } from '../components';
 import { connect } from 'react-redux';
 import { TYPE } from '../constants';
+import { browserHistory } from 'react-router';
 
 class Deck extends Component {
   constructor(props) {
@@ -35,8 +36,8 @@ class Deck extends Component {
     }
     let Widget = box.component && Widgets[box.component];
     return (
-      <Box separator={!box.child ? 'all' : 'none'} flex={true} justify="center" align="center" {...box.props}>
-        {/*!box.child && */this.buildMenu(box)}
+      <Box separator={(!box.child && !this.props.present) ? 'all' : 'none'} flex={true} justify="center" align="center" {...box.props}>
+        {!this.props.present && this.buildMenu(box)}
         {child}
         {box.component && <Widget />}
       </Box>
@@ -47,7 +48,7 @@ class Deck extends Component {
     return (
       <Menu closeOnClick={false} direction="row" justify="between" colorIndex={box.child ? 'grey-4-a' : ''}
             inline={!box.props.direction || (box.props.direction == 'column') || !box.child} >
-        <Box direction={box.direction == 'row' ? 'column' : 'row'}>
+        <Box direction={box.direction == 'column' ? 'row' : 'row'}>
           <Button icon={<Shift className={(!box.props.direction || box.props.direction == 'column') ? 'icon_rotate90' : ''}/>}
                   onClick={this.toggleDirection.bind(this, box)}/>
           {
@@ -59,6 +60,10 @@ class Deck extends Component {
             <Button icon={<Trash />} onClick={this.props.deleteBox.bind(this, box, this.props.box)}/>
           }
           <Button icon={<Configure />} onClick={this.showConfigure.bind(this, box)}/>
+          {
+            box.key == this.props.box.key &&
+            <Button icon={<Play />} onClick={() => browserHistory.push('/preview')} />
+          }
         </Box>
       </Menu>
     );

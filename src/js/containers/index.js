@@ -12,8 +12,10 @@ import DeviceStatus from './DeviceStatus';
 import Customer from './Customer';
 import Status from './Status';
 import Deck from './Deck';
+import Preview from './Preview';
 
 export {
+  Preview,
   Deck,
   Login,
   Frame,
