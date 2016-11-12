@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tile, Box, Tiles} from 'grommet';
+// import { Tile, Box, Tiles} from 'grommet';
 import {
   TopCenter//,
   // TopLeft,
@@ -8,9 +8,11 @@ import {
   // BottomLeft
 } from '../components/index';
 
+import Map from '../components/Map_chart';
+
 export default class Home extends Component {
   render() {
-    return <TopCenter />;
+    return <Map />;
     // return (
     //   <Box flex={true} colorIndex="light-2">
     //     <Box style={{flexGrow: 1}}>

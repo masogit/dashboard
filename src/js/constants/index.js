@@ -2,7 +2,8 @@ const params = {
   URL: {
     DEVICE_TYPES: '/devicemanager/devicetypes',
     DEVICES: '/devicemanager/devices',
-    MAP_DATA: '/mapdata/'
+    DATA_MAP: '/data/map/',
+    DATA_BUSINESS: '/data/business/'
   },
   TYPE: {
     DECK_ADD_BOX: 'deck_add_box',

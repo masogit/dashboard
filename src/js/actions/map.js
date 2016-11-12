@@ -4,8 +4,14 @@
 import { Rest } from 'grommet';
 import { URL } from '../constants';
 
-export function getMapJson(place) {
-  return Rest.default.get(URL.MAP_DATA + place).then((res) => {
+export function getMapJson(name) {
+  return Rest.default.get(URL.DATA_MAP + name).then((res) => {
+    return res.body;
+  });
+}
+
+export function getBusinessJson(name) {
+  return Rest.default.get(URL.DATA_BUSINESS + name).then((res) => {
     return res.body;
   });
 }
