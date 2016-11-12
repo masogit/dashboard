@@ -7,14 +7,27 @@ import {
   // MiddleRight,
   // BottomLeft
 } from '../components/index';
-
+import {renderBrushed } from '../components/Map_brush.js';
 import Map from '../components/Map_chart';
-
+import Grid from '../components/Grid_chart';
+// import echarts from 'echarts';
 export default class Home extends Component {
 
-
+  // componentDidMount() {
+  //   const chart1 = echarts.getInstanceByDom(document.getElementById('map_chart').children[0]);
+  //   const chart2 = echarts.getInstanceByDom(document.getElementById('grid_chart'));
+  //   chart1.group = 'group1';
+  //   chart2.group = 'group1';
+  //   echarts.connect('group1');
+    
+  // }
   render() {
-    return <Map />;
+    return (
+      <div>
+        <Map onBrushSelected={renderBrushed} />
+        <Grid />
+      </div>
+    );
     // return (
     //   <Box flex={true} colorIndex="light-2">
     //     <Box style={{flexGrow: 1}}>
