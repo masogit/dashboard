@@ -2,101 +2,25 @@ import React, { Component } from 'react';
 import { Box, Menu, Button, Icons, Layer } from 'grommet';
 const { Trash, Shift, AddCircle, Configure } = Icons.Base;
 import { BoxPropsMenu, Widgets } from '../components';
-import { remove } from 'lodash';
+import { connect } from 'react-redux';
+import { TYPE } from '../constants';
 
-function getID() {
-  return (Math.random() + 1).toString(36).substring(7);
-};
-
-export default class Deck extends Component {
-  constructor() {
+class Deck extends Component {
+  constructor(props) {
     super();
     this.state = {
-      box: {
-        key: getID(),
-        props:{},
-        child: null,
-        component: null
-      }
+      box: props.box
     };
-    this.onUpdate.bind(this);
   }
 
   onUpdate(box, props) {
     Object.assign(box.props, props);
-    this.setState({ box: this.state.box });
+    this.props.setBox(this.props.box);
   }
 
   onBind(box, compName) {
     box.component = compName;
-    this.setState({ box: this.state.box });
-  }
-
-  addBox(box) {
-    // clean parent
-    // box.props.direction = direction;
-    box.props.justify = null;
-    box.props.align = null;
-
-    if (!box.child)
-      box.child = [{
-        key: getID(),
-        props:{},
-        child: null
-      }, {
-        key: getID(),
-        props:{},
-        child: null
-      }];
-    else if (box.child instanceof Array)
-      box.child.push({
-        key: getID(),
-        props:{},
-        child: null
-      });
-    else {
-      var child = box.child;
-      box.child = [{
-        key: getID(),
-        props:{},
-        child: child
-      }, {
-        key: getID(),
-        props:{},
-        child: null
-      }];
-    }
-
-    this.setState({ box: this.state.box });
-  }
-
-  deleteBox(box) {
-    if (box.child) {
-      box.child = null;
-    } else if (this.state.box.key != box.key) {
-      this.removeFromRoot(box.key, this.state.box);
-    }
-
-    this.setState({ box: this.state.box });
-  }
-
-  removeFromRoot(key, box) {
-    if (box.child && box.child instanceof Array) {
-      let removed = remove(box.child, child => {
-        return child.key == key;
-      });
-
-      if (box.child.length == 0) {
-        box.child = null;
-        box.props.justify = 'center';
-        box.props.align = 'center';
-      }
-
-      if (removed.length == 0)
-        box.child.forEach(child => {
-          this.removeFromRoot(key, child);
-        });
-    }
+    this.props.setBox(this.props.box);
   }
 
   buildBox(box) {
@@ -126,10 +50,10 @@ export default class Deck extends Component {
         <Box direction={box.direction == 'row' ? 'column' : 'row'}>
           <Button icon={<Shift className={(!box.props.direction || box.props.direction == 'column') ? 'icon_rotate90' : ''}/>}
                   onClick={this.toggleDirection.bind(this, box)}/>
-          <Button icon={<AddCircle />} onClick={this.addBox.bind(this, box)}/>
+          <Button icon={<AddCircle />} onClick={this.props.addBox.bind(this, box, this.props.box)}/>
           {
             !(box.child instanceof Array && box.child.length > 0) &&
-            <Button icon={<Trash />} onClick={this.deleteBox.bind(this, box)}/>
+            <Button icon={<Trash />} onClick={this.props.deleteBox.bind(this, box, this.props.box)}/>
           }
           <Button icon={<Configure />} onClick={this.showConfigure.bind(this, box)}/>
         </Box>
@@ -145,7 +69,7 @@ export default class Deck extends Component {
     else
       box.props.direction = 'row';
 
-    this.setState({ box: this.state.box });
+    this.props.setBox(this.props.box);
   }
 
   showConfigure(box) {
@@ -163,7 +87,8 @@ export default class Deck extends Component {
   }
 
   render() {
-    let { box } = this.state;
+    let { box } = this.props;
+    console.log(box);
     return (
         <Box flex={true}>
           { this.buildBox(box) }
@@ -173,3 +98,16 @@ export default class Deck extends Component {
   }
 }
 
+let mapStateToProps = (state) => {
+  return {
+    box: state.deck.box
+  };
+};
+
+let mapDispatchProps = (dispatch) => ({
+  addBox: (box, root) => dispatch({type: TYPE.DECK_ADD_BOX, box: box, root: root}),
+  deleteBox: (box, root) => dispatch({type: TYPE.DECK_DEL_BOX, box: box, root: root}),
+  setBox: (box) => dispatch({type: TYPE.DECK_SET_BOX, box: box})
+});
+
+export default connect(mapStateToProps, mapDispatchProps)(Deck);
