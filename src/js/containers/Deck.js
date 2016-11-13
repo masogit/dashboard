@@ -36,7 +36,7 @@ class Deck extends Component {
     let Widget = box.component && Widgets[box.component];
     let position = !box.component ? {justify: 'center', align: 'center'} : {};
     return (
-      <Box separator={(!box.child && !this.props.present) ? 'all' : 'none'} flex={true} {...position} {...box.props}>
+      <Box key={box.key} separator={(!box.child && !this.props.present) ? 'all' : 'none'} flex={true} {...position} {...box.props}>
         {!this.props.present && this.buildMenu(box)}
         {child}
         {box.component && <Widget />}
@@ -46,7 +46,7 @@ class Deck extends Component {
 
   buildMenu(box) {
     return (
-      <Menu closeOnClick={false} direction="row" justify="between" colorIndex={box.child ? 'grey-4-a' : ''}
+      <Menu closeOnClick={false} direction="row" colorIndex={box.child ? 'grey-4-a' : ''}
             inline={!box.props.direction || (box.props.direction == 'column') || !box.child} >
         <Box direction={box.direction == 'column' ? 'row' : 'row'}>
           <Button icon={<Shift className={(!box.props.direction || box.props.direction == 'column') ? 'icon_rotate90' : ''}/>}
