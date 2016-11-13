@@ -97,7 +97,7 @@ export default class Bar_chart extends ChartComponent {
   }
 
   render() {
-    const {height = 500, width = 800} = this.props;
+    const {height, width} = this.state;
     
     return <div id='bar_chart' style={{ width, height }} />;
   } 
