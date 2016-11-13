@@ -1,10 +1,11 @@
 /**
  * Created by huling on 10/22/2016.
  */
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Box, Header, Heading } from 'grommet';
 import { LineChart } from 'react-d3';
-
+LineChart.propTypes.width = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
+  
 const lineData = [
   {
     name: "series1",

@@ -8,12 +8,12 @@ export default class Home extends Component {
     return (
       <Columns justify="center">
       {
-        Object.keys(Widgets).map((key) => {
+        Object.keys(Widgets).map((key, index) => {
           let Widget = Widgets[key];
           return (
-            <Box separator="all" margin="small">
+            <Box separator="all" margin="small" key={index}>
               <Box colorIndex="neutral-1" pad="small"><Title>{key}</Title></Box>
-              <Widget />
+              <Widget/>
             </Box>
           );
         })

@@ -1,9 +1,9 @@
 import echarts from 'echarts';
 import React, { Component } from 'react';
 import { getMapJson, getBusinessJson } from '../actions/map.js';
+import ChartComponent from './ChartComponent';
 
-let charts = {};
-export default class Map extends Component {
+export default class Map extends ChartComponent {
   componentWillMount() {
     this.state = {
       geoCoordMap: [],
@@ -15,6 +15,7 @@ export default class Map extends Component {
     this.initState();
     this.loadMap = this.loadMap.bind(this);
     this.loadMap();
+    this.charts = {};
   }
 
   componentDidMount() {
@@ -26,7 +27,7 @@ export default class Map extends Component {
   }
 
   componentWillUnmont() {
-    charts = {};
+    this.charts = {};
   }
 
   initState(props = {}) {
@@ -39,17 +40,12 @@ export default class Map extends Component {
   }
 
   initChart(name = this.state.map) {
-    if (charts[name]) {
-      const {chart, geoCoordMap, data} = charts[name];
+    if (this.charts[name]) {
+      const {chart, geoCoordMap, data} = this.charts[name];
       this.chart = chart;
       this.setState({ geoCoordMap, data });
     } else {
-      const div = document.createElement('div');
-      div.id = name;
-      div.style.width = this.state.width + 'px';
-      div.style.height = this.state.height + 'px';
-      document.getElementById('map_chart').appendChild(div);
-      const chart = echarts.init(div);
+      const chart = this.getChart('map_chart', name);
       this.chart = chart;
       this.chart.showLoading();
       this.chart.on('click', params => {
@@ -65,14 +61,17 @@ export default class Map extends Component {
         }, this.loadMap);
       });
       // this.addFunction();
-      charts[name] = { chart };
+      this.charts[name] = { chart };
     }
 
-    Object.keys(charts).map(id => {
-      if (id != name) {
-        document.getElementById(id).style.display = 'none';
-      } else {
-        document.getElementById(id).style.display = 'block';
+    Object.keys(this.charts).map(id => {
+      const chart = document.getElementById(id);
+      if (chart) {
+        if (id != name) {
+         chart.style.display = 'none';
+        } else {
+          chart.style.display = 'block';
+        }
       }
     });
   }
@@ -118,8 +117,8 @@ export default class Map extends Component {
       if (geoCoordMap) {
         this.setState({ geoCoordMap, data, map, business, isMapDataReady: true });
 
-        charts[map].geoCoordMap = geoCoordMap;
-        charts[map].data = data;
+        this.charts[map].geoCoordMap = geoCoordMap;
+        this.charts[map].data = data;
       } else {
         const {map, business, parent} = this.state.parent;
         this.setState({ map, business, parent, isMapDataReady: true });
@@ -189,7 +188,7 @@ export default class Map extends Component {
             icon: 'path://M432.45,595.444c0,2.177-4.661,6.82-11.305,6.82c-6.475,0-11.306-4.567-11.306-6.82s4.852-6.812,11.306-6.812C427.841,588.632,432.452,593.191,432.45,595.444L432.45,595.444z M421.155,589.876c-3.009,0-5.448,2.495-5.448,5.572s2.439,5.572,5.448,5.572c3.01,0,5.449-2.495,5.449-5.572C426.604,592.371,424.165,589.876,421.155,589.876L421.155,589.876z M421.146,591.891c-1.916,0-3.47,1.589-3.47,3.549c0,1.959,1.554,3.548,3.47,3.548s3.469-1.589,3.469-3.548C424.614,593.479,423.062,591.891,421.146,591.891L421.146,591.891zM421.146,591.891',
             onclick: () => {
               const {map, business, parent} = this.state.parent;
-              const {chart, geoCoordMap, data} = charts[map];
+              const {chart, geoCoordMap, data} = this.charts[map];
               // this.chart = chart;
               this.setState({ geoCoordMap, data, map, business, parent });
             }
