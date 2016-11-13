@@ -9,7 +9,7 @@ class Deck extends Component {
   constructor(props) {
     super();
     this.state = {
-      box: props.box
+      layer: null
     };
   }
 
@@ -34,8 +34,9 @@ class Deck extends Component {
       );
     }
     let Widget = box.component && Widgets[box.component];
+    let position = !box.component ? {justify: 'center', align: 'center'} : {};
     return (
-      <Box separator={(!box.child && !this.props.present) ? 'all' : 'none'} flex={true} justify="center" align="center" {...box.props}>
+      <Box separator={(!box.child && !this.props.present) ? 'all' : 'none'} flex={true} {...position} {...box.props}>
         {!this.props.present && this.buildMenu(box)}
         {child}
         {box.component && <Widget />}
