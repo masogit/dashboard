@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput } from 'grommet';
+import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput, Select } from 'grommet';
 import { WidgetNames } from './index';
 
-const FIXED_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
-const RELATIVE_SIZES = ['full', '1/2', '1/3', '2/3', '1/4', '3/4'];
-const SIZES = FIXED_SIZES.concat(RELATIVE_SIZES);
 const COLOR_INDEX = [
   'brand',
   'accent-1', 'accent-2', 'accent-3',
@@ -13,6 +10,19 @@ const COLOR_INDEX = [
   'light-1', 'light-2',
   'critical', 'warning', 'ok', 'unknown'
 ];
+const FIXED_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
+const oneOf = {
+  justify: ['start', 'center', 'between', 'end'],
+  align: ['start', 'center', 'end', 'baseline', 'stretch'],
+  alignContent: ['start', 'center', 'end', 'between', 'around', 'stretch'],
+  alignSelf: ['start', 'center', 'end', 'stretch'],
+  textAlign: ['left', 'center', 'right'],
+  colorIndex: COLOR_INDEX,
+  separator: ['top', 'bottom', 'left', 'right', 'horizontal', 'vertical', 'all', 'none']
+};
+
+// const RELATIVE_SIZES = ['full', '1/2', '1/3', '2/3', '1/4', '3/4'];
+// const SIZES = FIXED_SIZES.concat(RELATIVE_SIZES);
 
 export default class BoxPropsMenu extends Component {
   constructor() {
@@ -34,16 +44,22 @@ export default class BoxPropsMenu extends Component {
   updateProps(key, value) {
     let { boxProps } = this.props;
     boxProps[key] = value;
-    if (key == 'flex')
-      boxProps.size = {};
+    if (key == 'flex') {
+      if (boxProps.style) {
+        delete boxProps.style.height;
+        delete boxProps.style.width;
+      }
+      delete boxProps.size;
+    }
 
     this.props.onUpdate(boxProps);
   }
 
   updateStyle(key, value) {
     let { boxProps } = this.props;
-    let style = boxProps.style || {};
-    style.key = value;
+    const {style: style = {}} = boxProps;
+    style[key] = value;
+    Object.assign(boxProps, {style});
 
     if (key == 'height' || key == 'width')
       boxProps.flex = false;
@@ -51,25 +67,29 @@ export default class BoxPropsMenu extends Component {
     this.props.onUpdate(boxProps);
   }
 
-  renderSizeMenu(key) {
+  renderSizeProps(key) {
     let { boxProps: {size: size = {}} } = this.props;
-    return <SearchInput placeHolder={key} suggestions={SIZES} defaultValue={size[key]}
+    return <SearchInput placeHolder={key} suggestions={FIXED_SIZES} defaultValue={size[key]}
                         onSelect={(selected) => {
                           this.updateSize(key, selected.suggestion);
                           selected.target.value = selected.suggestion;
                         }}
                         onDOMChange={(e) => {
-                          if (Number.isNaN(e.target.value))
+                          if (Number.isInteger(Number(e.target.value)))
                             this.updateStyle(key, e.target.value + 'px');
                         }}/>;
   }
 
   renderSize() {
+    let type = 'flex';
+    const prop = this.props.boxProps[type];
     return (
       <Header pad="small">
-        <Title>size</Title>
-        { this.renderSizeMenu('height') }
-        { this.renderSizeMenu('width') }
+        <Title>Size</Title>
+        { this.renderSizeProps('height') }
+        { this.renderSizeProps('width') }
+        <CheckBox toggle={true} label={type} checked={prop} reverse={true}
+        onChange={(e) => this.updateProps(type, e.target.checked)} />
       </Header>
     );
   }
@@ -80,7 +100,8 @@ export default class BoxPropsMenu extends Component {
     return (
       <Header pad="small">
         <Title>{type}</Title>
-        <CheckBox toggle={true} label={type} checked={prop} onChange={(e) => this.updateProps(type, e.target.checked)} />
+        <CheckBox toggle={true} checked={prop}
+                  onChange={(e) => this.updateProps(type, e.target.checked)} />
       </Header>
     );
   }
@@ -119,14 +140,32 @@ export default class BoxPropsMenu extends Component {
     );
   }
 
+  renderOneOf({label, prop, types}) {
+    const { boxProps } = this.props;
+    const currentValue = boxProps[prop];
+    return(
+      <Header pad="small">
+        <Title>{label}</Title>
+        <Select options={types} value={currentValue} onChange={(selected) => this.updateProps(prop, selected.option)} />
+      </Header>
+    );
+  }
+
+  renderAllOneOf() {
+    return Object.keys(oneOf).map((key) => {
+      return this.renderOneOf({
+        label: key, prop: key, types: oneOf[key]
+      });
+    });
+  }
+
   render() {
     return (
-      <Box size="large">
-        <Header><Title>Box Properties</Title></Header>
-        { this.renderSize() }
+      <Box size="xlarge">
         { this.renderWidgetsMenus() }
+        { this.renderSize() }
         { this.renderBool('flex') }
-        { this.renderColor() }
+        { this.renderAllOneOf() }
       </Box>
     );
   }
