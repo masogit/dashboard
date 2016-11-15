@@ -12,7 +12,7 @@ class Frame extends Component {
   }
 
   render () {
-    const { modules, user, title, location } = this.props;
+    const { modules, user, title, logo, location } = this.props;
     let module = modules.filter((module) => {
       return location.pathname.indexOf(module.router) === 0;
     })[0];
@@ -21,7 +21,7 @@ class Frame extends Component {
 
     return (
       <Box full={true}>
-        <Header modules={modules} path={location.pathname} user={user} title={title}/>
+        <Header modules={modules} path={location.pathname} user={user} title={title} logo={logo}/>
         <Box flex={true} direction="row">
           <Sidebar menus={menus} />
           <Box flex={true}>{this.props.children}</Box>
@@ -36,7 +36,8 @@ let mapStateToProps = (state) => {
   return {
     modules: state.header.modules,
     user: state.header.user,
-    title: state.header.title
+    title: state.header.title,
+    logo: state.header.logo
   };
 };
 

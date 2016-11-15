@@ -1,7 +1,7 @@
 import { TYPE } from '../constants';
 
 const initialState = {
-  logo: 'demo.png',
+  logo: 'shortcut-icon.png',
   title: 'Dashboard Platform',
   modules: [
     {title: 'LIBRARY', router: '/home'},

@@ -9,8 +9,8 @@ export default class HeaderArea extends Component {
   render() {
     const {modules, path, user, title} = this.props;
     return (
-      <Header justify="between" separator='bottom'>
-        <Title> <img src='img/mobile-app-icon.png' width='30px'/> {title} </Title>
+      <Header justify="between" separator='bottom' colorIndex="light-2">
+        <Title> <img src={`img/${this.props.logo}`} width='30px'/> {title} </Title>
         <Menu direction="row" align="center" responsive={false}>
           {
             modules && modules.map((module, index) => {
