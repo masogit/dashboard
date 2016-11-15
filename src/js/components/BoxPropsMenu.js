@@ -141,28 +141,19 @@ export default class BoxPropsMenu extends Component {
     );
   }
 
-  renderColor() {
+  renderOneOf({label, prop, types}) {
     const { boxProps } = this.props;
-    let { colorIndex } = boxProps;
-    const menus = COLOR_INDEX.map((color, index) => {
-      return <Anchor key={index} label={color} onClick={this.updateProps.bind(this, 'colorIndex', color)} />;
+    let currentValue = boxProps[prop] || '';
+    const menus = types.map((type, index) => {
+      return (<Anchor key={index} label={type} onClick={() => {
+        this.updateProps(prop, type);
+        // this.refs[prop].props.label = type;
+      }} />);
     });
     return(
       <Header pad="small" justify="between">
-        <Title>Color</Title>
-        <Menu label={`Index: ${colorIndex || ''}`}>{menus}</Menu>
-        <input type='color' />
-      </Header>
-    );
-  }
-
-  renderOneOf({label, prop, types}) {
-    const { boxProps } = this.props;
-    const currentValue = boxProps[prop];
-    return(
-      <Header pad="small" justify="between">
         <Title>{label}</Title>
-        <Select options={types} value={currentValue} onChange={(selected) => this.updateProps(prop, selected.option)} />
+        <Menu ref={prop} label={currentValue} inline={false}>{menus}</Menu>
       </Header>
     );
   }
@@ -194,7 +185,7 @@ export default class BoxPropsMenu extends Component {
 
   render() {
     return (
-      <Box size="xlarge">
+      <Box>
         { this.renderWidgetsMenus() }
         { this.renderSize() }
         { this.renderBool('flex') }

@@ -78,7 +78,7 @@ class Deck extends Component {
 
   showConfigure(box) {
     const layer = (
-      <Layer align="center" closer={true} onClose={this.closeConfigure.bind(this)}>
+      <Layer align="right" closer={true} onClose={this.closeConfigure.bind(this)}>
         <BoxPropsMenu onUpdate={(props) => this.onUpdate(box, props)} boxProps={box.props}
                       onBind={(compName) => this.onBind(box, compName)} component={box.component}/>
       </Layer>
