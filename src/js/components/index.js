@@ -13,8 +13,10 @@ import BottomRight from './BottomRight';
 import BoxPropsMenu from './BoxPropsMenu';
 import Map from './Map_chart';
 import Grid from './Grid_chart';
+import WorldMap from './WorldMap';
 
 const Widgets = {
+  WorldMap,
   Grid,
   Map,
   TopLeft,

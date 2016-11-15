@@ -81,15 +81,11 @@ export default class BoxPropsMenu extends Component {
   }
 
   renderSize() {
-    let type = 'flex';
-    const prop = this.props.boxProps[type];
     return (
-      <Header pad="small">
+      <Header pad="small" justify="between">
         <Title>Size</Title>
         { this.renderSizeProps('height') }
         { this.renderSizeProps('width') }
-        <CheckBox toggle={true} label={type} checked={prop} reverse={true}
-        onChange={(e) => this.updateProps(type, e.target.checked)} />
       </Header>
     );
   }
@@ -98,7 +94,7 @@ export default class BoxPropsMenu extends Component {
   renderBool(type) {
     const prop = this.props.boxProps[type];
     return (
-      <Header pad="small">
+      <Header pad="small" justify="between">
         <Title>{type}</Title>
         <CheckBox toggle={true} checked={prop}
                   onChange={(e) => this.updateProps(type, e.target.checked)} />
@@ -118,7 +114,7 @@ export default class BoxPropsMenu extends Component {
       return <Anchor key={index} label={key} onClick={() => onBind(key)}/>;
     });
     return (
-      <Header pad="small">
+      <Header pad="small" justify="between">
         <Title>Widgets</Title>
         <Menu label={`Component: ${component || ''}`}>{menus}</Menu>
       </Header>
@@ -132,7 +128,7 @@ export default class BoxPropsMenu extends Component {
       return <Anchor key={index} label={color} onClick={this.updateProps.bind(this, 'colorIndex', color)} />;
     });
     return(
-      <Header pad="small">
+      <Header pad="small" justify="between">
         <Title>Color</Title>
         <Menu label={`Index: ${colorIndex || ''}`}>{menus}</Menu>
         <input type='color' />
@@ -144,7 +140,7 @@ export default class BoxPropsMenu extends Component {
     const { boxProps } = this.props;
     const currentValue = boxProps[prop];
     return(
-      <Header pad="small">
+      <Header pad="small" justify="between">
         <Title>{label}</Title>
         <Select options={types} value={currentValue} onChange={(selected) => this.updateProps(prop, selected.option)} />
       </Header>
