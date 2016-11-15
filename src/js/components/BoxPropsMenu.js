@@ -10,7 +10,9 @@ const COLOR_INDEX = [
   'light-1', 'light-2',
   'critical', 'warning', 'ok', 'unknown'
 ];
+const MARGIN_SIZES = ['small', 'medium', 'large', 'none'];
 const FIXED_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
+const PAD_SIZES = ['small', 'medium', 'large', 'none'];
 const oneOf = {
   justify: ['start', 'center', 'between', 'end'],
   align: ['start', 'center', 'end', 'baseline', 'stretch'],
@@ -19,6 +21,21 @@ const oneOf = {
   textAlign: ['left', 'center', 'right'],
   colorIndex: COLOR_INDEX,
   separator: ['top', 'bottom', 'left', 'right', 'horizontal', 'vertical', 'all', 'none']
+};
+const sharp = {
+  margin: {
+    bottom: MARGIN_SIZES,
+    horizontal: MARGIN_SIZES,
+    left: MARGIN_SIZES,
+    right: MARGIN_SIZES,
+    top: MARGIN_SIZES,
+    vertical: MARGIN_SIZES
+  },
+  pad: {
+    between: PAD_SIZES,
+    horizontal: PAD_SIZES,
+    vertical: PAD_SIZES
+  }
 };
 
 // const RELATIVE_SIZES = ['full', '1/2', '1/3', '2/3', '1/4', '3/4'];
@@ -30,6 +47,15 @@ export default class BoxPropsMenu extends Component {
     this.state={
       size: this.renderSize
     };
+  }
+
+  updateSharp(key, attr, value) {
+    let { boxProps } = this.props;
+    let sharp = boxProps[key] || {};
+    sharp[attr] = value;
+
+    boxProps[key] = sharp;
+    this.props.onUpdate(boxProps);
   }
 
   updateSize(key, value) {
@@ -102,12 +128,6 @@ export default class BoxPropsMenu extends Component {
     );
   }
 
-  renderPropsMenus() {
-    return Object.keys(Box.propTypes).map((type) => {
-      return <Title>{type}</Title>;
-    });
-  }
-
   renderWidgetsMenus() {
     const { component, onBind } = this.props;
     let menus = WidgetNames.map((key, index) => {
@@ -155,6 +175,23 @@ export default class BoxPropsMenu extends Component {
     });
   }
 
+  renderAllSharp() {
+    return Object.keys(sharp).map((key) => {
+      const attrSelects = Object.keys(sharp[key]).map((attr) => {
+        let menus = sharp[key][attr].map((prop, index) => {
+          return <Anchor key={index} label={prop} onClick={() => this.updateSharp(key, attr, prop)}/>;
+        });
+        return <Menu label={attr}>{menus}</Menu>;
+      });
+      return(
+        <Header pad="small" justify="between">
+          <Title>{key}</Title>
+          { attrSelects }
+        </Header>
+      );
+    });
+  }
+
   render() {
     return (
       <Box size="xlarge">
@@ -162,6 +199,7 @@ export default class BoxPropsMenu extends Component {
         { this.renderSize() }
         { this.renderBool('flex') }
         { this.renderAllOneOf() }
+        { this.renderAllSharp() }
       </Box>
     );
   }
