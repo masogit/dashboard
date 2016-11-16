@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput, Select } from 'grommet';
+import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput, Split } from 'grommet';
 import { WidgetNames } from './index';
 
 const COLOR_INDEX = [
@@ -14,6 +14,7 @@ const MARGIN_SIZES = ['small', 'medium', 'large', 'none'];
 const FIXED_SIZES = ['xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
 const PAD_SIZES = ['small', 'medium', 'large', 'none'];
 const oneOf = {
+  flex: ['grow', 'shrink', true, false],
   justify: ['start', 'center', 'between', 'end'],
   align: ['start', 'center', 'end', 'baseline', 'stretch'],
   alignContent: ['start', 'center', 'end', 'between', 'around', 'stretch'],
@@ -145,7 +146,7 @@ export default class BoxPropsMenu extends Component {
     const { boxProps } = this.props;
     let currentValue = boxProps[prop] || '';
     const menus = types.map((type, index) => {
-      return (<Anchor key={index} label={type} onClick={() => {
+      return (<Anchor key={index} label={String(type)} onClick={() => {
         this.updateProps(prop, type);
         // this.refs[prop].props.label = type;
       }} />);
@@ -177,7 +178,7 @@ export default class BoxPropsMenu extends Component {
       return(
         <Header pad="small" justify="between">
           <Title>{key}</Title>
-          { attrSelects }
+          <Box>{ attrSelects }</Box>
         </Header>
       );
     });
@@ -188,9 +189,10 @@ export default class BoxPropsMenu extends Component {
       <Box>
         { this.renderWidgetsMenus() }
         { this.renderSize() }
-        { this.renderBool('flex') }
-        { this.renderAllOneOf() }
-        { this.renderAllSharp() }
+        <Split showOnResponsive="both">
+          { this.renderAllOneOf() }
+          { this.renderAllSharp() }
+        </Split>
       </Box>
     );
   }
