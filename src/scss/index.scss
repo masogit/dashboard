@@ -1,6 +1,9 @@
 @import '~grommet/scss/vanilla/index';
 @import "object_tiles";
 @import "map";
+@import "bootstrap.css";
+/*@import "AdminLTE.css";*/
+@import "_all-skins.css";
 
 .icon_rotate90 {
   -webkit-transform: rotate(90deg);

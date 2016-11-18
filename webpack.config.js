@@ -43,6 +43,10 @@ module.exports = {
         loader: 'style!css!sass?sourceMap&includePaths[]=' + path.resolve(__dirname, './node_modules') +
         '&includePaths[]=' + encodeURIComponent(path.resolve(__dirname, './node_modules/grommet/node_modules'))
       },
+      {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
       //图片文件使用 url-loader 来处理，小于8kb的直接转为base64
       {test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'},
       {

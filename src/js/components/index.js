@@ -14,6 +14,7 @@ import BoxPropsMenu from './BoxPropsMenu';
 import Map from './Map_chart';
 import Grid from './Grid_chart';
 import WorldMap from './WorldMap';
+import AdminTemplate from './AdminTemplate';
 
 const Widgets = {
   WorldMap,
@@ -38,5 +39,6 @@ export {
   Sidebar,
   Table,
   Widgets,
-  WidgetNames
+  WidgetNames,
+  AdminTemplate
 };

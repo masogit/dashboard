@@ -96,6 +96,10 @@ export default class Bar_chart extends ChartComponent {
     this.chart.setOption(option);
   }
 
+   componentWillReciveProps(nextProps, nextState) {
+     this._onResize(document.getElementById('bar_chart'), document.getElementById('bar_chart'), nextProps.width, nextProps.height)
+  }
+
   render() {
     const {height, width} = this.state;
     
