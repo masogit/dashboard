@@ -6,7 +6,7 @@ const initialState = {
   showSidebar: true,
   modules: [
     {
-      title: 'LIBRARY', router: '/home', icon: 'envelope', number:'4',
+      title: 'LIBRARY', router: '/home', icon: 'envelope', number: '4',
       menus: [
         {root: 'MAIN NAVIGATION'},
         { title: 'Overview', router: '/device', icon: 'dashboard', active: true,  menus: [
@@ -21,7 +21,12 @@ const initialState = {
         ] },
         { title: 'Status', router: '/device/status', icon: 'heartbeat', status: [{text: 4, color: 'blue'}] },
         { title: 'History', router: '/device/history', icon: 'history', status: [{text: 'new', color: 'green'}] },
-        { title: 'Alarm', router: '/device/alarm', icon: 'warning' },
+        {
+          title: 'Alarm', router: '/device/alarm', icon: 'warning', menus: [
+            { title: 'a1', router: '/dashboard1' },
+            { title: 'a2', router: '/dashboard2' }
+          ]
+        },
         { title: 'Mailbox', router: '/device/alarm', icon: 'envelope', status: [{ text: '5', color: 'red' }, { text: '3', color: 'green' }, { text: 4, color: 'yellow' }] },
         { root: 'LABELS' },
         { title: 'important', router: '/device/status', icon: 'circle-o text-red' },
@@ -56,7 +61,7 @@ const handlers = {
     return {'modules': modules};
   },
   [TYPE.TOGGLE_SIDEBAR]: state => {
-    return {showSidebar: !state.showSidebar}
+    return { showSidebar: !state.showSidebar };
   }
 };
 
