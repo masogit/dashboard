@@ -1,3 +1,11 @@
-.grommetux-anchor--icon-label:not(.grommetux-anchor--primary):visited {
-  color: #fff;
+.sidebar-menu {
+  .grommetux-anchor {
+    &--icon-label:not(.grommetux-anchor--primary):visited {
+      color: #fff;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }

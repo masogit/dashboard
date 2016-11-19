@@ -9,36 +9,44 @@ export default class SideBar extends Component {
     this.searchInput.inputRef.class += 'form-control';
   }
 
-  renderTreeView(menus, activeIndex = 0, root = false) {
+  renderTreeView(menus, {activeIndex = 0, root = false, active = false}) {
+    const classes = root ? ['sidebar-menu'] : ['treeview-menu'];
+    if (active) {
+      classes.push('active');
+    }
+
     return (
-      <List className={root ? 'sidebar-menu' : 'treeview-menu'}>
-        {root && <ListItem className='header' separator='none'>MAIN NAVIGATION</ListItem>}
+      <List className={classes.join(' ')}>
         {
           menus.map((menu, index) => {
-            const listItem = (
-              <ListItem key={index} className={'treeview' + (activeIndex == index ? ' active' : '')}
-                separator='none' direction='column' align='stretch'
-                pad={root ? 'small' : 'none'}>
-                <Anchor tag={Link} icon={<i className={`fa fa-${menu.icon || 'circle'}`} />}
-                  label={menu.title} to={menu.router} />
-                <Box className='pull-right-container'>
-                  {menu.menus && <i className="fa fa-angle-left pull-right"/>}
-                </Box>
-                {menu.menus && this.renderTreeView(menu.menus)}
-              </ListItem>
-            );          
-            return listItem;
+            if (menu.root) {
+              return <ListItem key={index} className='header' separator='none'>{menu.root}</ListItem>;
+            } else {
+              return (
+                <ListItem key={index} className={'treeview' + (menu.active ? ' active' : '')}
+                  separator='none' direction='column' align='stretch'
+                  pad={root ? 'small' : 'none'}>
+                  <Anchor tag={Link} >
+                    <i className={`fa fa-${menu.icon || 'circle-o'}`} />
+                    <span>{menu.title}</span>
+                    <Box className='pull-right-container' direction='row'>
+                      {menu.menus && <i className="fa fa-angle-left pull-right" />}
+                      {menu.status && menu.status.map((item, index) => (
+                        <small key={index} className={`label pull-right bg-${item.color}`}>{item.text}</small>
+                      ))}
+                    </Box>
+                  </Anchor>                
+                  {menu.menus && this.renderTreeView(menu.menus, {active: menu.active})}
+                </ListItem>
+              );
+            }
           })
         }
       </List>
     );
   }
 
-  render() {
-    // <Header justify="between" >
-    //         <Title> <img src={`img/${logo}`} width='30px' /> {title} </Title>
-    // </Header>
-    
+  render() {    
     const { menus , logo, title, user } = this.props;
     let isArray = menus instanceof Array;
     if (menus)
@@ -53,7 +61,7 @@ export default class SideBar extends Component {
           <UserPanel name={user.name} />
           <SearchInput ref={node => this.searchInput = node} className='sidebar-form' placeHolder='Search...'/>
           {!isArray && this.renderMenu(menus)}
-          {isArray && this.renderTreeView(menus, 0, true)}
+          {isArray && this.renderTreeView(menus, { root: true })}
         </Sidebar>
       );
     else
