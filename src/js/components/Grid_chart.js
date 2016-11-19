@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ChartComponent from './ChartComponent';
 
 export default class Grid_chart extends ChartComponent {
@@ -21,8 +21,7 @@ export default class Grid_chart extends ChartComponent {
         }
       },
       legend: {
-        data: ['机器一', '机器二', '机器三'],
-					
+        data: ['机器一', '机器二', '机器三']
       },
       grid: {
         show: false,
@@ -34,11 +33,11 @@ export default class Grid_chart extends ChartComponent {
       },
       xAxis: [{
         boundaryGap:false,
-        axisLine:{
-            show:false
+        axisLine: {
+          show: false
         },
-        axisTick:{
-            show:false
+        axisTick: {
+          show: false
         },
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
       }],
@@ -63,7 +62,7 @@ export default class Grid_chart extends ChartComponent {
         name: '机器一',
         type: 'line',
         //          stack: '总量',
-					
+
         areaStyle: {
           normal: {
             opacity: 0.9
@@ -98,8 +97,8 @@ export default class Grid_chart extends ChartComponent {
   }
 
   render() {
-    const {height, width} = this.state;
-    
+    const { height, width } = this.state;
+
     return <div id='grid_chart' style={{ width, height }} />;
-  } 
-} 
+  }
+}

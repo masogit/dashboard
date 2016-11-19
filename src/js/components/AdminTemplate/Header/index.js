@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Anchor, Header, Title, Menu, Search } from 'grommet';
+import { Anchor, Header, Menu, Search } from 'grommet';
 import { Link } from 'react-router';
 import UserIcon from 'grommet/components/icons/base/User';
 

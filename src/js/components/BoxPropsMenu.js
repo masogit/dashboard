@@ -96,7 +96,8 @@ export default class BoxPropsMenu extends Component {
 
   renderSizeProps(key) {
     let { boxProps: {size: size = {}} } = this.props;
-    return <SearchInput placeHolder={key} suggestions={FIXED_SIZES} defaultValue={size[key]}
+    return (
+      <SearchInput placeHolder={key} suggestions={FIXED_SIZES} defaultValue={size[key]}
                         onSelect={(selected) => {
                           this.updateSize(key, selected.suggestion);
                           selected.target.value = selected.suggestion;
@@ -104,7 +105,8 @@ export default class BoxPropsMenu extends Component {
                         onDOMChange={(e) => {
                           if (Number.isInteger(Number(e.target.value)))
                             this.updateStyle(key, e.target.value + 'px');
-                        }}/>;
+                        }} />
+    );
   }
 
   renderSize() {

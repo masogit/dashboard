@@ -37,10 +37,10 @@ export default class Map extends Component {
     getMapJson('china').then((place) => {
       const features = place.features;
       const points = features.map(f => ({
-          type: "Point",
-          coordinates: f.properties.cp,
-          number: f.properties.childNum
-        }));
+        type: "Point",
+        coordinates: f.properties.cp,
+        number: f.properties.childNum
+      }));
 
       this.setState({
         features,
@@ -59,7 +59,7 @@ export default class Map extends Component {
   }
 
   renderMap() {
-    const {mapContainer, path, projection} = this;
+    const { mapContainer, path } = this;
     const features = this.state.features;
     if (features) {
       // draw subunit
@@ -69,7 +69,7 @@ export default class Map extends Component {
         .attr("class", 'subunit')
         .attr("d", path)
         .style("fill", (d, a) => d.properties.color);
-        
+
       const events = this.props.events;
       if (events) {
         events.map((pre, curent) => {
@@ -91,24 +91,24 @@ export default class Map extends Component {
 
   mouseout(d, i) {
     this.mapContainer.selectAll(".subunit")[0][i].style.opacity = 1;
-    this.setState({ showLayer: false })
+    this.setState({ showLayer: false });
   }
 
-  renderPoints() {  
+  renderPoints() {
     var radius = d3.scale.sqrt()
     .domain([0, 40])
       .range([0, 15]);
-    
+
     if (this.state.points) {
       const {mapContainer, path} = this;
       const circleNumber = 3;
-      for(let i = 0; i < circleNumber; i++) {
-         mapContainer.selectAll('point')
+      for (let i = 0; i < circleNumber; i++) {
+        mapContainer.selectAll('point')
           .data(this.state.points)
           .enter().append("circle")
           .attr('class', 'circle')
-          .attr("transform", function (d) { return "translate(" + path.centroid(d) + ")"; })
-          .attr("r", function (d) { return radius(d.number) * (1 + i/4) })
+          .attr("transform", d => `translate(${ path.centroid(d)})`)
+          .attr("r", d => radius(d.number) * (1 + i / 4))
           .on('mouseenter', this.mouseenter)
           .on('mouseout', this.mouseout);
       }
@@ -139,14 +139,14 @@ export default class Map extends Component {
   }
 
   render() {
-    const {showLabel, showPoints, events, children} = this.props;
+    const { children } = this.props;
     return (
       <Box className='map'>
         <div id='map' />
         <Box className='layer' ref={node => this.layer = node}>
           {this.state.showLayer && children}
         </Box>
-      </Box>  
+      </Box>
     );
   }
 }

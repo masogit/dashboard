@@ -13,7 +13,7 @@ class Frame extends Component {
   }
 
   render () {
-    const { modules, user, title, logo, location, color='blue' } = this.props;
+    const { modules, user, title, location, color='blue' } = this.props;
     let module = modules.filter((module) => {
       return location.pathname.indexOf(module.router) === 0;
     })[0];
@@ -29,7 +29,7 @@ class Frame extends Component {
             </Box>
             <Box flex={true}>{this.props.children}</Box>
             <Footer />
-          </Box>        
+          </Box>
       </Box>
     );
   }

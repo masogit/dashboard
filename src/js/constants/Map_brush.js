@@ -5,7 +5,7 @@ const brush = {
   brushStyle: {
     borderWidth: 2,
     color: 'rgba(0,0,0,0.2)',
-    borderColor: 'rgba(0,0,0,0.5)',
+    borderColor: 'rgba(0,0,0,0.5)'
   },
   seriesIndex: [0, 1],
   throttleType: 'debounce',
@@ -45,18 +45,18 @@ function renderBrushed(params, convertedData) {
 
   this.setOption({
     yAxis: {
-        data: categoryData
+      data: categoryData
     },
     xAxis: {
-        axisLabel: {show: !!count}
+      axisLabel: { show: !!count }
     },
     title: {
-        id: 'statistic',
-        text: count ? '平均: ' + (sum / count).toFixed(4) : ''
+      id: 'statistic',
+      text: count ? '平均: ' + (sum / count).toFixed(4) : ''
     },
     series: {
-        id: 'bar',
-        data: barData
+      id: 'bar',
+      data: barData
     }
   });
 }

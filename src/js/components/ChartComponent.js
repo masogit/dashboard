@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import echarts from 'echarts';
 
 export default class ChartComponent extends Component {
@@ -6,11 +5,11 @@ export default class ChartComponent extends Component {
     this.state = {
       width: this.props.width || 800,
       height: this.props.height || 300
-    }
+    };
   }
 
   componentWillReciveProps(nextProps, nextState) {
-    
+
   }
 
   _onResize(container, div, width, height) {
@@ -18,16 +17,14 @@ export default class ChartComponent extends Component {
     const parentCss = document.defaultView.getComputedStyle(container.parentElement);
     const p_width = parseInt(parentCss.width.slice(0, -2));
     const p_margin_h = parseInt(parentCss.marginLeft.slice(0, -2)) + parseInt(parentCss.marginRight.slice(0, -2));
-    const p_border_h = parseInt(parentCss.borderLeftWidth.slice(0, -2)) + parseInt(parentCss.borderRightWidth.slice(0, -2))
+    const p_border_h = parseInt(parentCss.borderLeftWidth.slice(0, -2)) + parseInt(parentCss.borderRightWidth.slice(0, -2));
     if (p_width > 100) {
       width = p_width - p_margin_h + p_border_h;
-    } else {
-      width = width;
     }
 
     const p_height = parseInt(parentCss.height.slice(0, -2));
     const p_margin_v = parseInt(parentCss.marginTop.slice(0, -2)) + parseInt(parentCss.marginBottom.slice(0, -2));
-    const p_border_v = parseInt(parentCss.borderBottomWidth.slice(0, -2)) + parseInt(parentCss.borderTopWidth.slice(0, -2))
+    const p_border_v = parseInt(parentCss.borderBottomWidth.slice(0, -2)) + parseInt(parentCss.borderTopWidth.slice(0, -2));
     if (p_height > 100) {
       height = p_height - p_margin_v + p_border_v;
     } else {
@@ -58,11 +55,11 @@ export default class ChartComponent extends Component {
     // if (height < parseInt(parentCss.height.slice(0, -2))) {
     //   height = parentCss.height;
     // } else {
-    //   height =  height + 'px';    
+    //   height =  height + 'px';
     // }
 
     // div.style.width = width;
-    // div.style.height = height;    
+    // div.style.height = height;
 
     window.addEventListener('resize', this._onResize.bind(this, container, div, width, height));
     return echarts.init(div);
@@ -70,5 +67,5 @@ export default class ChartComponent extends Component {
 
   render() {
     return null;
-  } 
-} 
+  }
+}

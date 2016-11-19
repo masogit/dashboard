@@ -2,8 +2,7 @@
  * Created by huling on 10/22/2016.
  */
 import React, { Component } from 'react';
-import { Box, Heading, Header, Menu, Anchor, Meter} from 'grommet';
-import Status from 'grommet/components/icons/Status';
+import { Box, Heading, Header, Menu, Anchor} from 'grommet';
 import { AreaChart } from 'react-d3';
 
 var myDate = new Date();
@@ -44,7 +43,6 @@ export default class BottomLeft extends Component {
 
   render() {
     const {title} = this.props;
-    const {axis_x} = this.state;
     return (
       <Box style={{width: '100%'}} pad='small'>
         <Header justify='between'>

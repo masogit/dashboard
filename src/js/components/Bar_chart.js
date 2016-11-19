@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ChartComponent from './ChartComponent';
 
 export default class Bar_chart extends ChartComponent {
   componentDidMount() {
     this.chart = this.getChart('bar_chart');
-    
+
     // this.chart.title = '堆叠条形图';
 
     const option = {
@@ -96,13 +96,13 @@ export default class Bar_chart extends ChartComponent {
     this.chart.setOption(option);
   }
 
-   componentWillReciveProps(nextProps, nextState) {
-     this._onResize(document.getElementById('bar_chart'), document.getElementById('bar_chart'), nextProps.width, nextProps.height)
+  componentWillReciveProps(nextProps, nextState) {
+    this._onResize(document.getElementById('bar_chart'), document.getElementById('bar_chart'), nextProps.width, nextProps.height);
   }
 
   render() {
-    const {height, width} = this.state;
-    
+    const { height, width } = this.state;
+
     return <div id='bar_chart' style={{ width, height }} />;
-  } 
-} 
+  }
+}

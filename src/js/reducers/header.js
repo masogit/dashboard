@@ -4,13 +4,14 @@ const initialState = {
   logo: 'shortcut-icon.png',
   title: 'Dashboard',
   modules: [
-    {title: 'LIBRARY', router: '/home',
+    {
+      title: 'LIBRARY', router: '/home',
       menus: [
-            {title: 'Overview', router: '/device'},
-            {title: 'Status', router: '/device/status'},
-            {title: 'History', router: '/device/history'},
-            {title: 'Alarm', router: '/device/alarm'}
-          ]
+        { title: 'Overview', router: '/device' },
+        { title: 'Status', router: '/device/status' },
+        { title: 'History', router: '/device/history' },
+        { title: 'Alarm', router: '/device/alarm' }
+      ]
     },
     {title: 'COMPOSE', router: '/deck'},
     {title: 'PERFORM', router: '/preview'}
