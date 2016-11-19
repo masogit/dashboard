@@ -34,3 +34,6 @@
   font-size: $font-size-small;
 }
 
+.no-shrink {
+  flex-shrink: 0;
+}

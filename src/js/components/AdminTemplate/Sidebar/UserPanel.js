@@ -6,7 +6,7 @@ export default class UserPanel extends Component {
   render() {    
     const { icon, name, status = 'ok' } = this.props;
     return (
-      <Box className='user-panel' direction='row' pad='small'>
+      <Box className='user-panel' direction='row' pad='small' flex={false}>
         <Box className='pull-left image'>
           <img src={`img/${icon || 'user2-160x160.jpg'}`} className='img-circle' />
         </Box>

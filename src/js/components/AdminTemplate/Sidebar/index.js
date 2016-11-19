@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Anchor, Sidebar, Label, List, ListItem, Box, SearchInput } from 'grommet';
 import { Link } from 'react-router';
 import UserPanel from './UserPanel';
+import { connect } from 'react-redux';
 
-export default class SideBar extends Component {
+class SideBar extends Component {
   componentDidMount() {
     this.searchInput.inputRef.type = 'text';
     this.searchInput.inputRef.class += 'form-control';
   }
 
-  renderTreeView(menus, {activeIndex = 0, root = false, active = false}) {
+  renderTreeView(menus, {root = false, active = false}) {
     const classes = root ? ['sidebar-menu'] : ['treeview-menu'];
     if (active) {
       classes.push('active');
@@ -47,19 +48,19 @@ export default class SideBar extends Component {
   }
 
   render() {    
-    const { menus , logo, title, user } = this.props;
+    const { menus, logo, title, user } = this.props;
     let isArray = menus instanceof Array;
     if (menus)
       return (
         <Sidebar size='small' className='main-sidebar main-header'>          
-          <Box tag='a' className='logo'>
+          <Box tag='a' className='logo' flex={false}>
             <span className='logo-mini'>
               <img src={`img/${logo}`} width='30px' />
             </span>
             <Label margin='small' className='logo-lg'>{title}</Label>
           </Box>
           <UserPanel name={user.name} />
-          <SearchInput ref={node => this.searchInput = node} className='sidebar-form' placeHolder='Search...'/>
+          <SearchInput ref={node => this.searchInput = node} className='sidebar-form no-shrink' placeHolder='Search...'/>
           {!isArray && this.renderMenu(menus)}
           {isArray && this.renderTreeView(menus, { root: true })}
         </Sidebar>
@@ -68,3 +69,11 @@ export default class SideBar extends Component {
       return null;
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    showSidebar: state.header.showSidebar
+  };
+};
+
+export default connect(mapStateToProps, {})(SideBar);

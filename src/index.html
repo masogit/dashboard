@@ -65,21 +65,21 @@
     for (var i = 0; i < 100; i += 1) {
       c.insertAdjacentHTML('beforeend', '<div class="t off"></div>');
     }
-    var timer = setInterval(function () {
-      var again = false;
-      if (document.body.classList.contains('loading')) {
-        var ts = c.querySelectorAll('div.t.off');
-        var index = Math.floor(Math.random() * ts.length);
-        ts[index].classList.remove('off');
-        ts[index].classList.add('on');
-        if (ts.length > 1) {
-          again = true;
-        }
-      }
-      if (! again) {
-        clearInterval(timer);
-      }
-    }, 100)
+    // var timer = setInterval(function () {
+    //   var again = false;
+    //   if (document.body.classList.contains('loading')) {
+    //     var ts = c.querySelectorAll('div.t.off');
+    //     var index = Math.floor(Math.random() * ts.length);
+    //     ts[index].classList.remove('off');
+    //     ts[index].classList.add('on');
+    //     if (ts.length > 1) {
+    //       again = true;
+    //     }
+    //   }
+    //   if (! again) {
+    //     clearInterval(timer);
+    //   }
+    // }, 100)
     </script>
   </div>
   <script src="index.js"></script>

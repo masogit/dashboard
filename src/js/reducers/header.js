@@ -3,6 +3,7 @@ import { TYPE } from '../constants';
 const initialState = {
   logo: 'shortcut-icon.png',
   title: 'Dashboard',
+  showSidebar: true,
   modules: [
     {
       title: 'LIBRARY', router: '/home', icon: 'envelope', number:'4',
@@ -53,6 +54,9 @@ const handlers = {
     });
 
     return {'modules': modules};
+  },
+  [TYPE.TOGGLE_SIDEBAR]: state => {
+    return {showSidebar: !state.showSidebar}
   }
 };
 

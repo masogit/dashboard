@@ -16,7 +16,9 @@ const params = {
     INIT_DEVICE_TYPE: 'init_device_type',
     LOAD_ALL_DEVICES: 'load_all_devices',
     ACTIVE: 'module_active',
-    LOGIN: 'app_login'
+    LOGIN: 'app_login',
+
+    TOGGLE_SIDEBAR: 'toggle_sidebar'
   },
   Map_brush
 };
