@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Anchor, Sidebar, Label, Accordion, AccordionPanel, List, ListItem, Box } from 'grommet';
+import { Anchor, Sidebar, Label, Accordion, AccordionPanel, List, ListItem, Box, SearchInput } from 'grommet';
 import { Link } from 'react-router';
 import UserPanel from './UserPanel';
 
 export default class SideBar extends Component {
+  componentDidMount() {
+    this.searchInput.inputRef.type = 'text';
+    this.searchInput.inputRef.class += 'form-control';
+  }
 
   renderAccordion(menus) {
     const groups = Object.keys(menus);
@@ -65,9 +69,10 @@ export default class SideBar extends Component {
             <span className='logo-mini'>
               <img src={`img/${logo}`} width='30px' />
             </span>
-            <Label truncate={true} margin='small' className='logo-lg'>{title}</Label>
+            <Label margin='small' className='logo-lg'>{title}</Label>
           </Box>
-          <UserPanel name={user.name}/>
+          <UserPanel name={user.name} />
+          <SearchInput ref={node => this.searchInput = node} className='sidebar-form' placeHolder='Search...'/>
           {!isArray && this.renderAccordion(menus)}
           {isArray && this.renderMenu(menus)}
         </Sidebar>
