@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Anchor, Sidebar, Header, Title, Accordion, AccordionPanel, List, ListItem } from 'grommet';
+import { Anchor, Sidebar, Label, Accordion, AccordionPanel, List, ListItem, Box } from 'grommet';
 import { Link } from 'react-router';
+import UserPanel from './UserPanel';
 
 export default class SideBar extends Component {
 
@@ -49,15 +50,24 @@ export default class SideBar extends Component {
       </List>
     );
   }
+
   render() {
-    const { menus , logo, title } = this.props;
+    // <Header justify="between" >
+    //         <Title> <img src={`img/${logo}`} width='30px' /> {title} </Title>
+    // </Header>
+    
+    const { menus , logo, title, user } = this.props;
     let isArray = menus instanceof Array;
     if (menus)
       return (
-        <Sidebar pad="small" separator="right" >
-          <Header justify="between">
-            <Title> <img src={`img/${logo}`} width='30px' /> {title} </Title>
-          </Header>
+        <Sidebar size='small' className='main-sidebar main-header'>          
+          <Box tag='a' className='logo'>
+            <span className='logo-mini'>
+              <img src={`img/${logo}`} width='30px' />
+            </span>
+            <Label truncate={true} margin='small' className='logo-lg'>{title}</Label>
+          </Box>
+          <UserPanel name={user.name}/>
           {!isArray && this.renderAccordion(menus)}
           {isArray && this.renderMenu(menus)}
         </Sidebar>

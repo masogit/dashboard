@@ -11,15 +11,15 @@ import Footer from './Footer';
 // import BottomLeft from './BottomLeft';
 // import BottomRight from './BottomRight';
 // import BoxPropsMenu from './BoxPropsMenu';
-import Map from './Map_chart';
+// import Map from './Map_chart';
 // import Grid from './Grid_chart';
-import WorldMap from './WorldMap';
+// import WorldMap from './WorldMap';
 import AdminTemplate from './AdminTemplate';
 
 const Widgets = {
-  WorldMap,
+  // WorldMap,
   // Grid,
-  Map
+  // Map
   // TopLeft,
   // TopRight,
   // MiddleCenter,
