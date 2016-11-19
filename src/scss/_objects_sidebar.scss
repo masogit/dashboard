@@ -5,3 +5,16 @@
     }
   }
 }
+
+.sidebar-menu {
+  .grommetux-anchor {
+    color: #b8c7ce;
+    font-size: $font-size-small;
+    flex: 1;
+    font-weight: normal;
+  }
+}
+
+.grommetux-anchor--icon-label:not(.grommetux-anchor--primary):hover:not(.grommetux-anchor--disabled) {
+  color: #fff;
+}

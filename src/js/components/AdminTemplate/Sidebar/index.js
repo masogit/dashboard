@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Anchor, Sidebar, Label, Accordion, AccordionPanel, List, ListItem, Box, SearchInput } from 'grommet';
+import { Anchor, Sidebar, Label, List, ListItem, Box, SearchInput } from 'grommet';
 import { Link } from 'react-router';
 import UserPanel from './UserPanel';
 
@@ -9,46 +9,25 @@ export default class SideBar extends Component {
     this.searchInput.inputRef.class += 'form-control';
   }
 
-  renderAccordion(menus) {
-    const groups = Object.keys(menus);
-    if (groups.length == 0) {
-      return null;
-    }
+  renderTreeView(menus, activeIndex = 0, root = false) {
     return (
-      <Accordion animate={false}>
-        {
-          groups.map((group, index) => {
-            return (
-              <AccordionPanel key={index} heading={group}>
-                <List>
-                  {
-                    menus[group] && menus[group].map((menu, index) => {
-                      return (
-                        <ListItem key={index}>
-                          <Anchor tag={Link} label={menu.title} to={menu.router} />
-                        </ListItem>
-                      );
-                    })
-                  }
-                </List>
-              </AccordionPanel>
-            );
-          })
-        }
-      </Accordion>
-    );
-  }
-
-  renderMenu(menus) {
-    return (
-      <List>
+      <List className={root ? 'sidebar-menu' : 'treeview-menu'}>
+        {root && <ListItem className='header' separator='none'>MAIN NAVIGATION</ListItem>}
         {
           menus.map((menu, index) => {
-            return (
-              <ListItem key={index}>
-                <Anchor tag={Link} label={menu.title} to={menu.router} />
+            const listItem = (
+              <ListItem key={index} className={'treeview' + (activeIndex == index ? ' active' : '')}
+                separator='none' direction='column' align='stretch'
+                pad={root ? 'small' : 'none'}>
+                <Anchor tag={Link} icon={<i className={`fa fa-${menu.icon || 'circle'}`} />}
+                  label={menu.title} to={menu.router} />
+                <Box className='pull-right-container'>
+                  {menu.menus && <i className="fa fa-angle-left pull-right"/>}
+                </Box>
+                {menu.menus && this.renderTreeView(menu.menus)}
               </ListItem>
-            );
+            );          
+            return listItem;
           })
         }
       </List>
@@ -73,8 +52,8 @@ export default class SideBar extends Component {
           </Box>
           <UserPanel name={user.name} />
           <SearchInput ref={node => this.searchInput = node} className='sidebar-form' placeHolder='Search...'/>
-          {!isArray && this.renderAccordion(menus)}
-          {isArray && this.renderMenu(menus)}
+          {!isArray && this.renderMenu(menus)}
+          {isArray && this.renderTreeView(menus, 0, true)}
         </Sidebar>
       );
     else

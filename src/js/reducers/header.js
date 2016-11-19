@@ -7,10 +7,13 @@ const initialState = {
     {
       title: 'LIBRARY', router: '/home', icon: 'envelope', number:'4',
       menus: [
-        { title: 'Overview', router: '/device' },
-        { title: 'Status', router: '/device/status' },
-        { title: 'History', router: '/device/history' },
-        { title: 'Alarm', router: '/device/alarm' }
+        { title: 'Overview', router: '/device', icon: 'dashboard',  menus: [
+          { title: 'dashboard1', router: '/dashboard1', icon: 'circle' },
+          { title: 'dashboard2', router: '/dashboard2', icon: 'circle' }
+        ] },
+        { title: 'Status', router: '/device/status', icon: 'heartbeat' },
+        { title: 'History', router: '/device/history', icon: 'history' },
+        { title: 'Alarm', router: '/device/alarm', icon: 'warning' }
       ]
     },
     {title: 'COMPOSE', router: '/deck', icon: 'bell', number:'10', status:'warning'},

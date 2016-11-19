@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {  Box } from 'grommet';
-import UserIcon from 'grommet/components/icons/base/User';
 import Status from 'grommet/components/icons/Status';
 
 export default class UserPanel extends Component {
