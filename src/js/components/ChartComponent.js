@@ -1,4 +1,5 @@
 import echarts from 'echarts';
+import { Component } from 'react';
 
 export default class ChartComponent extends Component {
   componentWillMount() {

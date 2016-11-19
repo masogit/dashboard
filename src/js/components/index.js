@@ -1,4 +1,4 @@
-// import Footer from './Footer';
+import Footer from './Footer';
 // import Header from './Header';
 // import Sidebar from './Sidebar';
 // import Table from './Table';
@@ -11,34 +11,34 @@
 // import BottomLeft from './BottomLeft';
 // import BottomRight from './BottomRight';
 // import BoxPropsMenu from './BoxPropsMenu';
-// import Map from './Map_chart';
+import Map from './Map_chart';
 // import Grid from './Grid_chart';
-// import WorldMap from './WorldMap';
+import WorldMap from './WorldMap';
 import AdminTemplate from './AdminTemplate';
 
-// const Widgets = {
-//   WorldMap,
-//   Grid,
-//   Map,
-//   TopLeft,
-//   TopRight,
-//   MiddleCenter,
-//   Bar_chart,
-//   MiddleRight,
-//   BottomCenter,
-//   BottomLeft,
-//   BottomRight
-// };
+const Widgets = {
+  WorldMap,
+  // Grid,
+  Map
+  // TopLeft,
+  // TopRight,
+  // MiddleCenter,
+  // Bar_chart,
+  // MiddleRight,
+  // BottomCenter,
+  // BottomLeft,
+  // BottomRight
+};
 
-// const WidgetNames = Object.keys(Widgets);
+const WidgetNames = Object.keys(Widgets);
 
 export {
   // BoxPropsMenu,
-  // Footer,
+  Footer,
   // Header,
   // Sidebar,
   // Table,
-  // Widgets,
-  // WidgetNames,
+  Widgets,
+  WidgetNames,
   AdminTemplate
 };

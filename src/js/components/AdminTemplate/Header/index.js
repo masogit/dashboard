@@ -1,30 +1,24 @@
 import React, { Component, PropTypes } from 'react';
-import { Anchor, Header, Menu, Search } from 'grommet';
-import { Link } from 'react-router';
-import UserIcon from 'grommet/components/icons/base/User';
+import { Anchor, Header, Menu, Box } from 'grommet';
+import CustomMenu from './CustomMenu';
 
 Anchor.propTypes.tag = PropTypes.oneOfType([PropTypes.string, PropTypes.func]);
 
 export default class HeaderArea extends Component {
   render() {
-    const {modules, path, user} = this.props;
     return (
-      <Header justify="end" separator='bottom' className='navbar navbar-static-top'>
-        <Menu direction="row" align="center" responsive={false}>
-          {
-            modules && modules.map((module, index) => {
-              return (
-                <Anchor key={index} tag={Link} to={module.router}
-                  label={module.title} className={path.indexOf(module.router) == 0 ? 'active' : ''} />
-              );
-            })
-          }
-          <Search dropAlign={{ "right": "right" }} />
-          <Menu icon={<UserIcon />} label={user.name}>
-            <Anchor label="Logout" tag={Link} to={'/login'} />
-          </Menu>
-        </Menu>
-      </Header>
+        <Header justify="end" separator='bottom' className='main-header'>
+            <Menu className='navbar navbar-static-top' inline flex >
+                <Box direction='row' justify='between' align='end'>
+                    <Anchor className='sidebar-toggle' role='button'>
+                        <span className='sr-only'>Toggle navigation</span>
+                    </Anchor>
+                    <Box className='navbar-custom-menu' direction='row'>
+                        <CustomMenu {...this.props} />
+                    </Box>    
+                </Box>    
+            </Menu>    
+        </Header>
     );
   }
 }

@@ -1,0 +1,40 @@
+.user-menu {
+  .grommetux-button {
+    &__icon svg.grommetux-control-icon-user {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin-top: -2px;
+      max-width: none;
+      vertical-align: middle;
+      background: #fff;
+    }
+  }
+
+  .grommetux-menu__control-label {
+    font-size: $icon-size-small;
+  }
+}
+
+.skin-blue .navbar-custom-menu {
+  svg:not([class*='grommetux-control-icon-user']) {
+    fill: #fff;
+    stroke: #fff;
+  }
+
+  .grommetux-menu__control-label {
+    color: #fff;
+  }
+}   
+
+.grommetux-button__icon svg {
+  vertical-align: baseline;
+}
+
+.grommetux-button {
+  font-size: 1em;
+  border-radius: 0;
+  &--focus {
+    box-shadow: none;
+  }
+}

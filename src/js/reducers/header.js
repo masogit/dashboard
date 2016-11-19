@@ -5,7 +5,7 @@ const initialState = {
   title: 'Dashboard',
   modules: [
     {
-      title: 'LIBRARY', router: '/home',
+      title: 'LIBRARY', router: '/home', icon: 'envelope', number:'4',
       menus: [
         { title: 'Overview', router: '/device' },
         { title: 'Status', router: '/device/status' },
@@ -13,8 +13,8 @@ const initialState = {
         { title: 'Alarm', router: '/device/alarm' }
       ]
     },
-    {title: 'COMPOSE', router: '/deck'},
-    {title: 'PERFORM', router: '/preview'}
+    {title: 'COMPOSE', router: '/deck', icon: 'bell', number:'10', status:'warning'},
+    {title: 'PERFORM', router: '/preview', icon: 'flag', number:'9', status: 'danger'}
   ],
   user: {
     name: 'Admin',
