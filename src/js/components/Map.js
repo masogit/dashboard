@@ -2,7 +2,7 @@
  * Created by huling on 11/5/2016.
  */
 
-import 'd3';
+import d3 from 'd3';
 import React, { Component, PropTypes } from 'react';
 import { Box } from 'grommet';
 import {getMapJson} from '../actions/map.js';
