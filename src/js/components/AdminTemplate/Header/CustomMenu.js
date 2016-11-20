@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Anchor, Menu, Search, List, ListItem, Box } from 'grommet';
 import { Link } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { deviceActions } from '../../../actions';
-import { connect } from 'react-redux';
 
-class CustomMenu extends Component {
+export default class CustomMenu extends Component {
   render() {
     const {modules, path, user} = this.props;
     return (
@@ -31,17 +28,4 @@ class CustomMenu extends Component {
     );
   }
 }
-
-let mapStateToProps = (state) => {
-  return {
-    modules: state.header.modules,
-    user: state.header.user
-  };
-};
-
-let mapDispatchProps = (dispatch) => ({
-  actions: bindActionCreators(deviceActions, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchProps)(CustomMenu);
 

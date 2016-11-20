@@ -124,7 +124,7 @@ class SideBar extends Component {
           <span className='logo-mini'>
             <img src={`img/${logo}`} width='30px' />
           </span>
-          <Label margin='small' className='logo-lg'>{title}</Label>
+          <Label margin='small' className='logo-lg'><b>{title}</b></Label>
         </Box>
         <UserPanel name={user.name} />
         <SearchInput ref={node => this.searchInput = node} className='sidebar-form no-shrink' placeHolder='Search...' />

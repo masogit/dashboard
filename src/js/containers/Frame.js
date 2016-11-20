@@ -13,12 +13,7 @@ class Frame extends Component {
   }
 
   render () {
-    const { modules, user, title, location, color='blue' } = this.props;
-    let module = modules.filter((module) => {
-      return location.pathname.indexOf(module.router) === 0;
-    })[0];
-
-    let menus = module && module.menus ? module.menus : null;
+    const { modules, menus, user, title, location, color='blue' } = this.props;
 
     return (
         <Box full={true} className={'skin-' + color} direction='row'>
@@ -27,7 +22,7 @@ class Frame extends Component {
             <Box className='main-header' >
                 <Header modules={modules} path={location.pathname} user={user}  />
             </Box>
-            <Box flex={true}>{this.props.children}</Box>
+            <Box flex={true} colorIndex="light-2">{this.props.children}</Box>
             <Footer />
           </Box>
       </Box>
@@ -37,6 +32,7 @@ class Frame extends Component {
 
 let mapStateToProps = (state) => {
   return {
+    menus: state.header.menus,
     modules: state.header.modules,
     user: state.header.user,
     title: state.header.title,
