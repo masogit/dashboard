@@ -13,15 +13,10 @@ class Deck extends Component {
     };
   }
 
-  onUpdate(box, props) {
-    Object.assign(box.props, props);
-    this.props.setBox(this.props.box);
-  }
-
-  onBind(box, compName) {
-    box.component = compName;
-    this.props.setBox(this.props.box);
-  }
+  // onBind(box, compName) {
+  //   box.component = compName;
+  //   this.props.setBox(this.props.box);
+  // }
 
   buildBox(box) {
     let child;
@@ -79,8 +74,7 @@ class Deck extends Component {
   showConfigure(box) {
     const layer = (
       <Layer align="right" closer={true} onClose={this.closeConfigure.bind(this)}>
-        <BoxPropsMenu onUpdate={(props) => this.onUpdate(box, props)} boxProps={box.props}
-                      onBind={(compName) => this.onBind(box, compName)} component={box.component}/>
+        <BoxPropsMenu boxProps={box.props} currentBox={box} component={box.component}/>
       </Layer>
     );
     this.setState({ layer });

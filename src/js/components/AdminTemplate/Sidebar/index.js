@@ -48,15 +48,15 @@ class SideBar extends Component {
 
   componentDidUpdate() {
     if (this.searchInput) {
-        this.updateSearchInput();
-      }
+      this.updateSearchInput();
+    }
   }
 
   updateSearchInput() {
     if (this.searchInputUpdated) {
       return;
     }
-    
+
     this.searchInput.inputRef.type = 'text';
     this.searchInput.inputRef.class += 'form-control';
   }

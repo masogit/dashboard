@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput, Split } from 'grommet';
 import { WidgetNames } from './index';
+import { connect } from 'react-redux';
+import { TYPE } from '../constants';
 
 const COLOR_INDEX = [
   'brand',
@@ -42,21 +44,26 @@ const sharp = {
 // const RELATIVE_SIZES = ['full', '1/2', '1/3', '2/3', '1/4', '3/4'];
 // const SIZES = FIXED_SIZES.concat(RELATIVE_SIZES);
 
-export default class BoxPropsMenu extends Component {
+class BoxPropsMenu extends Component {
   constructor() {
     super();
     this.state={
       size: this.renderSize
     };
+    this._onUpdate = this._onUpdate.bind(this);
   }
 
+  _onUpdate() {
+    this.props.onUpdate(this.props.box);
+  }
+  
   updateSharp(key, attr, value) {
     let { boxProps } = this.props;
     let sharp = boxProps[key] || {};
     sharp[attr] = value;
 
     boxProps[key] = sharp;
-    this.props.onUpdate(boxProps);
+    this._onUpdate();
   }
 
   updateSize(key, value) {
@@ -65,7 +72,7 @@ export default class BoxPropsMenu extends Component {
     size[key] = value;
 
     Object.assign(boxProps, {size, flex: false});
-    this.props.onUpdate(boxProps);
+    this._onUpdate();
   }
 
   updateProps(key, value) {
@@ -79,7 +86,7 @@ export default class BoxPropsMenu extends Component {
       delete boxProps.size;
     }
 
-    this.props.onUpdate(boxProps);
+    this._onUpdate();
   }
 
   updateStyle(key, value) {
@@ -91,7 +98,7 @@ export default class BoxPropsMenu extends Component {
     if (key == 'height' || key == 'width')
       boxProps.flex = false;
 
-    this.props.onUpdate(boxProps);
+    this._onUpdate();
   }
 
   renderSizeProps(key) {
@@ -132,9 +139,13 @@ export default class BoxPropsMenu extends Component {
   }
 
   renderWidgetsMenus() {
-    const { component, onBind } = this.props;
+    const { component } = this.props;
     let menus = WidgetNames.map((key, index) => {
-      return <Anchor key={index} label={key} onClick={() => onBind(key)}/>;
+      return <Anchor key={index} label={key} onClick={() => {
+        this.props.currentBox.component = key;
+        this._onUpdate();
+      }
+      }/>;
     });
     return (
       <Header pad="small" justify="between">
@@ -192,10 +203,22 @@ export default class BoxPropsMenu extends Component {
         { this.renderWidgetsMenus() }
         { this.renderSize() }
         <Split showOnResponsive="both">
-          { this.renderAllOneOf() }
-          { this.renderAllSharp() }
+          <Box>{ this.renderAllOneOf() }</Box>
+          <Box>{ this.renderAllSharp() }</Box>
         </Split>
       </Box>
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    box: state.deck.box
+  };
+};
+
+let mapDispatchProps = (dispatch) => ({
+  onUpdate: (box) => dispatch({type: TYPE.DECK_SET_BOX, box: box})
+});
+
+export default connect(mapStateToProps, mapDispatchProps)(BoxPropsMenu);
