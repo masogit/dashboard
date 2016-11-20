@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { Box, Header, Heading } from 'grommet';
-import { Table } from '../components';
+import { Table } from '../index';
 
 const initialState = {
   records: [

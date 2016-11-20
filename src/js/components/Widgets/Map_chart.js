@@ -1,6 +1,6 @@
 import echarts from 'echarts';
 import React from 'react';
-import { getMapJson, getBusinessJson } from '../actions/map.js';
+import { getMapJson, getBusinessJson } from '../../actions/map.js';
 import ChartComponent from './ChartComponent';
 
 export default class Map extends ChartComponent {
