@@ -8,12 +8,12 @@ const initialState = {
     { root: 'DASHBOARD' },
     {
       title: 'Decks', icon: 'dashboard', active: true, menus: [
-        { title: 'Group1', router: '/home', icon: 'circle' },
+        { title: 'Group1', router: '/preview', icon: 'circle' },
         {
           title: 'Group2', router: '/dashboard2', icon: 'circle', active: true,
           menus: [
             { title: 'd2', router: '/home', active: true },
-            { title: 'd3', router: '/dashboard2' }
+            { title: 'd3', router: '/deck' }
           ]
         }
       ]

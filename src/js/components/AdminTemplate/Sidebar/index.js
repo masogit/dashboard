@@ -72,7 +72,7 @@ class SideBar extends Component {
       clearActive(this.state.menus);
       if (!currentStatus) {
         activeParent(this.state.menus, menu);
-      }  
+      }
       menu.active = !currentStatus;
       this.setState({ menus: this.state.menus });
     };
@@ -88,7 +88,7 @@ class SideBar extends Component {
                 <ListItem key={index} className={'treeview' + (menu.active ? ' active' : '')}
                   separator='none' direction='column' align='stretch'
                   pad={root ? 'small' : 'none'}>
-                  <Anchor tag={Link} onClick={() => showList(menu)} >
+                  <Anchor tag={Link} onClick={() => showList(menu)} to={menu.menus ? null : menu.router}>
                     <i className={`fa fa-${menu.icon || 'circle-o'}`} />
                     <span>{menu.title}</span>
                     <Box className='pull-right-container' direction='row'>
@@ -111,13 +111,13 @@ class SideBar extends Component {
   render() {
     const { logo, title, user, showSidebar } = this.props;
     const menus = this.state.menus;
-      
+
     if (!showSidebar || !menus) {
       return null;
     }
 
     let isArray = menus instanceof Array;
-       
+
     return (
       <Sidebar size='small' className='main-sidebar main-header'>
         <Box tag='a' className='logo' flex={false}>
