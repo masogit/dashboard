@@ -121,8 +121,10 @@ class BoxPropsMenu extends Component {
     return (
       <Header pad="small" justify="between">
         <Title>Size</Title>
-        {this.renderSizeProps('height')}
-        {this.renderSizeProps('width')}
+        <Box direction="column">
+          {this.renderSizeProps('height')}
+          {this.renderSizeProps('width')}
+        </Box>
       </Header>
     );
   }
