@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput, Split } from 'grommet';
+import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput, Icons } from 'grommet';
+const { Configure } = Icons.Base;
 import { WidgetNames } from './index';
 import { connect } from 'react-redux';
 import { TYPE } from '../constants';
@@ -47,7 +48,7 @@ const sharp = {
 class BoxPropsMenu extends Component {
   constructor() {
     super();
-    this.state={
+    this.state = {
       size: this.renderSize
     };
     this._onUpdate = this._onUpdate.bind(this);
@@ -71,7 +72,7 @@ class BoxPropsMenu extends Component {
     const {size: size = {}} = boxProps;
     size[key] = value;
 
-    Object.assign(boxProps, {size, flex: false});
+    Object.assign(boxProps, { size, flex: false });
     this._onUpdate();
   }
 
@@ -93,7 +94,7 @@ class BoxPropsMenu extends Component {
     let { boxProps } = this.props;
     const {style: style = {}} = boxProps;
     style[key] = value;
-    Object.assign(boxProps, {style});
+    Object.assign(boxProps, { style });
 
     if (key == 'height' || key == 'width')
       boxProps.flex = false;
@@ -105,14 +106,14 @@ class BoxPropsMenu extends Component {
     let { boxProps: {size: size = {}} } = this.props;
     return (
       <SearchInput placeHolder={key} suggestions={FIXED_SIZES} defaultValue={size[key]}
-                        onSelect={(selected) => {
-                          this.updateSize(key, selected.suggestion);
-                          selected.target.value = selected.suggestion;
-                        }}
-                        onDOMChange={(e) => {
-                          if (Number.isInteger(Number(e.target.value)))
-                            this.updateStyle(key, e.target.value + 'px');
-                        }} />
+        onSelect={(selected) => {
+          this.updateSize(key, selected.suggestion);
+          selected.target.value = selected.suggestion;
+        } }
+        onDOMChange={(e) => {
+          if (Number.isInteger(Number(e.target.value)))
+            this.updateStyle(key, e.target.value + 'px');
+        } } />
     );
   }
 
@@ -120,8 +121,8 @@ class BoxPropsMenu extends Component {
     return (
       <Header pad="small" justify="between">
         <Title>Size</Title>
-        { this.renderSizeProps('height') }
-        { this.renderSizeProps('width') }
+        {this.renderSizeProps('height')}
+        {this.renderSizeProps('width')}
       </Header>
     );
   }
@@ -133,7 +134,7 @@ class BoxPropsMenu extends Component {
       <Header pad="small" justify="between">
         <Title>{type}</Title>
         <CheckBox toggle={true} checked={prop}
-                  onChange={(e) => this.updateProps(type, e.target.checked)} />
+          onChange={(e) => this.updateProps(type, e.target.checked)} />
       </Header>
     );
   }
@@ -145,7 +146,7 @@ class BoxPropsMenu extends Component {
         this.props.currentBox.component = key;
         this._onUpdate();
       }
-      }/>;
+      } />;
     });
     return (
       <Header pad="small" justify="between">
@@ -162,9 +163,9 @@ class BoxPropsMenu extends Component {
       return (<Anchor key={index} label={String(type)} onClick={() => {
         this.updateProps(prop, type);
         // this.refs[prop].props.label = type;
-      }} />);
+      } } />);
     });
-    return(
+    return (
       <Header pad="small" justify="between">
         <Title>{label}</Title>
         <Menu ref={prop} label={currentValue} inline={false}>{menus}</Menu>
@@ -184,14 +185,14 @@ class BoxPropsMenu extends Component {
     return Object.keys(sharp).map((key, index) => {
       const attrSelects = Object.keys(sharp[key]).map((attr, index) => {
         let menus = sharp[key][attr].map((prop, index) => {
-          return <Anchor key={index} label={prop} onClick={() => this.updateSharp(key, attr, prop)}/>;
+          return <Anchor key={index} label={prop} onClick={() => this.updateSharp(key, attr, prop)} />;
         });
         return <Menu label={attr} key={index}>{menus}</Menu>;
       });
-      return(
+      return (
         <Header pad="small" justify="between" key={index}>
           <Title>{key}</Title>
-          <Box>{ attrSelects }</Box>
+          <Box>{attrSelects}</Box>
         </Header>
       );
     });
@@ -199,14 +200,12 @@ class BoxPropsMenu extends Component {
 
   render() {
     return (
-      <Box>
-        { this.renderWidgetsMenus() }
-        { this.renderSize() }
-        <Split showOnResponsive="both">
-          <Box>{ this.renderAllOneOf() }</Box>
-          <Box>{ this.renderAllSharp() }</Box>
-        </Split>
-      </Box>
+      <Menu inline={false} closeOnClick={false} icon={<Configure />}>
+        {this.renderWidgetsMenus()}
+        {this.renderSize()}
+        <Box>{this.renderAllOneOf()}</Box>
+        <Box>{this.renderAllSharp()}</Box>
+      </Menu>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Box, Menu, Button, Icons, Layer } from 'grommet';
-const { Trash, Shift, AddCircle, Configure } = Icons.Base;
+import { Box, Menu, Button, Icons } from 'grommet';
+const { Trash, Shift, AddCircle} = Icons.Base;
 import { BoxPropsMenu, Widgets } from '../components';
 import { connect } from 'react-redux';
 import { TYPE } from '../constants';
@@ -12,11 +12,6 @@ class Deck extends Component {
       layer: null
     };
   }
-
-  // onBind(box, compName) {
-  //   box.component = compName;
-  //   this.props.setBox(this.props.box);
-  // }
 
   buildBox(box) {
     let child;
@@ -54,7 +49,7 @@ class Deck extends Component {
             !(box.child instanceof Array && box.child.length > 0) &&
             <Button icon={<Trash />} onClick={this.props.deleteBox.bind(this, box, this.props.box)}/>
           }
-          <Button icon={<Configure />} onClick={this.showConfigure.bind(this, box)}/>
+          <BoxPropsMenu boxProps={box.props} currentBox={box} component={box.component}/>
         </Box>
       </Menu>
     );
@@ -69,15 +64,6 @@ class Deck extends Component {
       box.props.direction = 'row';
 
     this.props.setBox(this.props.box);
-  }
-
-  showConfigure(box) {
-    const layer = (
-      <Layer align="right" closer={true} onClose={this.closeConfigure.bind(this)}>
-        <BoxPropsMenu boxProps={box.props} currentBox={box} component={box.component}/>
-      </Layer>
-    );
-    this.setState({ layer });
   }
 
   closeConfigure() {

@@ -37,3 +37,7 @@
 .no-shrink {
   flex-shrink: 0;
 }
+
+body div[class*=grommetux-drop]:first-child {
+  z-index: 99999;
+}
