@@ -170,15 +170,15 @@ export default class BoxPropsMenu extends Component {
   }
 
   renderAllSharp() {
-    return Object.keys(sharp).map((key) => {
-      const attrSelects = Object.keys(sharp[key]).map((attr) => {
+    return Object.keys(sharp).map((key, index) => {
+      const attrSelects = Object.keys(sharp[key]).map((attr, index) => {
         let menus = sharp[key][attr].map((prop, index) => {
           return <Anchor key={index} label={prop} onClick={() => this.updateSharp(key, attr, prop)}/>;
         });
-        return <Menu label={attr}>{menus}</Menu>;
+        return <Menu label={attr} key={index}>{menus}</Menu>;
       });
       return(
-        <Header pad="small" justify="between">
+        <Header pad="small" justify="between" key={index}>
           <Title>{key}</Title>
           <Box>{ attrSelects }</Box>
         </Header>
