@@ -27,8 +27,6 @@ const activeParent = (menus, target, parents = []) => {
       parents.push(menu);
       activeParent(menu.menus, target, parents);
       parents.pop();
-    } else {
-      //parents.pop();
     }
   });
 };
@@ -38,9 +36,27 @@ class SideBar extends Component {
     this.state = {
       menus: this.props.menus
     };
+    this.updateSearchInput = this.updateSearchInput.bind(this);
+    this.searchInputUpdated = false;
   }
 
   componentDidMount() {
+    if (this.searchInput) {
+      this.updateSearchInput();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.searchInput) {
+        this.updateSearchInput();
+      }
+  }
+
+  updateSearchInput() {
+    if (this.searchInputUpdated) {
+      return;
+    }
+    
     this.searchInput.inputRef.type = 'text';
     this.searchInput.inputRef.class += 'form-control';
   }
