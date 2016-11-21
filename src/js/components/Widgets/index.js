@@ -1,25 +1,27 @@
-import TopLeft from './TopLeft';
-import TopRight from './TopRight';
-import MiddleCenter from './MiddleCenter';
+import Area_chart from './Area_chart';
+import Card2 from './Card2';
+import Candletick_chart from './Candletick_chart';
 import Bar_chart from './Bar_chart';
-import MiddleRight from './MiddleRight';
-import BottomCenter from './BottomCenter';
-import BottomLeft from './BottomLeft';
-import BottomRight from './BottomRight';
+import Line_chart from './Line_chart';
+import Pie_chart from './Pie_chart';
+import Table from './Table';
+import Card1 from './Card1';
 import Map from './Map_chart';
 import Grid from './Grid_chart';
 import WorldMap from './WorldMap';
 
-export default {
+const widgets = {
   WorldMap,
   Grid,
   Map,
-  TopLeft,
-  TopRight,
-  MiddleCenter,
+  Area_chart,
+  Card2,
+  Candletick_chart,
   Bar_chart,
-  MiddleRight,
-  BottomCenter,
-  BottomLeft,
-  BottomRight
-}
+  Line_chart,
+  Pie_chart,
+  Table,
+  Card1
+};
+
+export default widgets;

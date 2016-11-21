@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { Box, Header, Heading } from 'grommet';
 import { Table } from '../index';
+import Warpper from './Warpper';
 
 const initialState = {
   records: [
@@ -12,16 +13,18 @@ const initialState = {
   labels: "NO.,NAME,PRESSURE"
 };
 
-export default class MiddleCenter extends Component {
+export default class Warpper_table extends Component {
   render() {
     const { records, labels } = initialState;
     return (
-      <Box pad="small">
-        <Header>
-          <Heading tag='h3' strong={true}>ALARM VALUE</Heading>
-        </Header>
-        <Table data={records} fields={labels} />
-      </Box>
+      <Warpper name='Table'>
+        <Box pad='small'>
+          <Header>
+            <Heading tag='h3' strong={true}>ALARM VALUE</Heading>
+          </Header>
+          <Table data={records} fields={labels} />
+        </Box>
+      </Warpper>
     );
   }
 }

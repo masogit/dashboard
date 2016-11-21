@@ -2,9 +2,9 @@
  * Created by huling on 10/22/2016.
  */
 import React, { Component } from 'react';
-import { Box, Header, Heading } from 'grommet';
+import { Header, Heading } from 'grommet';
 import { CandlestickChart } from 'react-d3';
-
+import Warpper from './Warpper';
 var myDate = new Date();
 const ohlcData = [
   {
@@ -18,10 +18,10 @@ const ohlcData = [
   }
 ];
 
-export default class MiddleRight extends Component {
+export default class Candletick_chart extends Component {
   render() {
     return (
-      <Box pad="small">
+      <Warpper name='Candletick Chart'>
         <Header>
           <Heading tag='h3' strong={true}>LOGS</Heading>
         </Header>
@@ -32,7 +32,7 @@ export default class MiddleRight extends Component {
           xAxisTickInterval={{unit: 'month', interval: 1}}
           yAxisOffset={-10}
         />
-      </Box>
+      </Warpper>
     );
   }
 }

@@ -4,9 +4,10 @@
 import React, { Component } from 'react';
 import Map from './Map.js';
 import { Box } from 'grommet';
-import BottomRight from './BottomRight.js';
+import Card1 from './Card1.js';
+import Warpper from './Warpper.js';
 
-export default class TopCenter extends Component {
+export default class Full_Map extends Component {
 
   render() {
     // const events = [{
@@ -21,11 +22,13 @@ export default class TopCenter extends Component {
     //   }
     // }];
     return (
-      <Map >
-        <Box size='large' colorIndex='brand'>
-          <BottomRight />
-        </Box>
-      </Map>
+      <Warpper name='Full Map'>
+        <Map >
+          <Box size='large' colorIndex='brand'>
+            <Card1 />
+          </Box>
+        </Map>
+      </Warpper>
     );
   }
 }

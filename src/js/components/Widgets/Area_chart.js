@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { Box, Heading, Header, Menu, Anchor} from 'grommet';
 import { AreaChart } from 'react-d3';
+import Warpper from './Warpper';
 
 var myDate = new Date();
 const areaData = [
@@ -29,7 +30,7 @@ const areaData = [
   }
 ];
 
-export default class BottomLeft extends Component {
+export default class Area_chart extends Component {
   componentWillMount() {
     this.state = {
       axis_x: [{"index": 0, "label": "10 ms"}, {"index": 2, "label": "30 ms"}, {"index": 4, "label": "50 ms"}],
@@ -44,7 +45,7 @@ export default class BottomLeft extends Component {
   render() {
     const {title} = this.props;
     return (
-      <Box style={{width: '100%'}} pad='small'>
+      <Warpper name='Area Chart' status='info'>
         <Header justify='between'>
           <Heading tag='h3' strong={true}>{title}</Heading>
           <Menu direction='row'>
@@ -66,7 +67,7 @@ export default class BottomLeft extends Component {
             xAxisTickInterval={{unit: 'year', interval: 2}}
           />
         </Box>
-      </Box>
+      </Warpper>
     );
   }
 }

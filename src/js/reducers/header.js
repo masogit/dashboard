@@ -36,7 +36,7 @@ const initialState = {
     { title: 'Overview', router: '/device', icon: 'circle-o text-green' },
     { title: 'Status', router: '/device/status', icon: 'circle-o text-red' },
     { title: 'History', router: '/device/history', icon: 'circle-o text-yellow' },
-    { title: 'Alarm', router: '/device/alarm', icon: 'circle-o text-blue' },
+    { title: 'Alarm', router: '/device/alarm', icon: 'circle-o text-blue' }
 
   ],
   modules: [

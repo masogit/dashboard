@@ -2,8 +2,8 @@ import echarts from 'echarts';
 import React from 'react';
 import { getMapJson, getBusinessJson } from '../../actions/map.js';
 import ChartComponent from './ChartComponent';
-
-export default class Map extends ChartComponent {
+import Warpper from './Warpper';
+export default class Map_chart extends ChartComponent {
   componentWillMount() {
     this.state = {
       geoCoordMap: [],
@@ -324,7 +324,11 @@ export default class Map extends ChartComponent {
   render() {
     const {width,height} = this.state;
 
-    return <div id='map_chart' style={{ width, height}}/>;
+    return (
+      <Warpper name='Map Chart' status='danger'>
+        <div id='map_chart' style={{ width, height }} />
+      </Warpper>
+    );
   }
 }
 

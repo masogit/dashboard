@@ -6,6 +6,7 @@ import d3 from 'd3';
 import React, { Component, PropTypes } from 'react';
 import { Box } from 'grommet';
 import {getMapJson} from '../actions/map.js';
+import Warpper from './Warpper';
 
 export default class Map extends Component {
   constructor() {
@@ -141,12 +142,14 @@ export default class Map extends Component {
   render() {
     const { children } = this.props;
     return (
-      <Box className='map'>
-        <div id='map' />
-        <Box className='layer' ref={node => this.layer = node}>
-          {this.state.showLayer && children}
-        </Box>
-      </Box>
+      <Warpper name='Map'>
+        <Box className='map'>
+          <div id='map' />
+          <Box className='layer' ref={node => this.layer = node}>
+            {this.state.showLayer && children}
+          </Box>
+        </Box >
+      </Warpper>
     );
   }
 }

@@ -4,8 +4,9 @@
 import React, { Component } from 'react';
 import { Box, Header, Heading, Tiles, Tile, Icons} from 'grommet';
 const {SocialTwitter, SocialFacebookOption, SocialLinkedinOption, SocialSkype} = Icons.Base;
+import Warpper from './Warpper';
 
-export default class BottomRight extends Component {
+export default class Card2 extends Component {
   componentWillMount() {
     this.state = {
       cards: [
@@ -27,7 +28,7 @@ export default class BottomRight extends Component {
     const {title} = this.props;
     const {cards} = this.state;
     return (
-      <Box pad='small'>
+      <Warpper name='Card2' status='warning'>
         <Header justify='between'>
           <Heading tag='h3' strong={true}>{title}</Heading>
           <Box direction='row'>
@@ -46,7 +47,7 @@ export default class BottomRight extends Component {
           ))
         }
         </Tiles>
-      </Box>
+      </Warpper>
     );
   }
 }

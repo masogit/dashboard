@@ -1,5 +1,6 @@
 import React from 'react';
 import ChartComponent from './ChartComponent';
+import Warpper from './Warpper';
 
 export default class Grid_chart extends ChartComponent {
   componentDidMount() {
@@ -99,6 +100,10 @@ export default class Grid_chart extends ChartComponent {
   render() {
     const { height, width } = this.state;
 
-    return <div id='grid_chart' style={{ width, height }} />;
+    return (
+      <Warpper name='Grid Chart'>
+        <div id='grid_chart' style={{ width, height }} />
+      </Warpper>
+    );
   }
 }

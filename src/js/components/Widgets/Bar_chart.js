@@ -1,5 +1,6 @@
 import React from 'react';
 import ChartComponent from './ChartComponent';
+import Warpper from './Warpper';
 
 export default class Bar_chart extends ChartComponent {
   componentDidMount() {
@@ -103,6 +104,10 @@ export default class Bar_chart extends ChartComponent {
   render() {
     const { height, width } = this.state;
 
-    return <div id='bar_chart' style={{ width, height }} />;
+    return (
+      <Warpper name='Bar Chart' status='success'>
+        <div id='bar_chart' style={{ width, height }} />
+      </Warpper>
+    );
   }
 }

@@ -2,8 +2,10 @@
  * Created by huling on 10/22/2016.
  */
 import React, { Component, PropTypes } from 'react';
-import { Box, Header, Heading } from 'grommet';
+import { Header, Heading } from 'grommet';
 import { LineChart } from 'react-d3';
+import Warpper from './Warpper';
+
 LineChart.propTypes.width = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
   
 const lineData = [
@@ -19,10 +21,10 @@ const lineData = [
   }
 ];
 
-export default class TopRight extends Component {
+export default class Line_chart extends Component {
   render() {
     return (
-      <Box pad="small">
+      <Warpper name='Line Chart'>
         <Header>
           <Heading tag='h3' strong={true}>ERROR RATE</Heading>
         </Header>
@@ -36,7 +38,7 @@ export default class TopRight extends Component {
           xAxisLabel="Elapsed Time (sec)"
           gridHorizontal={true}
         />
-      </Box>
+      </Warpper>
     );
   }
 }
