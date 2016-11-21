@@ -9,9 +9,13 @@ import Card1 from './Card1';
 import Map from './Map_chart';
 import Grid from './Grid_chart';
 import WorldMap from './WorldMap';
+import InfoBox from './InfoBox';
+import SmallBox from './SmallBox';
 
 const widgets = {
   WorldMap,
+  InfoBox,
+  SmallBox,
   Grid,
   Map,
   Area_chart,

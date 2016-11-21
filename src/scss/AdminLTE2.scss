@@ -12,6 +12,9 @@
 
 .fa {
   font-size: $icon-size-small;
+  .info-box &, .small-box & {
+    font-size: inherit;
+  }
 }
 
 .main-sidebar {
