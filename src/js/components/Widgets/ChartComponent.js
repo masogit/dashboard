@@ -7,33 +7,28 @@ export default class ChartComponent extends Component {
       width: this.props.width || 800,
       height: this.props.height || 300
     };
+    this._onResize = this._onResize.bind(this);
+  }
+
+  componentDidMount() {
+    setTimeout(this._onResize, 1000);
+  }
+
+  componentDidUpdate() {
+    setTimeout(this._onResize, 1000);
   }
 
   componentWillReciveProps(nextProps, nextState) {
 
   }
 
-  _onResize(container, div, width, height) {
-    // const parentRect = container.parentElement.getBoundingClientRect();
-    const parentCss = document.defaultView.getComputedStyle(container.parentElement);
-    const p_width = parseInt(parentCss.width.slice(0, -2));
-    const p_margin_h = parseInt(parentCss.marginLeft.slice(0, -2)) + parseInt(parentCss.marginRight.slice(0, -2));
-    const p_border_h = parseInt(parentCss.borderLeftWidth.slice(0, -2)) + parseInt(parentCss.borderRightWidth.slice(0, -2));
-    if (p_width > 100) {
-      width = p_width - p_margin_h + p_border_h;
-    }
-
-    const p_height = parseInt(parentCss.height.slice(0, -2));
-    const p_margin_v = parseInt(parentCss.marginTop.slice(0, -2)) + parseInt(parentCss.marginBottom.slice(0, -2));
-    const p_border_v = parseInt(parentCss.borderBottomWidth.slice(0, -2)) + parseInt(parentCss.borderTopWidth.slice(0, -2));
-    if (p_height > 100) {
-      height = p_height - p_margin_v + p_border_v;
-    } else {
-      height = height;
-    }
-
-    div.style.width = width + 'px';
-    div.style.height = height + 'px';
+  _onResize() {
+    const container = this.chart._dom.parentElement.parentElement;
+    const width = container.getBoundingClientRect().width;
+    const height = container.getBoundingClientRect().height;
+    this.chart._dom.style.width = width + 'px';
+    this.chart._dom.style.height = height + 'px';
+    this.chart.resize({ width, height });
   }
 
   getChart(id, name = id + 'child') {
@@ -43,7 +38,7 @@ export default class ChartComponent extends Component {
     const container = document.getElementById(id);
     container.appendChild(div);
 
-    this._onResize(container, div, width, height);
+    //this._onResize(container, div, width, height);
     // // const parentRect = container.parentElement.getBoundingClientRect();
     // const parentCss = document.defaultView.getComputedStyle(container.parentElement);
 
@@ -62,7 +57,9 @@ export default class ChartComponent extends Component {
     // div.style.width = width;
     // div.style.height = height;
 
-    window.addEventListener('resize', this._onResize.bind(this, container, div, width, height));
+    //window.addEventListener('resize', this._onResize.bind(this, container, div, width, height));
+
+
     return echarts.init(div);
   }
 

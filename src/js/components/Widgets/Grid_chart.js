@@ -5,12 +5,7 @@ import Warpper from './Warpper';
 export default class Grid_chart extends ChartComponent {
   componentDidMount() {
     this.chart = this.getChart('grid_chart');
-    const container = this.chart._dom.parentElement.parentElement;
-    const width = container.getBoundingClientRect().width;
-    const height = container.getBoundingClientRect().height;
-    this.chart._dom.style.width = width + 'px';
-    this.chart._dom.style.height = height + 'px';
-    this.chart.resize({ width, height });
+
     this.chart.setOption({
       color: ['#ebd282', '#70d2e2', '#e97993'], //设置颜色调色盘
       backgroundColor: '#eee',
