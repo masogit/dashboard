@@ -108,11 +108,13 @@ class BoxPropsMenu extends Component {
         onSelect={(selected) => {
           this.updateSize(key, selected.suggestion);
           selected.target.value = selected.suggestion;
-        } }
+        }
+        }
         onDOMChange={(e) => {
           if (Number.isInteger(Number(e.target.value)))
             this.updateStyle(key, e.target.value + 'px');
-        } } />
+        }
+        } />
     );
   }
 
@@ -143,11 +145,11 @@ class BoxPropsMenu extends Component {
   renderWidgetsMenus() {
     const { component } = this.props;
     let menus = WidgetNames.map((key, index) => {
-      return <Anchor key={index} label={key} onClick={() => {
+      return (<Anchor key={index} label={key} onClick={() => {
         this.props.currentBox.component = key;
         this._onUpdate();
       }
-      } />;
+      } />);
     });
     return (
       <Header pad="small" justify="between">
@@ -164,7 +166,8 @@ class BoxPropsMenu extends Component {
       return (<Anchor key={index} label={String(type)} onClick={() => {
         this.updateProps(prop, type);
         // this.refs[prop].props.label = type;
-      } } />);
+      }
+      } />);
     });
     return (
       <Header pad="small" justify="between">

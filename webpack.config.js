@@ -1,6 +1,7 @@
 /** * Created by hammer on 2016/3/26. * 配置的打包文件 */
 //import WebpackDevServer from 'webpack-dev-server';
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 //var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 var path = require('path');
 console.log(__dirname);
@@ -9,7 +10,9 @@ module.exports = {
   //插件项
   plugins: [
     //commonsPlugin,
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    
+    new CopyWebpackPlugin([{from: 'img/*', to: 'img/*'}, {from: 'css/*', to: 'css/*'}])
   ],
   //页面入口文件配置
   entry: [

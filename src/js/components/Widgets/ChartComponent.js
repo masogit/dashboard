@@ -33,7 +33,6 @@ export default class ChartComponent extends Component {
 
   getChart(id, name = id + 'child') {
     const div = document.createElement('div');
-    let {width, height} = this.state;
     div.id = name;
     const container = document.getElementById(id);
     container.appendChild(div);
