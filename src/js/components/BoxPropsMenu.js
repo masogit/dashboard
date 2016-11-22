@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput, Icons } from 'grommet';
-const { Configure } = Icons.Base;
+import { Anchor, Box, Menu, Header, Title, CheckBox, SearchInput } from 'grommet';
 import { WidgetNames } from './index';
 import { connect } from 'react-redux';
 import { TYPE } from '../constants';
@@ -57,7 +56,7 @@ class BoxPropsMenu extends Component {
   _onUpdate() {
     this.props.onUpdate(this.props.box);
   }
-  
+
   updateSharp(key, attr, value) {
     let { boxProps } = this.props;
     let sharp = boxProps[key] || {};
@@ -202,12 +201,12 @@ class BoxPropsMenu extends Component {
 
   render() {
     return (
-      <Menu inline={false} closeOnClick={false} icon={<Configure />}>
+      <Box style={{ marginTop: '51px' }}>
         {this.renderWidgetsMenus()}
         {this.renderSize()}
         <Box>{this.renderAllOneOf()}</Box>
         <Box>{this.renderAllSharp()}</Box>
-      </Menu>
+      </Box>
     );
   }
 }
@@ -219,7 +218,7 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchProps = (dispatch) => ({
-  onUpdate: (box) => dispatch({type: TYPE.DECK_SET_BOX, box: box})
+  onUpdate: (box) => dispatch({ type: TYPE.DECK_SET_BOX, box: box })
 });
 
 export default connect(mapStateToProps, mapDispatchProps)(BoxPropsMenu);
