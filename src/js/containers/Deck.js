@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Box, Menu, Button, Icons, Layer } from 'grommet';
-const { Trash, Shift, AddCircle, Configure } = Icons.Base;
+import { Anchor, Box, Menu, Button, Icons, Layer, Header, Headline } from 'grommet';
+const { Trash, Shift, AddCircle, Configure, Play, Save } = Icons.Base;
 import { BoxPropsMenu, Widgets } from '../components';
 import { connect } from 'react-redux';
 import { TYPE } from '../constants';
+import { Link } from 'react-router';
 
 class Deck extends Component {
   constructor(props) {
@@ -81,13 +82,29 @@ class Deck extends Component {
   }
 
   render() {
-    let { box } = this.props;
-    return (
+    let { box, present } = this.props;
+    let workspace = (
       <Box flex={true}>
         {this.buildBox(box)}
         {this.state.layer}
       </Box>
     );
+
+    if (present)
+      return workspace;
+    else
+      return (
+        <Box flex={true} pad="small">
+          <Header justify="between">
+            <Headline size="small">Layout Designer</Headline>
+            <Menu inline={true} direction="row">
+              <Anchor icon={<Play />} label="Preview" tag={Link} to="/preview" />
+              <Anchor icon={<Save />} label="Save" onClick={() => console.log('Save')} />
+            </Menu>
+          </Header>
+          {workspace}
+        </Box>
+      );
   }
 }
 

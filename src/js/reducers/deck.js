@@ -1,9 +1,10 @@
 import { TYPE } from '../constants';
 import { remove } from 'lodash';
 const initialState = {
+  all: [],
   box: {
     key: getID(),
-    props:{},
+    props: {},
     child: null,
     component: null
   }
@@ -33,6 +34,10 @@ function removeFromRoot(key, box) {
 }
 
 const handlers = {
+  [TYPE.DECK_SET_ALL]: (state, action) => {
+    let decks = action.decks;
+    return { all: decks };
+  },
   [TYPE.DECK_ADD_BOX]: (state, action) => {
     let box = action.box;
     box.props.justify = null;
@@ -41,32 +46,32 @@ const handlers = {
     if (!box.child)
       box.child = [{
         key: getID(),
-        props:{},
+        props: {},
         child: null
       }, {
         key: getID(),
-        props:{},
+        props: {},
         child: null
       }];
     else if (box.child instanceof Array)
       box.child.push({
         key: getID(),
-        props:{},
+        props: {},
         child: null
       });
     else {
       var child = box.child;
       box.child = [{
         key: getID(),
-        props:{},
+        props: {},
         child: child
       }, {
         key: getID(),
-        props:{},
+        props: {},
         child: null
       }];
     }
-    return {box: {...action.root}};
+    return { box: {...action.root } };
   },
   [TYPE.DECK_DEL_BOX]: (state, action) => {
     let box = action.box;
@@ -75,16 +80,16 @@ const handlers = {
     } else if (action.root.key != box.key) {
       removeFromRoot(box.key, action.root);
     }
-    return {box: {...action.root}};
+    return { box: {...action.root } };
   },
   [TYPE.DECK_SET_BOX]: (state, action) => {
     // let box = Object.assign({}, action.box);
-    return {box: {...action.box}};
+    return { box: {...action.box } };
   }
 };
 
 export default function (state = initialState, action) {
   let handler = handlers[action.type];
   if (!handler) return state;
-  return {...state, ...handler(state, action)};
+  return {...state, ...handler(state, action) };
 };

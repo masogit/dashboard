@@ -13,10 +13,14 @@ import Customer from './Customer';
 import Status from './Status';
 import Deck from './Deck';
 import Preview from './Preview';
+import Widgets from './Widgets';
+import Decks from './Decks';
 
 export {
+  Widgets,
   Preview,
   Deck,
+  Decks,
   Login,
   Frame,
   Home,

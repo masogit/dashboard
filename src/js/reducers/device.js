@@ -18,9 +18,9 @@ const handlers = {
       type: getLegends(records, 'type'),
       touchBy: getLegends(records, 'touchBy')
     };
-    return {records, markers, legends};
+    return { records, markers, legends };
   },
-  [TYPE.INIT_DEVICE_TYPE]: (state, action) => ({types: action.deviceTypes})
+  [TYPE.INIT_DEVICE_TYPE]: (state, action) => ({ types: action.deviceTypes })
 };
 
 function getMarkers(records) {
@@ -42,7 +42,7 @@ function getMarkers(records) {
 function getLegends(records, field) {
   let grouped = {};
   records.forEach((record) => {
-    if(grouped[record[field]])
+    if (grouped[record[field]])
       grouped[record[field]] += 1;
     else
       grouped[record[field]] = 1;
@@ -60,5 +60,5 @@ function getLegends(records, field) {
 export default function (state = initialState, action) {
   let handler = handlers[action.type];
   if (!handler) return state;
-  return {...state, ...handler(state, action)};
+  return {...state, ...handler(state, action) };
 };

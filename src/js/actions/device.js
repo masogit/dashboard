@@ -1,6 +1,5 @@
-import { TYPE } from '../constants';
+import { TYPE, URL } from '../constants';
 import { Rest } from 'grommet';
-import { URL } from '../constants';
 
 export function loadDeviceTypes() {
   return dispatch => {

@@ -1,5 +1,7 @@
-import { Deck, Customer, Device, DeviceModel, DeviceAlarm, DeviceHistory, DeviceStatus,
-         Frame, Home, Login, Settings, WorkOrder, NoFound, Status, Preview } from './containers';
+import {
+  Deck, Decks, Customer, Device, DeviceModel, DeviceAlarm, DeviceHistory, DeviceStatus,
+  Frame, Home, Login, Settings, WorkOrder, NoFound, Status, Preview, Widgets
+} from './containers';
 
 export default [
   {
@@ -16,7 +18,9 @@ export default [
     indexRoute: { component: Home },
     childRoutes: [
       { path: 'deck', component: Deck },
+      { path: 'decks', component: Decks },
       { path: 'home', component: Home },
+      { path: 'widgets', component: Widgets },
       { path: 'device', component: Device },
       { path: 'device/alarm', component: DeviceAlarm },
       { path: 'device/history', component: DeviceHistory },
