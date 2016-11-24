@@ -7,6 +7,11 @@ import { connect } from 'react-redux';
 Anchor.propTypes.tag = PropTypes.oneOfType([PropTypes.string, PropTypes.func]);
 
 class HeaderArea extends Component {
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props);
+    console.log(nextProps);
+  }
+
   render() {
     return (
       <Header justify="end" separator='bottom' className='main-header'>
@@ -27,6 +32,7 @@ class HeaderArea extends Component {
 
 let mapStateToProps = (state) => {
   return {
+    msgs: state.system.msgs,
     showSidebar: state.header.showSidebar
   };
 };

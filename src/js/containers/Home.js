@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import { Columns} from 'grommet';
-import { Widgets } from '../components';
+import { Box, Header, Headline, Icons, Anchor } from 'grommet';
+import { Deck } from './index';
+import { Link } from 'react-router';
 
+const { Expand } = Icons.Base;
 export default class Home extends Component {
-
-                // <Box colorIndex="neutral-1" pad="small"><Title>{key}</Title></Box>
   render() {
     return (
-      <Columns justify="center">
-        {
-          Object.keys(Widgets).map((key, index) => {
-            const Widget = Widgets[key];
-            return <Widget key={index}/>;
-          })
-        }
-      </Columns>
+      <Box pad="small">
+        <Header justify="between">
+          <Headline size="small">Home page</Headline>
+          <Anchor icon={<Expand />} label="Full Screen" tag={Link} to="/preview" />
+        </Header>
+        <Deck present={true} />
+      </Box>
     );
   }
 }

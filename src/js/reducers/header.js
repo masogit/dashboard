@@ -8,10 +8,8 @@ const initialState = {
 
     { root: 'DATA VISUALIZATION' },
     { title: 'HOME', icon: 'dashboard', active: true, router: "/home" },
-    { title: 'DASHBOARD', icon: 'dashboard', router: "/decks" },
     { title: 'Widgets', router: '/widgets', icon: 'heartbeat', status: [{ text: 4, color: 'blue' }] },
     { title: 'Designer', router: '/deck', icon: 'history', status: [{ text: 'new', color: 'green' }] },
-    { title: 'Fullscreen', router: '/preview', icon: 'warning' },
     { title: 'Library', router: '/device/alarm', icon: 'envelope', status: [{ text: '5', color: 'red' }, { text: '3', color: 'green' }, { text: 4, color: 'yellow' }] },
 
     { root: 'DEVICE' },

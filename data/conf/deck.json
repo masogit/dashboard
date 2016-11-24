@@ -1,1 +1,70 @@
-[]
+{
+ "key": "gm1citxrpw89iladims4i",
+ "props": {
+  "justify": null,
+  "align": null,
+  "separator": "none"
+ },
+ "child": [
+  {
+   "key": "7dshk2fm6nhigpkfbt9",
+   "props": {
+    "direction": "row",
+    "justify": null,
+    "align": null,
+    "separator": "none"
+   },
+   "child": [
+    {
+     "key": "uldlx4vu8nvgdhmh1tt9",
+     "props": {
+      "justify": null,
+      "align": null,
+      "separator": "none",
+      "margin": {
+       "right": "medium"
+      }
+     },
+     "child": [
+      {
+       "key": "y963tff7ko16f97msra4i",
+       "props": {},
+       "child": null,
+       "component": "InfoBox"
+      },
+      {
+       "key": "uixn4lxes915mhn6ogvi",
+       "props": {},
+       "child": null,
+       "component": "SmallBox"
+      }
+     ],
+     "component": null
+    },
+    {
+     "key": "bbxmtj7zy502v86w29",
+     "props": {
+      "justify": null,
+      "align": null,
+      "separator": "none"
+     },
+     "child": [
+      {
+       "key": "gmeo2s7fv7tnxbf0f6r",
+       "props": {},
+       "child": null,
+       "component": "WorldMap"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "s5y5f0w53cr9qmmx9lik9",
+   "props": {},
+   "child": null,
+   "component": "Bar_chart"
+  }
+ ],
+ "component": null
+}

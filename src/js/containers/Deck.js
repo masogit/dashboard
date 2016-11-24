@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Anchor, Box, Menu, Button, Icons, Layer, Header, Headline } from 'grommet';
 const { Trash, Shift, AddCircle, Configure, Play, Save } = Icons.Base;
 import { BoxPropsMenu, Widgets } from '../components';
-import { connect } from 'react-redux';
 import { TYPE } from '../constants';
 import { Link } from 'react-router';
+import { deckActions } from '../actions';
 
 class Deck extends Component {
   constructor(props) {
@@ -12,6 +14,10 @@ class Deck extends Component {
     this.state = {
       layer: null
     };
+  }
+
+  componentWillMount() {
+    this.props.actions.getDecks();
   }
 
   buildBox(box) {
@@ -99,7 +105,7 @@ class Deck extends Component {
             <Headline size="small">Layout Designer</Headline>
             <Menu inline={true} direction="row">
               <Anchor icon={<Play />} label="Preview" tag={Link} to="/preview" />
-              <Anchor icon={<Save />} label="Save" onClick={() => console.log('Save')} />
+              <Anchor icon={<Save />} label="Save" onClick={this.props.actions.setDecks.bind(this, this.props.box)} />
             </Menu>
           </Header>
           {workspace}
@@ -115,6 +121,7 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchProps = (dispatch) => ({
+  actions: bindActionCreators(deckActions, dispatch),
   addBox: (box, root) => dispatch({ type: TYPE.DECK_ADD_BOX, box: box, root: root }),
   deleteBox: (box, root) => dispatch({ type: TYPE.DECK_DEL_BOX, box: box, root: root }),
   setBox: (box) => dispatch({ type: TYPE.DECK_SET_BOX, box: box })
