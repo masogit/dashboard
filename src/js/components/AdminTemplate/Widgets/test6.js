@@ -114,30 +114,35 @@ const option = {
     ]
 };
 
-/*myChart.on('brushSelected', renderBrushed);
+option.addEvents = (myChart) => {
 
-function renderBrushed(params) {
+  myChart.on('brushSelected', renderBrushed);
+
+  function renderBrushed(params) {
     var brushed = [];
     var brushComponent = params.batch[0];
 
     for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
-        var rawIndices = brushComponent.selected[sIdx].dataIndex;
-        brushed.push('[Series ' + sIdx + '] ' + rawIndices.join(', '));
+      var rawIndices = brushComponent.selected[sIdx].dataIndex;
+      brushed.push('[Series ' + sIdx + '] ' + rawIndices.join(', '));
     }
 
     myChart.setOption({
-        title: {
-            backgroundColor: '#333',
-            text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
-            bottom: 0,
-            right: 0,
-            width: 100,
-            textStyle: {
-                fontSize: 12,
-                color: '#fff'
-            }
+      title: {
+        backgroundColor: '#333',
+        text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
+        bottom: 0,
+        right: 0,
+        width: 100,
+        textStyle: {
+          fontSize: 12,
+          color: '#fff'
         }
+      }
     });
-}*/
+  }
+}
+
+
 
 export default option;

@@ -19,6 +19,9 @@ class ChartTemplate extends ChartComponent {
 
     option.preAction().then(() => {
       this.chart.setOption(option);
+      if (option.addEvents) {
+        option.addEvents(this.chart);
+      }
       super.componentDidMount();
     });
   }
