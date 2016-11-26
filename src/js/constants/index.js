@@ -13,6 +13,7 @@ const params = {
 
     DECK_ADD_BOX: 'deck_add_box',
     DECK_DEL_BOX: 'deck_del_box',
+    DECK_RESET_BOX: 'deck_rest_box',
     DECK_RM_PARENT: 'deck_rm_parent',
     DECK_SET_BOX: 'deck_set_box',
     DECK_SET_ALL: 'deck_set_all',

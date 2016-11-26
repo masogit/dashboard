@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Anchor, Box, Menu, Button, Icons, Layer, Header, Headline } from 'grommet';
-const { Trash, Shift, AddCircle, Configure, Play, Save } = Icons.Base;
+const { Trash, Shift, AddCircle, Configure, Play, Save, Clear } = Icons.Base;
 import { BoxPropsMenu, Widgets } from '../components';
 import { TYPE } from '../constants';
 import { Link } from 'react-router';
@@ -106,6 +106,7 @@ class Deck extends Component {
             <Menu inline={true} direction="row">
               <Anchor icon={<Play />} label="Preview" tag={Link} to="/preview" />
               <Anchor icon={<Save />} label="Save" onClick={this.props.actions.setDecks.bind(this, this.props.box)} />
+              <Anchor icon={<Clear />} label="Reset" onClick={this.props.resetBox} />
             </Menu>
           </Header>
           {workspace}
@@ -122,6 +123,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchProps = (dispatch) => ({
   actions: bindActionCreators(deckActions, dispatch),
+  resetBox: () => dispatch({ type: TYPE.DECK_RESET_BOX }),
   addBox: (box, root) => dispatch({ type: TYPE.DECK_ADD_BOX, box: box, root: root }),
   deleteBox: (box, root) => dispatch({ type: TYPE.DECK_DEL_BOX, box: box, root: root }),
   setBox: (box) => dispatch({ type: TYPE.DECK_SET_BOX, box: box })

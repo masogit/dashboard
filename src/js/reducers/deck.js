@@ -1,13 +1,16 @@
 import { TYPE } from '../constants';
 import { remove } from 'lodash';
+
+const initBox = {
+  key: getID(),
+  props: {},
+  child: null,
+  component: null
+}
+
 const initialState = {
   all: [],
-  box: {
-    key: getID(),
-    props: {},
-    child: null,
-    component: null
-  }
+  box: initBox
 };
 
 function getID() {
@@ -85,6 +88,9 @@ const handlers = {
   [TYPE.DECK_SET_BOX]: (state, action) => {
     // let box = Object.assign({}, action.box);
     return { box: {...action.box } };
+  },
+  [TYPE.DECK_RESET_BOX]: (state, action) => {
+    return { box: initBox };
   }
 };
 
