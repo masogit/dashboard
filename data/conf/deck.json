@@ -3,11 +3,13 @@
  "props": {
   "justify": null,
   "align": null,
-  "separator": "none"
+  "separator": "none",
+  "flex": true,
+  "colorIndex": "neutral-2"
  },
  "child": [
   {
-   "key": "7dshk2fm6nhigpkfbt9",
+   "key": "lcjt0yu6kf0yzgc6gk3xr",
    "props": {
     "direction": "row",
     "justify": null,
@@ -16,51 +18,31 @@
    },
    "child": [
     {
-     "key": "uldlx4vu8nvgdhmh1tt9",
+     "key": "lvsgx7x7woaaidl323xr",
      "props": {
-      "justify": null,
-      "align": null,
-      "separator": "none",
+      "style": {},
+      "flex": true,
+      "pad": {
+       "between": "medium"
+      },
       "margin": {
-       "right": "medium"
+       "right": "medium",
+       "top": "medium"
       }
      },
-     "child": [
-      {
-       "key": "y963tff7ko16f97msra4i",
-       "props": {},
-       "child": null,
-       "component": "InfoBox"
-      },
-      {
-       "key": "uixn4lxes915mhn6ogvi",
-       "props": {},
-       "child": null,
-       "component": "SmallBox"
-      }
-     ],
-     "component": null
+     "child": null,
+     "component": "SmallBox"
     },
     {
-     "key": "bbxmtj7zy502v86w29",
-     "props": {
-      "justify": null,
-      "align": null,
-      "separator": "none"
-     },
-     "child": [
-      {
-       "key": "gmeo2s7fv7tnxbf0f6r",
-       "props": {},
-       "child": null,
-       "component": "WorldMap"
-      }
-     ]
+     "key": "9n8l21we9y1y6ekx1or",
+     "props": {},
+     "child": null,
+     "component": "Bar_chart"
     }
    ]
   },
   {
-   "key": "s5y5f0w53cr9qmmx9lik9",
+   "key": "jr59hg55c2onshpk3xr",
    "props": {},
    "child": null,
    "component": "Bar_chart"

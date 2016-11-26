@@ -7,10 +7,6 @@ import { connect } from 'react-redux';
 Anchor.propTypes.tag = PropTypes.oneOfType([PropTypes.string, PropTypes.func]);
 
 class HeaderArea extends Component {
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props);
-    console.log(nextProps);
-  }
 
   render() {
     return (

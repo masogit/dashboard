@@ -7,14 +7,14 @@ const initialState = {
   menus: [
 
     { root: 'DATA VISUALIZATION' },
-    { title: 'HOME', icon: 'dashboard', active: true, router: "/home" },
+    { title: 'Home', icon: 'dashboard', active: true, router: "/home" },
     { title: 'Widgets', router: '/widgets', icon: 'heartbeat', status: [{ text: 4, color: 'blue' }] },
     { title: 'Designer', router: '/deck', icon: 'history', status: [{ text: 'new', color: 'green' }] },
     { title: 'Library', router: '/device/alarm', icon: 'envelope', status: [{ text: '5', color: 'red' }, { text: '3', color: 'green' }, { text: 4, color: 'yellow' }] },
 
     { root: 'DEVICE' },
     { title: 'Overview', router: '/device', icon: 'circle-o text-green' },
-    { title: 'Status', router: '/device/status', icon: 'circle-o text-red' },
+    { title: 'Types', router: '/device/types', icon: 'circle-o text-red' },
     { title: 'History', router: '/device/history', icon: 'circle-o text-yellow' },
     { title: 'Alarm', router: '/device/alarm', icon: 'circle-o text-blue' },
 

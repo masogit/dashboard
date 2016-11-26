@@ -1,19 +1,27 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { Box, Object as Tree } from 'grommet';
 import { connect } from 'react-redux';
+import { deviceActions } from '../actions';
 
 class DeviceModel extends Component {
+  componentWillMount() {
+    this.props.actions.loadDeviceTypes();
+  }
   render() {
+
     const { model } = this.props.params;
     const { types } = this.props;
     let type = types.filter((type) => {
       return type.name == model;
-    })[0];
+    })[0] || types[0];
 
     return (
-        <Box>
-            <Tree data={type} />
-        </Box>
+      <Box>
+        {
+          type && <Tree data={type} />
+        }
+      </Box>
     );
   }
 }
@@ -24,4 +32,8 @@ let mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(DeviceModel);
+let mapDispatchProps = (dispatch) => ({
+  actions: bindActionCreators(deviceActions, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchProps)(DeviceModel);

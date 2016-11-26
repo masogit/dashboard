@@ -6,20 +6,18 @@
   "repository": "",
   "license": "",
   "scripts": {
-    "start": "gulp dist && node server",
-    "build": "webpack",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base dist --open",
+    "start": "node server && gulp dev",
+    "dev": "gulp dev",
+    "build": "gulp dist && node server",
     "test": "test"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "d3": "^4.3.0",
     "echarts": "^3.3.1",
     "express": "^4.14.0",
     "grommet": "^1.0.0",
     "react": "^15.0.2",
     "react-d3": "^0.4.0",
-    "react-d3-map": "^0.8.3",
     "react-dom": "^15.0.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
@@ -36,7 +34,7 @@
     "babel-register": "^6.5.2",
     "copy-webpack-plugin": "^4.0.1",
     "grommet-toolbox": "^0.4.5",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "node-sass": "^3.10.1",
     "redux-devtools": "^3.3.1"
   }

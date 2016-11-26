@@ -9,22 +9,21 @@ import { deviceActions } from '../actions';
 class Frame extends Component {
 
   componentDidMount() {
-    // this.props.actions.loadDeviceTypes();
   }
 
-  render () {
-    const { modules, menus, user, title, location, color='blue' } = this.props;
+  render() {
+    const { modules, menus, user, title, location, color = 'blue' } = this.props;
 
     return (
-        <Box full={true} className={'skin-' + color} direction='row'>
-          <Sidebar menus={menus} title={title} user={user} />
-          <Box flex={true}>
-            <Box className='main-header' >
-                <Header modules={modules} path={location.pathname} user={user}  />
-            </Box>
-            <Box flex={true} colorIndex="light-2">{this.props.children}</Box>
-            <Footer />
+      <Box full={true} className={'skin-' + color} direction='row'>
+        <Sidebar menus={menus} title={title} user={user} />
+        <Box flex={true}>
+          <Box className='main-header' >
+            <Header modules={modules} path={location.pathname} user={user} />
           </Box>
+          <Box flex={true} colorIndex="light-2">{this.props.children}</Box>
+          <Footer />
+        </Box>
       </Box>
     );
   }

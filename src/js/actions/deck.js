@@ -10,7 +10,7 @@ export function getDecks() {
         box
       });
     });
-  }
+  };
 }
 
 export function setDecks(decks) {
