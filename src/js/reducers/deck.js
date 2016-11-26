@@ -6,7 +6,7 @@ const initBox = {
   props: {},
   child: null,
   component: null
-}
+};
 
 const initialState = {
   all: [],
