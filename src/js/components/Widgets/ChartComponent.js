@@ -12,22 +12,24 @@ export default class ChartComponent extends Component {
 
   componentDidMount() {
     setTimeout(this._onResize, 1000);
+    // window.addEventListener('resize', this._onResize);
   }
 
   componentDidUpdate() {
     setTimeout(this._onResize, 1000);
   }
 
-  componentWillReciveProps(nextProps, nextState) {
-
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
   }
 
-  _onResize() {
-    const container = this.chart._dom.parentElement.parentElement;
-    const width = container.getBoundingClientRect().width;
-    const height = container.getBoundingClientRect().height;
+  _onResize(container = this.chart._dom.parentElement.parentElement) {
+    const width = container.getBoundingClientRect().width || 800;
+    const height = container.getBoundingClientRect().height || 300;
+
     this.chart._dom.style.width = width + 'px';
     this.chart._dom.style.height = height + 'px';
+    console.log('resize: width: ' +width + ' height ' + height);
     this.chart.resize({ width, height });
   }
 
@@ -36,28 +38,6 @@ export default class ChartComponent extends Component {
     div.id = name;
     const container = document.getElementById(id);
     container.appendChild(div);
-
-    //this._onResize(container, div, width, height);
-    // // const parentRect = container.parentElement.getBoundingClientRect();
-    // const parentCss = document.defaultView.getComputedStyle(container.parentElement);
-
-    // if (width < parseInt(parentCss.width.slice(0, -2))) {
-    //   width = parentCss.width;
-    // } else {
-    //   width = width + 'px';
-    // }
-
-    // if (height < parseInt(parentCss.height.slice(0, -2))) {
-    //   height = parentCss.height;
-    // } else {
-    //   height =  height + 'px';
-    // }
-
-    // div.style.width = width;
-    // div.style.height = height;
-
-    //window.addEventListener('resize', this._onResize.bind(this, container, div, width, height));
-
 
     return echarts.init(div);
   }

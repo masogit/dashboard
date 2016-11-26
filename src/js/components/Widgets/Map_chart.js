@@ -16,26 +16,28 @@ export default class Map_chart extends ChartComponent {
     this.loadMap = this.loadMap.bind(this);
     this.loadMap();
     this.charts = {};
+    this._onResize = this._onResize.bind(this);
   }
 
   componentDidMount() {
     this.initChart();
+    setTimeout(this._onResize, 1000);
+    window.addEventListener('resize', this._onResize);
   }
 
   componentDidUpdate() {
+// setTimeout(this._onResize, 1000);
     this.renderMap();
   }
 
   componentWillUnmont() {
+    window.removeEventListener('resize', this._onResize);
     this.charts = {};
   }
 
-  initState(props = {}) {
-    const {height = 600, width = 800} = props;
+  initState() {
     Object.assign(this.state, {
-      isMapDataReady: false,
-      height,
-      width
+      isMapDataReady: false
     });
   }
 
@@ -46,6 +48,7 @@ export default class Map_chart extends ChartComponent {
       this.setState({ geoCoordMap, data });
     } else {
       const chart = this.getChart('map_chart', name);
+      console.log('init chart'  + name);
       this.chart = chart;
       this.chart.showLoading();
       this.chart.on('click', params => {
@@ -60,7 +63,6 @@ export default class Map_chart extends ChartComponent {
           isMapDataReady: false
         }, this.loadMap);
       });
-      // this.addFunction();
       this.charts[name] = { chart };
     }
 
@@ -75,26 +77,8 @@ export default class Map_chart extends ChartComponent {
       }
     });
   }
-
-  addFunction() {
-    // const {onBrushSelected} = this.props;
-    // if (onBrushSelected) {
-    //   this.chart.on('brushselected', onBrushSelected);
-
-    //   this.chart.setOption({
-    //     toolbox: {
-    //       iconStyle: {
-    //         normal: {
-    //           borderColor: '#fff'
-    //         },
-    //         emphasis: {
-    //           borderColor: '#b1e4ff'
-    //         },
-    //         brush: brush
-    //       }
-    //     }
-    //   })
-    // }
+  _onResize() {
+    super._onResize(this.chart._dom.parentElement.parentElement.parentElement.parentElement);
   }
 
   loadMap(map = this.state.map, business = this.state.business) {
