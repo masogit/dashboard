@@ -5,10 +5,22 @@ import options from './optionIndex';
 
 class ChartTemplate extends ChartComponent {
   componentDidMount() {
-    this.chart = this.getChart(this.props.id);
+    const {id, option} = this.props;
 
+    this.chart = this.getChart(id);
 
-    this.chart.setOption(this.props.option);
+    if (!option.preAction) {
+      option.preAction = () =>{
+        return {
+          then: func => func()
+        };
+      };
+    }
+
+    option.preAction().then(() => {
+      this.chart.setOption(option);
+      super.componentDidMount();
+    });
   }
 
 
@@ -17,7 +29,7 @@ class ChartTemplate extends ChartComponent {
 
     return (
       <Warpper name={label} status='success'>
-        <div id={id} style={{ width, height }} />
+         <div id={id} style={{ width, height }} />
       </Warpper>
     );
   }
@@ -25,11 +37,13 @@ class ChartTemplate extends ChartComponent {
 
 
 const Demo = () => {
-  options.map((option, index) => {
-    return (
-      <ChartTemplate id={'map' + index} option={option} />
-    );
-  });
+  return (
+    <div>{options.map((option, index) => {
+      return (
+        <ChartTemplate key={index} id={'map' + index} option={option} />
+      );
+    })}</div>
+  );
 };
 
 export default Demo;
