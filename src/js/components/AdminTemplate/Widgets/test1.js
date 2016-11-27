@@ -403,9 +403,9 @@ var convertData = function (data) {
 const option = {
   backgroundColor: '#fff',
   title: {
-    text: '全国主要城市空气质量',
-    subtext: 'data from PM25.in',
-    sublink: 'http://www.pm25.in',
+    text: '全国设备分布图',
+    subtext: '上海炙耘科技',
+    sublink: 'http://www.zhiyuninfo.com/',
     left: 'center',
     textStyle: {
       color: '#404a59'
@@ -414,15 +414,15 @@ const option = {
   tooltip: {
     trigger: 'item'
   },
-  legend: {
-    orient: 'vertical',
-    y: 'bottom',
-    x: 'right',
-    data: ['pm2.5'],
-    textStyle: {
-      color: '#404a59'
-    }
-  },
+  // legend: {
+  //   orient: 'vertical',
+  //   y: 'bottom',
+  //   x: 'right',
+  //   data: ['pm2.5'],
+  //   textStyle: {
+  //     color: '#404a59'
+  //   }
+  // },
   geo: {
     map: 'china',
     label: {

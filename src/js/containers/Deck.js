@@ -7,6 +7,7 @@ import { BoxPropsMenu, Widgets } from '../components';
 import { TYPE } from '../constants';
 import { Link } from 'react-router';
 import { deckActions } from '../actions';
+import Wrapper from '../components/Widgets/Warpper';
 
 class Deck extends Component {
   constructor(props) {
@@ -31,6 +32,13 @@ class Deck extends Component {
       );
     }
     let Widget = box.component && Widgets[box.component];
+    if (this.props.wrapper) {
+      Widget = (
+        <Wrapper status="success">
+          {Widget}
+        </Wrapper>
+      );
+    }
     let position = !box.component ? { justify: 'center', align: 'center' } : {};
     return (
       <Box key={box.key} separator={(!box.child && !this.props.present) ? 'all' : 'none'} flex={true} {...position} {...box.props}>

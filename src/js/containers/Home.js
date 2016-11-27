@@ -7,12 +7,12 @@ const { Expand } = Icons.Base;
 export default class Home extends Component {
   render() {
     return (
-      <Box pad="small">
+      <Box pad="small" flex={true}>
         <Header justify="between">
           <Headline size="small">Home page</Headline>
           <Anchor icon={<Expand />} label="Full Screen" tag={Link} to="/preview" />
         </Header>
-        <Deck present={true} />
+        <Deck present={true} wrapper />
       </Box>
     );
   }

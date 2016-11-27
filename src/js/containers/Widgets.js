@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Anchor, Box, Header, Headline, Columns, Icons } from 'grommet';
 // import { Widgets } from '../components';
 import Widgets from '../components/AdminTemplate/Widgets';
+import Warpper from '../components/Widgets/Warpper';
 
 const { Add } = Icons.Base;
 
@@ -11,10 +12,14 @@ export default class WidgetsContainer extends Component {
     if (!this.props.params.name) {
       const keys = Object.keys(Widgets);
       return (
-        <Columns justify="center">
+        <Columns justify="center" size="large">
           {
             keys.map((key) => {
-              return Widgets[key];
+              return (
+                <Warpper name={key} status="success" style={{ height: '600px' }}>
+                  {Widgets[key]}
+                </Warpper>
+              )
             })
           }
         </Columns>

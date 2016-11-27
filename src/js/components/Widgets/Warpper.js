@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import { Box, Heading } from 'grommet';
 
 const Warpper = (props) => {
@@ -7,19 +7,20 @@ const Warpper = (props) => {
   if (status) {
     classes.push(`box-${status}`);
   }
-  
+
   if (background) {
     classes.push(`bg-${background}-gradient`);
   }
 
   return (
-    <Box className='ui-sortable' pad='small'>
-      <Box className={classes.join(' ')}>
-        <Box className='box-header ui-sortable-handle' pad={{horizontal: 'small'}}>
-          {icon && <i className={`fa fa-${icon}`}/>}
-          <Box className='box-header'>
-            <Heading tag='h3' strong={true}>{name}</Heading>
-          </Box>
+    <Box className='ui-sortable' pad='small' flex={true}>
+      <Box className={classes.join(' ')} flex={true}>
+        <Box className='box-header ui-sortable-handle' pad={{ horizontal: 'small' }}>
+          {icon && <i className={`fa fa-${icon}`} />}
+          {name &&
+            <Box className='box-header'>
+              <Heading tag='h3' strong={true}>{name}</Heading>
+            </Box>}
           {tools && <Box className='box-tools pull-right'>{tools}</Box>}
         </Box>
         {children}

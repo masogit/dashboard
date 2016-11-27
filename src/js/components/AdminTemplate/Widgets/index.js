@@ -1,7 +1,7 @@
 import React from 'react';
 import ChartComponent from '../../Widgets/ChartComponent';
-import Warpper from '../../Widgets/Warpper';
 import options from './optionIndex';
+// import Warpper from '../../Widgets/Warpper';
 
 class ChartTemplate extends ChartComponent {
   componentDidMount() {
@@ -31,23 +31,12 @@ class ChartTemplate extends ChartComponent {
     const { height = 600, width = 800, id, label = id} = this.props;
 
     return (
-      <Warpper name={label} status='success'>
-        <div id={id} style={{ width, height }} />
-      </Warpper>
+      // <Warpper name={label} status='success'>
+      <div id={id} />
+      // </Warpper>
     );
   }
 }
-
-
-const Demo = () => {
-  return (
-    <div>{options.map((option, index) => {
-      return (
-        <ChartTemplate key={index} id={'map' + index} option={option} />
-      );
-    })}</div>
-  );
-};
 
 const Widgets = {};
 options.forEach((option, index) => {
