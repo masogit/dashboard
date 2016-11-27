@@ -504,7 +504,7 @@ const loadMap = (map = 'china') => {
     if (china) {
       echarts.registerMap(map, china);
     }
-  })
+  });
 };
 option.preAction = loadMap;
 export default option;

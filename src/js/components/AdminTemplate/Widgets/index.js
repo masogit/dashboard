@@ -28,7 +28,8 @@ class ChartTemplate extends ChartComponent {
 
 
   render() {
-    const { height = 600, width = 800, id, label = id} = this.props;
+    const { id } = this.props;
+    // const { height = 600, width = 800, id, label = id} = this.props;
 
     return (
       // <Warpper name={label} status='success'>

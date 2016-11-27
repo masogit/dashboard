@@ -19,7 +19,7 @@ export default class WidgetsContainer extends Component {
                 <Warpper name={key} status="success" style={{ height: '600px' }}>
                   {Widgets[key]}
                 </Warpper>
-              )
+              );
             })
           }
         </Columns>

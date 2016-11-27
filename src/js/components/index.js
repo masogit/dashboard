@@ -3,7 +3,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import Table from './Table';
 // import Widgets from './Widgets';
-import Widgets from './AdminTemplate/Widgets'
+import Widgets from './AdminTemplate/Widgets';
 import BoxPropsMenu from './BoxPropsMenu';
 import AdminTemplate from './AdminTemplate';
 
