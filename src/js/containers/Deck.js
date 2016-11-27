@@ -36,7 +36,7 @@ class Deck extends Component {
       <Box key={box.key} separator={(!box.child && !this.props.present) ? 'all' : 'none'} flex={true} {...position} {...box.props}>
         {!this.props.present && this.buildMenu(box)}
         {child}
-        {box.component && <Widget />}
+        {box.component && Widget}
       </Box>
     );
   }

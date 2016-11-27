@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Anchor, Box, Header, Headline, Columns, Icons } from 'grommet';
-import { Widgets } from '../components';
+// import { Widgets } from '../components';
+import Widgets from '../components/AdminTemplate/Widgets';
 
 const { Add } = Icons.Base;
 
@@ -12,9 +13,8 @@ export default class WidgetsContainer extends Component {
       return (
         <Columns justify="center">
           {
-            keys.map((key, index) => {
-              const Widget = Widgets[key];
-              return <Widget key={index} />;
+            keys.map((key) => {
+              return Widgets[key];
             })
           }
         </Columns>

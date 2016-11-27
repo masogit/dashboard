@@ -1,15 +1,13 @@
 {
- "key": "gm1citxrpw89iladims4i",
+ "key": "u8o7dbezdp72ti2ro1or",
  "props": {
   "justify": null,
   "align": null,
-  "separator": "none",
-  "flex": true,
-  "colorIndex": "neutral-2"
+  "separator": "none"
  },
  "child": [
   {
-   "key": "lcjt0yu6kf0yzgc6gk3xr",
+   "key": "k7g78qmpkwhrc9qqia4i",
    "props": {
     "direction": "row",
     "justify": null,
@@ -18,34 +16,59 @@
    },
    "child": [
     {
-     "key": "lvsgx7x7woaaidl323xr",
+     "key": "ylhqloeun7t04cmcxr",
      "props": {
-      "style": {},
-      "flex": true,
-      "pad": {
-       "between": "medium"
-      },
-      "margin": {
-       "right": "medium",
-       "top": "medium"
-      }
+      "direction": "column",
+      "justify": null,
+      "align": null,
+      "separator": "none"
      },
-     "child": null,
-     "component": "SmallBox"
+     "child": [
+      {
+       "key": "dcp7lnnjrnb9dkju4n29",
+       "props": {},
+       "child": null,
+       "component": "echart_1"
+      },
+      {
+       "key": "jypltiznua0yx8ncdi",
+       "props": {},
+       "child": null,
+       "component": "echart_2"
+      }
+     ]
     },
     {
-     "key": "9n8l21we9y1y6ekx1or",
+     "key": "kmrs0a3lgnfcsr8p8pvi",
      "props": {},
      "child": null,
-     "component": "Bar_chart"
+     "component": "echart_0"
     }
-   ]
+   ],
+   "component": null
   },
   {
-   "key": "jr59hg55c2onshpk3xr",
-   "props": {},
-   "child": null,
-   "component": "Bar_chart"
+   "key": "twstp38ti323rqr7wrk9",
+   "props": {
+    "direction": "row",
+    "justify": null,
+    "align": null,
+    "separator": "none"
+   },
+   "child": [
+    {
+     "key": "cyyq9nrodxbb25t7c766r",
+     "props": {},
+     "child": null,
+     "component": "echart_3"
+    },
+    {
+     "key": "sufjv1vvj7i1hiz1if6r",
+     "props": {},
+     "child": null,
+     "component": "echart_4"
+    }
+   ]
   }
  ],
  "component": null

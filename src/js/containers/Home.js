@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-/*import { Box, Header, Headline, Icons, Anchor } from 'grommet';
+import { Box, Header, Headline, Icons, Anchor } from 'grommet';
 import { Deck } from './index';
-import { Link } from 'react-router';*/
-import Demo from '../components/AdminTemplate/Widgets';
+import { Link } from 'react-router';
 
-// const { Expand } = Icons.Base;
+const { Expand } = Icons.Base;
 export default class Home extends Component {
   render() {
-    return <Demo />;
-   /* return (
+    return (
       <Box pad="small">
         <Header justify="between">
           <Headline size="small">Home page</Headline>
@@ -16,6 +14,6 @@ export default class Home extends Component {
         </Header>
         <Deck present={true} />
       </Box>
-    );*/
+    );
   }
 }

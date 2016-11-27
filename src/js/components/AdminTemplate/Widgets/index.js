@@ -10,7 +10,7 @@ class ChartTemplate extends ChartComponent {
     this.chart = this.getChart(id);
 
     if (!option.preAction) {
-      option.preAction = () =>{
+      option.preAction = () => {
         return {
           then: func => func()
         };
@@ -28,11 +28,11 @@ class ChartTemplate extends ChartComponent {
 
 
   render() {
-    const { height = 800, width = 600, id, label = id} = this.props;
+    const { height = 600, width = 800, id, label = id} = this.props;
 
     return (
       <Warpper name={label} status='success'>
-         <div id={id} style={{ width, height }} />
+        <div id={id} style={{ width, height }} />
       </Warpper>
     );
   }
@@ -49,4 +49,11 @@ const Demo = () => {
   );
 };
 
-export default Demo;
+const Widgets = {};
+options.forEach((option, index) => {
+  let id = 'echart_' + index;
+  let Widget = <ChartTemplate key={index} id={id} option={option} />;
+  Widgets[id] = Widget;
+});
+
+export default Widgets;
