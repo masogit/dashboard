@@ -401,7 +401,6 @@ var convertData = function (data) {
 };
 
 const option = {
-  backgroundColor: '#fff',
   title: {
     text: '全国设备分布图',
     subtext: '上海炙耘科技',
