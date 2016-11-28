@@ -1,18 +1,19 @@
 {
- "key": "gm4wz5al900rtxhcl3di",
+ "key": "27okccg771k78jtnjyvi",
  "props": {
   "justify": null,
   "align": null,
-  "separator": "none",
-  "margin": {
-   "top": "small",
-   "left": "small",
-   "horizontal": "small"
-  }
+  "separator": "none"
  },
  "child": [
   {
-   "key": "tqhabrchwucl2nvcxr",
+   "key": "nesb0cpmcltxvmrkke29",
+   "props": {},
+   "child": null,
+   "component": "echart_2"
+  },
+  {
+   "key": "ur8wvl0ignuhrhfjvpldi",
    "props": {
     "direction": "row",
     "justify": null,
@@ -21,66 +22,42 @@
    },
    "child": [
     {
-     "key": "9pxmuesixhg650j2a9k9",
+     "key": "msrutl7z6qmitst5r8uxr",
+     "props": {},
+     "child": null,
+     "component": "echart_3"
+    },
+    {
+     "key": "1eere2hdqbar3d0wwmi",
      "props": {
-      "direction": "column",
-      "size": {
-       "width": "large"
-      },
-      "flex": false,
-      "separator": "none",
-      "margin": {
-       "vertical": "none",
-       "horizontal": "none",
-       "top": "large",
-       "bottom": "none",
-       "left": "large"
-      },
+      "direction": "row",
       "justify": null,
-      "align": null
+      "align": null,
+      "separator": "none"
      },
      "child": [
       {
-       "key": "dp6ncqigjenvgeovfgvi",
+       "key": "zptd6u12knnmknb2ihpvi",
        "props": {},
        "child": null,
        "component": "echart_4"
       },
       {
-       "key": "y6gd37u4m1jvuvzn0zfr",
+       "key": "z45s6xa72usejsafko6r",
        "props": {},
        "child": null,
-       "component": "echart_5"
+       "component": "echart_1"
       }
      ],
      "component": null
-    },
-    {
-     "key": "894vhgiqvk33ul3di",
-     "props": {
-      "separator": "none",
-      "margin": {
-       "vertical": "small",
-       "horizontal": "small"
-      }
-     },
-     "child": null,
-     "component": "echart_0"
     }
    ]
   },
   {
-   "key": "u4f4db5rgwy9x7nqxgvi",
-   "props": {
-    "direction": "row",
-    "flex": true,
-    "separator": "none",
-    "margin": {
-     "horizontal": "small"
-    }
-   },
+   "key": "tvlhorfwckdi5dtgwrk9",
+   "props": {},
    "child": null,
-   "component": "echart_3"
+   "component": "echart_5"
   }
  ],
  "component": null
