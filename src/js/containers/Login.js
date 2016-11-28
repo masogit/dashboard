@@ -8,25 +8,25 @@ export default class Login extends Component {
   login(fields) {
     if (fields.username) {
       browserHistory.push('/home');
-      store.dispatch({type: TYPE.LOGIN, login: fields.username});
+      store.dispatch({ type: TYPE.LOGIN, login: fields.username });
     }
   }
 
   render() {
     return (
-        <App>
-          <Box full={true} align="center" justify="center">
-            <LoginForm
+      <App>
+        <Box full={true} align="center" justify="center">
+          <LoginForm
             align="center"
-            title="Grommet Demo"
+            title="Dashboard Platform"
             usernameType='text'
             onSubmit={this.login}
             defaultValues={{
               username: '',
               rememberMe: true
-            }}/>
-          </Box>
-        </App>
+            }} />
+        </Box>
+      </App>
     );
   }
 }

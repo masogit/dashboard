@@ -30,12 +30,30 @@
       "flex": false,
       "separator": "none",
       "margin": {
-       "vertical": "small",
-       "horizontal": "small"
-      }
+       "vertical": "none",
+       "horizontal": "none",
+       "top": "none",
+       "bottom": "none",
+       "left": "small"
+      },
+      "justify": null,
+      "align": null
      },
-     "child": null,
-     "component": "echart_4"
+     "child": [
+      {
+       "key": "dp6ncqigjenvgeovfgvi",
+       "props": {},
+       "child": null,
+       "component": "echart_4"
+      },
+      {
+       "key": "y6gd37u4m1jvuvzn0zfr",
+       "props": {},
+       "child": null,
+       "component": "echart_5"
+      }
+     ],
+     "component": null
     },
     {
      "key": "894vhgiqvk33ul3di",
