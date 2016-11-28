@@ -21,7 +21,7 @@ class Frame extends Component {
           <Box className='main-header' >
             <Header modules={modules} path={location.pathname} user={user} />
           </Box>
-          <Box flex={true} colorIndex="light-2">{this.props.children}</Box>
+          <Box flex={true}>{this.props.children}</Box>
           <Footer />
         </Box>
       </Box>
