@@ -1,48 +1,52 @@
 import React from 'react';
-import ChartComponent from '../../Widgets/ChartComponent';
+// import ChartComponent from '../../Widgets/ChartComponent';
 import options from './optionIndex';
 // import Warpper from '../../Widgets/Warpper';
+import ReactEcharts from 'echarts-for-react';
+// import ReEcharts from 're-echarts';
 
-class ChartTemplate extends ChartComponent {
-  componentDidMount() {
-    const {id, option} = this.props;
+// class ChartTemplate extends ChartComponent {
+//   componentDidMount() {
+//     const {id, option} = this.props;
 
-    this.chart = this.getChart(id);
+//     this.chart = this.getChart(id);
 
-    if (!option.preAction) {
-      option.preAction = () => {
-        return {
-          then: func => func()
-        };
-      };
-    }
+//     if (!option.preAction) {
+//       option.preAction = () => {
+//         return {
+//           then: func => func()
+//         };
+//       };
+//     }
 
-    option.preAction().then(() => {
-      this.chart.setOption(option);
-      if (option.addEvents) {
-        option.addEvents(this.chart);
-      }
-      super.componentDidMount();
-    });
-  }
+//     option.preAction().then(() => {
+//       this.chart.setOption(option);
+//       if (option.addEvents) {
+//         option.addEvents(this.chart);
+//       }
+//       super.componentDidMount();
+//     });
+//   }
 
 
-  render() {
-    const { id } = this.props;
-    // const { height = 600, width = 800, id, label = id} = this.props;
+//   render() {
+//     const { id } = this.props;
+//     // const { height = 600, width = 800, id, label = id} = this.props;
 
-    return (
-      // <Warpper name={label} status='success'>
-      <div id={id} />
-      // </Warpper>
-    );
-  }
-}
+//     return (
+//       // <Warpper name={label} status='success'>
+//       <div id={id} />
+//       // </Warpper>
+//     );
+//   }
+// }
 
 const Widgets = {};
 options.forEach((option, index) => {
   let id = 'echart_' + index;
-  let Widget = <ChartTemplate key={index} id={id} option={option} />;
+  // let Widget = <ReEcharts id={id} option={option} />;
+  let Widget = <ReactEcharts option={option} />;
+  // let Widget = <ChartTemplate key={index} id={id} option={option} />;
   Widgets[id] = Widget;
 });
 

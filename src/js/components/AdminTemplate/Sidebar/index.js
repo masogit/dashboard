@@ -128,7 +128,6 @@ class SideBar extends Component {
         </Box>
         <UserPanel name={user.name} />
         <SearchInput ref={node => this.searchInput = node} className='sidebar-form no-shrink' placeHolder='Search...' />
-        {!isArray && this.renderMenu(menus)}
         {isArray && this.renderTreeView(menus, { root: true })}
       </Sidebar>
     );
