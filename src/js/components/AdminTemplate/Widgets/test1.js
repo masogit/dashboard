@@ -403,8 +403,8 @@ var convertData = function (data) {
 const option = {
   title: {
     text: '全国设备分布图',
-    subtext: '上海炙耘科技',
-    sublink: 'http://www.zhiyuninfo.com/',
+    subtext: '上海灵硕科技',
+    sublink: 'http://masogit.github.io',
     left: 'center',
     textStyle: {
       color: '#404a59'

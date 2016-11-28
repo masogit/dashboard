@@ -1,7 +1,7 @@
 const option = {
   title: {
     text: '设备类别统计',
-    subtext: '上海炙耘科技',
+    subtext: '上海灵硕科技',
     x: 'center'
   },
   tooltip: {

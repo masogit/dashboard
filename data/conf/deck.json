@@ -32,9 +32,9 @@
       "margin": {
        "vertical": "none",
        "horizontal": "none",
-       "top": "none",
+       "top": "large",
        "bottom": "none",
-       "left": "small"
+       "left": "large"
       },
       "justify": null,
       "align": null
