@@ -1,33 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import options from './optionIndex';
-import ReactEcharts from 'echarts-for-react';
+// import ReactEcharts from 'echarts-for-react';
 // import ReEcharts from 're-echarts';
-
-
-//     if (!option.preAction) {
-//       option.preAction = () => {
-//         return {
-//           then: func => func()
-//         };
-//       };
-//     }
-
-//     option.preAction().then(() => {
-//       this.chart.setOption(option);
-//       if (option.addEvents) {
-//         option.addEvents(this.chart);
-//       }
-//       super.componentDidMount();
-//     });
-//   }
-
-
-const onResize = (chart) => {
-  const container = chart._dom.parentElement;
-  const height = container.getBoundingClientRect().height || 300;
-
-  chart.resize({ height });
-};
+ import ChartComponent from '../../Widgets/ChartComponent';
   
 const Widgets = {};
 
@@ -35,7 +10,8 @@ options.forEach((option, index) => {
   let id = 'echart_' + index;
   let Widget;
   
-  Widget = <ReactEcharts option={option} onChartReady={(chart) => setTimeout(onResize(chart), 200)}/>;
+  // Widget = <ReactEcharts ref='echart' option={option} onChartReady={(chart) => setTimeout(onResize(chart), 200)}/>;
+  Widget = <ChartComponent option={option} />;
   
   Widgets[id] = Widget;
 });

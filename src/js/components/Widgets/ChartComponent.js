@@ -1,48 +1,110 @@
 import echarts from 'echarts';
-import { Component } from 'react';
+import React from 'react';
 
-export default class ChartComponent extends Component {
+import elementResizeEvent from 'element-resize-event';
+
+const onResize = (chart) => {
+  const container = chart._dom.parentElement;
+  const height = container.getBoundingClientRect().height || 300;
+
+  chart.resize({ height });
+};
+
+const ReactEcharts = React.createClass({
+  propTypes: {
+    option: React.PropTypes.object.isRequired,
+    notMerge: React.PropTypes.bool,
+    lazyUpdate: React.PropTypes.bool,
+    style: React.PropTypes.object,
+    className: React.PropTypes.string,
+    theme: React.PropTypes.string,
+    onChartReady: React.PropTypes.func,
+    showLoading: React.PropTypes.bool,
+    onEvents: React.PropTypes.object
+  },
+  
   componentWillMount() {
     this.state = {
-      width: this.props.width || 800,
-      height: this.props.height || 300
+      isReady: this.props.option.preAction ? false : true
     };
-    this._onResize = this._onResize.bind(this);
-  }
 
+    if (this.props.option.preAction) {
+      this.props.option.preAction().then(() => {
+        this.setState({ isReady: true });
+      });
+    }
+  },
+  
+  // first add
   componentDidMount() {
-    setTimeout(this._onResize, 1000);
-    // window.addEventListener('resize', this._onResize);
-  }
+    let echartObj = this.renderEchartDom();
+    let onEvents = this.props.onEvents || {};
 
+    this.bindEvents(echartObj, onEvents);
+    setTimeout(onResize(echartObj), 200);
+
+    // on chart ready
+    if (typeof this.props.onChartReady === 'function') this.props.onChartReady(echartObj);
+
+    // on resize
+    elementResizeEvent(this.refs.echartsDom, function () {
+      echartObj.resize();
+    });
+  },
+  // update
   componentDidUpdate() {
-    setTimeout(this._onResize, 1000);
-  }
-
+    this.renderEchartDom();
+    this.bindEvents(this.getEchartsInstance(), this.props.onEvents || []);
+  },
+  // remove
   componentWillUnmount() {
-    window.removeEventListener('resize', this._onResize);
-  }
+    echarts.dispose(this.refs.echartsDom)
+  },
 
-  _onResize(container = this.chart._dom.parentElement.parentElement) {
-    const width = container.getBoundingClientRect().width || 800;
-    const height = container.getBoundingClientRect().height || 300;
+  //bind the events
+  bindEvents(instance, events) {
+    var _loop = function _loop(eventName) {
+      // ignore the event config which not satisfy
+      if (typeof eventName === 'string' && typeof events[eventName] === 'function') {
+        // binding event
+        instance.off(eventName);
+        instance.on(eventName, function (param) {
+          events[eventName](param, instance);
+        });
+      }
+    };
 
-    this.chart._dom.style.width = width + 'px';
-    this.chart._dom.style.height = height + 'px';
-    console.log('resize: width: ' +width + ' height ' + height);
-    this.chart.resize({ width, height });
-  }
+    for (var eventName in events) {
+      _loop(eventName);
+    }
 
-  getChart(id, name = id + 'child') {
-    const div = document.createElement('div');
-    div.id = name;
-    const container = document.getElementById(id);
-    container.appendChild(div);
+  },
+  // render the dom
+  renderEchartDom() {
+    // init the echart object
+    let echartObj = this.getEchartsInstance();
+    // set the echart option
+    echartObj.setOption(this.props.option, this.props.notMerge || false, this.props.lazyUpdate || false);
+    // set loading mask
+    if (this.props.showLoading) echartObj.showLoading();
+    else echartObj.hideLoading();
 
-    return echarts.init(div);
-  }
-
+    return echartObj;
+  },
+  getEchartsInstance() {
+    // return the echart object
+    return echarts.getInstanceByDom(this.refs.echartsDom) || echarts.init(this.refs.echartsDom, this.props.theme);
+  },
   render() {
-    return null;
+    let style = this.props.style || {
+      height: '300px'
+    };
+    // for render
+    return (
+      <div ref='echartsDom'
+        className={this.props.className}
+        style={style} />
+    );
   }
-}
+});
+module.exports = ReactEcharts;
