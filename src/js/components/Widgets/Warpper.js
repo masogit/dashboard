@@ -34,7 +34,7 @@ Warpper.defaultProps = {
 };
 
 Warpper.propTypes = {
-  name: PropTypes.string.required,
+  name: PropTypes.string,
   status: PropTypes.oneOf(['success', 'info', 'primary', 'danger', 'warning', 'default']),
   background: PropTypes.oneOf(['blue', 'light-blue', 'teal', 'aqua', 'yellow',
     'purple', 'green', 'red', 'black', 'maroon'])
