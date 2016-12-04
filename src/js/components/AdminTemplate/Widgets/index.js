@@ -1,15 +1,8 @@
 import React from 'react';
-// import ChartComponent from '../../Widgets/ChartComponent';
 import options from './optionIndex';
-// import Warpper from '../../Widgets/Warpper';
 import ReactEcharts from 'echarts-for-react';
 // import ReEcharts from 're-echarts';
 
-// class ChartTemplate extends ChartComponent {
-//   componentDidMount() {
-//     const {id, option} = this.props;
-
-//     this.chart = this.getChart(id);
 
 //     if (!option.preAction) {
 //       option.preAction = () => {
@@ -29,24 +22,21 @@ import ReactEcharts from 'echarts-for-react';
 //   }
 
 
-//   render() {
-//     const { id } = this.props;
-//     // const { height = 600, width = 800, id, label = id} = this.props;
+const onResize = (chart) => {
+  const container = chart._dom.parentElement;
+  const height = container.getBoundingClientRect().height || 300;
 
-//     return (
-//       // <Warpper name={label} status='success'>
-//       <div id={id} />
-//       // </Warpper>
-//     );
-//   }
-// }
-
+  chart.resize({ height });
+};
+  
 const Widgets = {};
+
 options.forEach((option, index) => {
   let id = 'echart_' + index;
-  // let Widget = <ReEcharts id={id} option={option} />;
-  let Widget = <ReactEcharts option={option} />;
-  // let Widget = <ChartTemplate key={index} id={id} option={option} />;
+  let Widget;
+  
+  Widget = <ReactEcharts option={option} onChartReady={(chart) => setTimeout(onResize(chart), 200)}/>;
+  
   Widgets[id] = Widget;
 });
 
