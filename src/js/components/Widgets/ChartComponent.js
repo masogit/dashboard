@@ -22,7 +22,7 @@ const ReactEcharts = React.createClass({
     showLoading: React.PropTypes.bool,
     onEvents: React.PropTypes.object
   },
-  
+
   componentWillMount() {
     this.state = {
       isReady: this.props.option.preAction ? false : true
@@ -34,7 +34,7 @@ const ReactEcharts = React.createClass({
       });
     }
   },
-  
+
   // first add
   componentDidMount() {
     let echartObj = this.renderEchartDom();
@@ -58,7 +58,7 @@ const ReactEcharts = React.createClass({
   },
   // remove
   componentWillUnmount() {
-    echarts.dispose(this.refs.echartsDom)
+    echarts.dispose(this.refs.echartsDom);
   },
 
   //bind the events
