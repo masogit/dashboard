@@ -6,9 +6,9 @@
   "repository": "",
   "license": "",
   "scripts": {
-    "start": "node server & gulp dev",
+    "dev1": "node server & gulp dev",
     "dev": "gulp dev",
-    "build": "gulp dist & node server",
+    "start": "gulp dist && node server",
     "test": "test"
   },
   "dependencies": {

@@ -1,34 +1,22 @@
 {
- "key": "27okccg771k78jtnjyvi",
+ "key": "2uh7ty64k14hse3a0pb9",
  "props": {
   "justify": null,
   "align": null,
-  "separator": "none"
+  "separator": "none",
+  "direction": "column"
  },
  "child": [
   {
-   "key": "nesb0cpmcltxvmrkke29",
-   "props": {},
-   "child": null,
-   "component": "echart_2"
-  },
-  {
-   "key": "ur8wvl0ignuhrhfjvpldi",
+   "key": "e863gfotrfssw8gjh5mi",
    "props": {
-    "direction": "row",
     "justify": null,
     "align": null,
     "separator": "none"
    },
    "child": [
     {
-     "key": "msrutl7z6qmitst5r8uxr",
-     "props": {},
-     "child": null,
-     "component": "echart_3"
-    },
-    {
-     "key": "1eere2hdqbar3d0wwmi",
+     "key": "xjvz5a0gd1w6vryzdj9k9",
      "props": {
       "direction": "row",
       "justify": null,
@@ -37,25 +25,35 @@
      },
      "child": [
       {
-       "key": "zptd6u12knnmknb2ihpvi",
-       "props": {},
-       "child": null,
-       "component": "echart_4"
-      },
-      {
-       "key": "z45s6xa72usejsafko6r",
+       "key": "0jeou7z0jrjbdfna5rk9",
        "props": {},
        "child": null,
        "component": "echart_1"
+      },
+      {
+       "key": "og17hu6m550g8kja714i",
+       "props": {},
+       "child": null,
+       "component": "echart_0"
       }
-     ],
-     "component": null
+     ]
+    },
+    {
+     "key": "jwhtu81irxaoqusl6usor",
+     "props": {},
+     "child": null,
+     "component": "echart_3"
     }
    ]
   },
   {
-   "key": "tvlhorfwckdi5dtgwrk9",
-   "props": {},
+   "key": "2ishovahiod87vavpldi",
+   "props": {
+    "style": {
+     "height": "100px"
+    },
+    "flex": false
+   },
    "child": null,
    "component": "echart_5"
   }
