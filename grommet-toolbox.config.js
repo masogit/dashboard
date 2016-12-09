@@ -9,7 +9,7 @@ export default {
   jsAssets: ['src/js/**/*.js'],
   mainJs: 'src/js/index.js',
   mainScss: 'src/scss/index.scss',
-  devServerPort: 8001,
+  devServerPort: 9001,
   devServerProxy: {
     '**': "http://localhost:8080"
   },
