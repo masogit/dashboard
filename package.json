@@ -6,7 +6,8 @@
   "repository": "",
   "license": "",
   "scripts": {
-    "build": "gulp dist && git subtree push --prefix dist github gh-pages",
+    "deploy": "git subtree push --prefix dist github gh-pages",
+    "build": "gulp dist",
     "dev": "gulp dev",
     "start": "gulp dist && node server",
     "test": "test"
