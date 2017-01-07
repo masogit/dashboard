@@ -1,5 +1,5 @@
 import echarts from 'echarts';
-import { getMapJson } from '../../../actions/map.js';
+import { getChinaMap } from '../../../actions/map.js';
 
 var data = [
   { name: '海门', value: 9 },
@@ -500,7 +500,8 @@ const option = {
 };
 
 const loadMap = (map = 'china') => {
-  return getMapJson(map).then((china) => {
+  // return echarts.registerMap(map, getChinaMap(map));
+  return getChinaMap(map).then((china) => {
     if (china) {
       echarts.registerMap(map, china);
     }

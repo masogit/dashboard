@@ -10,9 +10,9 @@ export default {
   mainJs: 'src/js/index.js',
   mainScss: 'src/scss/index.scss',
   devServerPort: 9001,
-  devServerProxy: {
-    '**': "http://localhost:8080"
-  },
+  // devServerProxy: {
+  //   '**': "http://localhost:8080"
+  // },
   webpack: {
     devtool: 'cheap-source-map'
   }

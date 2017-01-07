@@ -3,6 +3,15 @@
  */
 import { Rest } from 'grommet';
 import { URL } from '../constants';
+const map = require('../../data/map/china.json');
+
+export function getChinaMap() {
+  return new Promise((resolve, reject) => {
+    resolve(map);
+  }, (err) => {
+    console.log(err);
+  });
+}
 
 export function getMapJson(name) {
   return Rest.default.get(URL.DATA_MAP + name).then((res) => {

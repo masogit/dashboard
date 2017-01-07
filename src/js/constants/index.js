@@ -1,6 +1,9 @@
 import Map_brush from './Map_brush';
 
 const params = {
+  LOCAL: {
+    DECK: 'dashboard_deck'
+  },
   URL: {
     DEVICE_TYPES: '/devicemanager/devicetypes',
     DEVICES: '/devicemanager/devices',

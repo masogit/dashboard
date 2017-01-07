@@ -6,7 +6,7 @@
   "repository": "",
   "license": "",
   "scripts": {
-    "dev1": "node server & gulp dev",
+    "build": "gulp dist && git subtree push --prefix dist github gh-pages",
     "dev": "gulp dev",
     "start": "gulp dist && node server",
     "test": "test"
