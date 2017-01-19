@@ -5,7 +5,7 @@ import UserIcon from 'grommet/components/icons/base/User';
 
 export default class HeaderArea extends Component {
   render() {
-    const {modules, active, setActive, user, title} = this.props;
+    const {modules, active, setActive, user = {}, title} = this.props;
     return (
       <Header justify="between" separator='bottom'>
         <Title> <img src='img/mobile-app-icon.png' width='30px'/> {title} </Title>

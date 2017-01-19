@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 export default class SideBar extends Component {
   render() {
-    const { menus } = this.props;
+    const {menus = {}} = this.props;
     const groups = Object.keys(menus);
     return (
       <Sidebar full={false} pad="small" separator="right">

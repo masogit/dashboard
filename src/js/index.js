@@ -1,4 +1,5 @@
 import '../less/index.less';
+import '../scss/index.scss';
 
 import React from 'react';
 import { Provider } from 'react-redux';

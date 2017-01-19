@@ -10,7 +10,7 @@ export default {
   ],
   jsAssets: ['src/js/**/*.js'],
   mainJs: 'src/js/index.js',
-  // mainScss: 'src/less/index.less',
+  mainScss: 'src/sass/index.sass',
   devServerPort: 9001,
   webpack: {
     module: {
