@@ -10,6 +10,17 @@ export default {
   ],
   jsAssets: ['src/js/**/*.js'],
   mainJs: 'src/js/index.js',
-  mainScss: 'src/scss/index.scss',
-  devServerPort: 9001
+  // mainScss: 'src/less/index.less',
+  devServerPort: 9001,
+  webpack: {
+    module: {
+      loaders: [
+        {
+          test: /\.less$/,
+          loader: 'style!css!less'
+        }
+      ]
+    }
+  }
+
 };
