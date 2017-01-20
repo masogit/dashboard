@@ -2,36 +2,19 @@
  * Created by huangling on 19/01/2017.
  */
 import React, {Component} from 'react';
-import store, {types} from '../reducers';
-import {browserHistory} from 'react-router';
-import {Box} from 'grommet';
-import {Header, Footer, Sidebar} from '../components';
+import Board from './chess/Board';
 
-export default class PageDesigner extends Component {
-  login(fields) {
-    if (fields.username) {
-      browserHistory.push('/home');
-      store.dispatch({type: types.LOGIN, login: fields.username});
-    }
-  }
+export default class Chess extends Component {
+  // componentDidMount() {
+  //   setInterval(() => this.props.setPosition([
+  //     Math.floor(Math.random() * 8),
+  //     Math.floor(Math.random() * 8)
+  //   ]), 500);
+  // }
 
   render() {
-    const modules = [{
-      title: 'text'
-    }, {
-      title: 'image'
-    }, {
-      title: 'background'
-    }];
     return (
-      <Box full={true}>
-        <Header modules={modules} title='all the elements'/>
-        <Box flex={true} direction="row">
-          <Sidebar />
-          <Box flex={true}>play ground</Box>
-        </Box>
-        <Footer />
-      </Box>
+      <Board knightPosition={[0, 0]}/>
     );
   }
 }

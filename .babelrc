@@ -1,5 +1,10 @@
 {
-  "presets": [ "es2015", "react" ],
+  "presets": [
+    "stage-1",
+    "react",
+    "es2017",
+    "es2015"
+  ],
   "plugins": [
     "transform-object-rest-spread",
     "transform-object-assign"
