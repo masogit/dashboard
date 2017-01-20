@@ -4,7 +4,7 @@
 import * as types from '../page/chess/constants';
 
 const initialState = {
-  position: [0, 0]
+  position: [1, 7]
 };
 
 export default function (state = initialState, action) {

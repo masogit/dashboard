@@ -2,7 +2,7 @@
  * Created by huangling on 20/01/2017.
  */
 import React, {Component, PropTypes} from 'react';
-import Square from './Square';
+import BoardSquare from './BoardSquare';
 import Knight from './Knight';
 import * as types from './constants';
 import {connect} from 'react-redux';
@@ -13,12 +13,6 @@ class Board extends Component {
   renderSquare(i) {
     const x = i % 8;
     const y = Math.floor(i / 8);
-    const black = (x + y) % 2 === 1;
-
-    const [knightX, knightY] = this.props.knightPosition;
-    const piece = (x === knightX && y === knightY) ?
-      <Knight /> :
-      null;
 
     return (
       <div key={i}
@@ -27,26 +21,18 @@ class Board extends Component {
              height: '12.5%'
            }}
            onClick={() => this.handleSquareClick(x, y)}>
-        <Square black={black}>
-          {piece}
-        </Square>
+        <BoardSquare x={x} y={y}>
+          {this.renderPiece(x, y)}
+        </BoardSquare>
       </div>
     );
   }
 
-  handleSquareClick(x, y) {
-    if (this.canMoveKnight(x, y)) {
-      this.props.setPosition([x, y]);
+  renderPiece(x, y) {
+    const [knightX, knightY] = this.props.knightPosition;
+    if (x === knightX && y === knightY) {
+      return <Knight />;
     }
-  }
-
-  canMoveKnight(toX, toY) {
-    const [x, y] = this.props.knightPosition;
-    const dx = toX - x;
-    const dy = toY - y;
-
-    return (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
-      (Math.abs(dx) === 1 && Math.abs(dy) === 2);
   }
 
   render() {
@@ -74,19 +60,4 @@ Board.propTypes = {
   ).isRequired
 };
 
-
-let mapStateToProps = (state) => {
-  return {
-    knightPosition: state.chess.position
-  };
-};
-
-let mapDispatchProps = (dispatch) => {
-  return {
-    setPosition: (position) => dispatch({type: types.SET_POSITION, position})
-  };
-};
-
-
-export default
-export default DragDropContext(HTML5Backend)(connect(mapStateToProps, mapDispatchProps)(Board));
+export default DragDropContext(HTML5Backend)(Board);

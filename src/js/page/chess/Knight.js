@@ -2,11 +2,14 @@
  * Created by huangling on 20/01/2017.
  */
 import React, {Component, PropTypes} from 'react';
-import {ItemTypes} from 'constants';
+import {ItemTypes} from './constants';
+import {DragSource} from 'react-dnd';
+
 
 const knightSource = {
   beginDrag(props) {
-    return {};
+    console.log(props);
+    return {id: 1};
   }
 };
 
@@ -17,8 +20,7 @@ function collect(connect, monitor) {
   }
 }
 
-export default class Knight extends Component {
-
+class Knight extends Component {
   render() {
     const {connectDragSource, isDragging} = this.props;
     return connectDragSource(
