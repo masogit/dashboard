@@ -37,13 +37,13 @@ class BoardSquare extends Component {
         width: '100%',
         zIndex: 1,
         opacity: 0.5,
-        backgroundColor: color,
+        backgroundColor: color
       }}/>
     );
   }
 
   render() {
-    const {x, y, isOver, connectDropTarget, canDrop} = this.props;
+    const {x, y, isOver, connectDropTarget, canDrop, children} = this.props;
     const black = (x + y) % 2 === 1;
 
     return connectDropTarget(
@@ -53,12 +53,11 @@ class BoardSquare extends Component {
         height: '100%'
       }}>
         <Square black={black}>
-          {this.props.children}
+          {children}
         </Square>
         {isOver && !canDrop && this.renderOverlay('red')}
         {!isOver && canDrop && this.renderOverlay('yellow')}
         {isOver && canDrop && this.renderOverlay('green')}
-        }
       </div>
     );
   }

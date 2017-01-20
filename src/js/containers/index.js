@@ -1,15 +1,9 @@
-import Login from './Login';
-import Frame from './Frame';
-import Home from './Home';
-import Module from './Module';
 import NoFound from './NoFound';
-import Device from './Device';
+import PageDesigner from './PageDesigner';
+import Chess from '../chess';
 
 export {
-  Login,
-  Frame,
-  Home,
-  Module,
+  PageDesigner,
   NoFound,
-  Device
+  Chess
 };

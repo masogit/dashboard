@@ -1,21 +1,11 @@
-import {Device, Frame, Home, Login, Module, NoFound} from './containers';
-import PageDesigner from './page';
+import {PageDesigner, Chess, NoFound} from './containers';
 
 export default [{
   path: '/',
-  component: Login
-}, {
-  path: '/',
-  component: Frame,
-  indexRoute: {component: Home},
-  childRoutes: [
-    {path: 'home', component: Home},
-    {path: 'module', component: Module},
-    {path: 'device', component: Device}
-  ]
-}, {
-  path: 'page',
   component: PageDesigner
+}, {
+  path: '/chess',
+  component: Chess
 }, {
   path: '*',
   component: NoFound

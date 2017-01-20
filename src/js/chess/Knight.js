@@ -17,7 +17,7 @@ function collect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
-  }
+  };
 }
 
 class Knight extends Component {
@@ -26,7 +26,8 @@ class Knight extends Component {
     return connectDragSource(
       <span style={{
         opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
+        fontSize: 70,
+        lineHeight: '70px',
         fontWeight: 'bold',
         cursor: 'move'
       }}>♘</span>
@@ -36,7 +37,7 @@ class Knight extends Component {
 
 Knight.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
-  isDragging: PropTypes.bool.isRequired
+  isDragging: PropTypes.bool.isRequired,
 };
 
 export default DragSource(ItemTypes.KNIGHT, knightSource, collect)(Knight);

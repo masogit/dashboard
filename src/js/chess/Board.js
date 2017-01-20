@@ -4,8 +4,6 @@
 import React, {Component, PropTypes} from 'react';
 import BoardSquare from './BoardSquare';
 import Knight from './Knight';
-import * as types from './constants';
-import {connect} from 'react-redux';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -19,8 +17,7 @@ class Board extends Component {
            style={{
              width: '12.5%',
              height: '12.5%'
-           }}
-           onClick={() => this.handleSquareClick(x, y)}>
+           }}>
         <BoardSquare x={x} y={y}>
           {this.renderPiece(x, y)}
         </BoardSquare>

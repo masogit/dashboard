@@ -2,10 +2,10 @@
  * Created by huangling on 19/01/2017.
  */
 import React, {Component} from 'react';
-import Board from './chess/Board';
-import * as types from './chess/constants';
+import Board from '../chess/Board';
+import * as types from '../chess/constants';
 import {connect} from 'react-redux';
-import {observe} from './chess/Game';
+import {observe} from '../chess/Game';
 
 class Chess extends Component {
   componentWillMount() {
@@ -37,6 +37,4 @@ let mapDispatchProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchProps)(Chess);
-
-
 

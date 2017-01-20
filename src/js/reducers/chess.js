@@ -1,7 +1,7 @@
 /**
  * Created by huangling on 20/01/2017.
  */
-import * as types from '../page/chess/constants';
+import * as types from '../chess/constants';
 
 const initialState = {
   position: [1, 7]
