@@ -1,11 +1,14 @@
-import {PageDesigner, Chess, NoFound} from './containers';
+import Home, {PageDesigner, Chess, NoFound} from './containers';
 
 export default [{
   path: '/',
-  component: PageDesigner
+  component: Home
 }, {
   path: '/chess',
   component: Chess
+}, {
+  path: '/page',
+  component: PageDesigner
 }, {
   path: '*',
   component: NoFound

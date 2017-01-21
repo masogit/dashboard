@@ -1,6 +1,8 @@
-const params = {
-  ROOT_NAME: '/',
-  HEADER_COLOR: 'neutral-1-t'
+const ItemTypes = {
+  Text: 'text'
 };
 
-module.exports = params;
+export {
+  ItemTypes
+};
+
