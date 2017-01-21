@@ -1,5 +1,5 @@
 {
-  "name": "grommet-sample",
+  "name": "pagev3",
   "version": "0.1.0",
   "main": "src/js/index.js",
   "description": "",
@@ -9,7 +9,6 @@
     "start": "gulp dev"
   },
   "dependencies": {
-    "grommet": "^1.0.0",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "react": "^15.0.2",
@@ -19,7 +18,6 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "redux": "^3.6.0",
-    "redux-router": "^2.1.2",
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
