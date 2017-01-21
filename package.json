@@ -6,7 +6,9 @@
   "repository": "",
   "license": "",
   "scripts": {
-    "start": "gulp dev"
+    "start": "gulp dev",
+    "dist": "gulp dist",
+    "deploy": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "less": "^2.7.2",
