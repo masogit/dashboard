@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import Text from '../components/singleItem/Text';
 import Image from '../components/singleItem/Image';
 import BoardSquare from '../components/BoardSquare';
+import {Button} from 'antd';
 
 const Widgets = {
   Image,
@@ -28,19 +29,30 @@ export default class Page extends Component {
   }
 
   render() {
+    const headerItem = [
+      {title: 'Text'}, {title: 'Image'}
+    ];
+
     return (
       <div>
-        <header>
-          <div onClick={() => this.onAddItem('Text')}>
-            Text
-          </div>
-          <div onClick={() => this.onAddItem('Image')}>
-            Image
-          </div>
+        <header className="header">
+          {
+            headerItem.map((item, index) => (
+              <Button className="item"
+                      onClick={() => this.onAddItem(item.title)}>
+                {item.title}
+              </Button>)
+            )
+          }
         </header>
-        <section>
-          <BoardSquare boxes={this.state.boxes} newBox={this.state.newBox}/>
-        </section>
+        <div className="main-container">
+          <section className="content">
+            <BoardSquare boxes={this.state.boxes} newBox={this.state.newBox}/>
+          </section>
+          <aside className="sidebar-right">
+            <Button onClick={() => this.onSave()}>Save</Button>
+          </aside>
+        </div>
       </div>
     );
   }

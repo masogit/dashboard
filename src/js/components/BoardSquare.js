@@ -8,13 +8,6 @@ import {DropTarget, DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import Box from './Box';
 
-const styles = {
-  width: 300,
-  height: 300,
-  border: '1px solid black',
-  position: 'relative'
-};
-
 const squareTarget = {
   drop(props, monitor, component) {
     const item = monitor.getItem();
@@ -65,7 +58,7 @@ class BoardSquare extends Component {
     const {boxes} = this.state;
 
     return connectDropTarget(
-      <div style={styles}>
+      <div className="board">
         {boxes.map((box, index) => {
           const {left, top, title} = box;
           return (
