@@ -38,6 +38,10 @@ export default class Page extends Component {
   }
 
   onPreview() {
+    if (!previewHtml) {
+      this.onSave();
+    }
+
     this.setState({preview: true});
   }
 
