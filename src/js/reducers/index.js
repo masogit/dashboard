@@ -1,15 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import header from './header';
-import device from './device';
-import deck from './deck';
-import system from './system';
+import {createStore, combineReducers} from 'redux';
+import chess from './chess';
 
 const reducers = combineReducers({
-  system,
-  deck,
-  header,
-  device
+  chess
 });
 
-export default createStore(reducers, applyMiddleware(thunkMiddleware));
+export default createStore(reducers);

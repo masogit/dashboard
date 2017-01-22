@@ -1,3 +1,5 @@
+import path from 'path';
+
 export default {
   copyAssets: [
     'src/index.html',
@@ -8,12 +10,17 @@ export default {
   ],
   jsAssets: ['src/js/**/*.js'],
   mainJs: 'src/js/index.js',
-  mainScss: 'src/scss/index.scss',
+  mainScss: 'src/sass/index.sass',
   devServerPort: 9001,
-  // devServerProxy: {
-  //   '**': "http://localhost:8080"
-  // },
   webpack: {
-    devtool: 'cheap-source-map'
+    module: {
+      loaders: [
+        {
+          test: /\.less$/,
+          loader: 'style!css!less'
+        }
+      ]
+    }
   }
+
 };

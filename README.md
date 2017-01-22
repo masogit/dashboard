@@ -1,5 +1,29 @@
-# Dashboard Platform
+# Demo of Grommet Font End Framework
 
-For some reasons, I started this product since 3 months ago, with my dear partner.
+This project is built by React and Redux framework.
 
-Plan to implement a data visualization platform, allow user sync their report data, define their dashboard layouts, define charts on big screen.
+To run this application, execute the following commands:
+
+1. Install NPM modules
+
+    ```
+    $ npm install
+    ```
+
+1. Start the development server:
+
+    ```
+    $ npm start # 
+    ```
+
+1. Create the app distribution to be used by the back-end server
+
+    ```
+    $ npm run dist
+    ```
+  
+1. Deploy github pages from dist folder
+
+    ```
+    $ npm run deploy
+    ```
