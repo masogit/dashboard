@@ -4,10 +4,10 @@ export default [{
   path: '/login',
   component: Login
 }, {
-  path: '/apm',
+  path: '/',
   component: App
 }, {
-  path: '/',
+  path: '/dashboard',
   component: Frame,
   indexRoute: { component: Home },
   childRoutes: [

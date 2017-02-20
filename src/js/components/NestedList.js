@@ -37,8 +37,9 @@ export default class ListExampleNested extends React.Component {
         <ListItem
             primaryText="Inbox"
             leftIcon={<ContentInbox />}
-            initiallyOpen={true}
+            initiallyOpen={false}
             primaryTogglesNestedList={true}
+            onNestedListToggle={this.handleToggle}
             nestedItems={[
               <ListItem
                 key={1}

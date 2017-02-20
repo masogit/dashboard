@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 export default class Login extends Component {
   login(fields) {
     if (fields.username) {
-      browserHistory.push('/home');
+      browserHistory.push('/dashboard/home');
       store.dispatch({type: types.LOGIN, login: fields.username});
     }
   }
@@ -29,4 +29,3 @@ export default class Login extends Component {
     );
   }
 }
-

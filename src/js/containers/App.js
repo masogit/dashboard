@@ -9,7 +9,7 @@ export default class App extends Component {
   render() {
     // const { todos, actions } = this.props;
     return (
-        <MuiThemeProvider muiTheme={theme}>
+        <MuiThemeProvider muiTheme={theme('blackTheme')}>
             <Box flex>
                 <AppBar title="GE Healthcare APM" />
                 <Box>
