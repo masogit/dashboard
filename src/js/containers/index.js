@@ -1,4 +1,5 @@
 import Login from './Login';
+import App from './App';
 import Frame from './Frame';
 import Home from './Home';
 import Settings from './Settings';
@@ -14,6 +15,7 @@ import Status from './Status';
 
 export {
   Login,
+  App,
   Frame,
   Home,
   Settings,

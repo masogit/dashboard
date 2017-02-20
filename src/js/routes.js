@@ -1,8 +1,11 @@
-import { Customer, Device, DeviceModel, DeviceAlarm, DeviceHistory, DeviceStatus, Frame, Home, Login, Settings, WorkOrder, NoFound, Status } from './containers';
+import { App, Customer, Device, DeviceModel, DeviceAlarm, DeviceHistory, DeviceStatus, Frame, Home, Login, Settings, WorkOrder, NoFound, Status } from './containers';
 
 export default [{
   path: '/login',
   component: Login
+}, {
+  path: '/apm',
+  component: App
 }, {
   path: '/',
   component: Frame,
@@ -19,7 +22,7 @@ export default [{
     { path: 'settings/device/:model', component: DeviceModel },
     { path: 'settings/status/:param', component: Status }
   ]
-},{
+}, {
   path: '*',
   component: NoFound
 }];
