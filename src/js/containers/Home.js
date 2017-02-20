@@ -4,12 +4,10 @@ import {
   TopCenter,
   TopLeft,
   TopRight,
-  MiddleCenter,
   MiddleLeft,
   MiddleRight,
-  BottomCenter,
-  BottomLeft,
-  BottomRight} from '../components/index';
+  BottomCenter
+ } from '../components/index';
 
 export default class Home extends Component {
   render() {
@@ -34,23 +32,10 @@ export default class Home extends Component {
               <MiddleLeft/>
             </Tile>
             <Tile pad="medium" margin="small" >
-              <MiddleCenter/>
+              <BottomCenter title='RECENT EVENTS'/>
             </Tile>
             <Tile pad="medium" margin="small" >
               <MiddleRight/>
-            </Tile>
-          </Tiles>
-        </Box>
-        <Box style={{flexGrow: 1}}>
-          <Tiles fill={true} flex={true}>
-            <Tile size='large' align='start'>
-              <BottomLeft title='SYSTEM HEALTH SUMMARY'/>
-            </Tile>
-            <Tile size='small'>
-              <BottomCenter title='RECENT EVENTS'/>
-            </Tile>
-            <Tile size='small'>
-              <BottomRight title='USERS FEEDBACK'/>
             </Tile>
           </Tiles>
         </Box>
