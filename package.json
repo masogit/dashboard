@@ -6,7 +6,9 @@
   "repository": "",
   "license": "",
   "scripts": {
-    "start": "gulp dev"
+    "start": "gulp dev",
+    "build": "gulp dist",
+    "publish": "sh ./scripts/build.sh"
   },
   "dependencies": {
     "grommet": "^1.2.1",
