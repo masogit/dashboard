@@ -17,7 +17,7 @@ export default class Menu extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
   }
 
-  handleToggle() {
+  handleToggle(event) {
     this.setState({
       open: !this.state.open
     });
@@ -30,8 +30,6 @@ export default class Menu extends React.Component {
   };
 
   render() {
-
-    console.log(svgIcons);
     const str = "ActionGrade";
     let Icon = svgIcons[str];
     return (
@@ -44,7 +42,7 @@ export default class Menu extends React.Component {
           <ListItem
               primaryText="Inbox"
               leftIcon={<ContentInbox />}
-              initiallyOpen={false}
+              initiallyOpen={true}
               primaryTogglesNestedList={true}
               onNestedListToggle={this.handleToggle}
               nestedItems={[
