@@ -1,20 +1,21 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 import AppBar from 'material-ui/AppBar';
 import { Box, Sidebar } from 'grommet';
-import { NestedList } from '../components';
+import { Menu } from '../components';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import theme from '../constants/themes';
 
-export default class App extends Component {
+class App extends Component {
   render() {
-    // const { todos, actions } = this.props;
+    const { menu } = this.props;
     return (
         <MuiThemeProvider muiTheme={theme('blackTheme')}>
             <Box flex>
                 <AppBar title="GE Healthcare APM" />
                 <Box>
                     <Sidebar separator="right" size="small">
-                        <NestedList />
+                        <Menu menu={menu}/>
                     </Sidebar>
                     <Box>body</Box>
                 </Box>
@@ -29,11 +30,11 @@ export default class App extends Component {
 //   actions: PropTypes.object.isRequired
 // };
 
-// function mapStateToProps(state) {
-//   return {
-//     todos: state.todos
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    menu: state.menu
+  };
+}
 
 // function mapDispatchToProps(dispatch) {
 //   return {
@@ -41,7 +42,6 @@ export default class App extends Component {
 //   };
 // }
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(App);
+export default connect(
+  mapStateToProps
+)(App);

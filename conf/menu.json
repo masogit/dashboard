@@ -1,3 +1,37 @@
-{
-  
-}
+[
+  {
+    "key": "menu_home",
+    "icon": "ActionGrade",
+    "route": "/home",
+    "container": "Home"
+  },
+  {
+    "key": "menu.device_file",
+    "icon": "ContentInbox",
+    "route": "/device",
+    "child": [
+      {
+        "key": "menu.device_file.info",
+        "route": "/info",
+        "container": "DeviceFileInfo"
+      },
+      {
+        "key": "menu.device_file.check",
+        "route": "/check",
+        "container": "DeviceFileCheck"
+      }
+    ]
+  },
+  {
+    "key": "menu.configuration",
+    "icon": "ContentDrafts",
+    "router": "/conf",
+    "child": [
+      {
+        "key": "menu.configuration.tenant",
+        "route": "/tenant",
+        "container": "ConfTenant"
+      }
+    ]
+  }
+]

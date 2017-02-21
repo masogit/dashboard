@@ -41,7 +41,7 @@ const blackTheme = {
 const themes = {
   rawBaseTheme,
   blackTheme
-}
+};
 
 function theme(str = 'rawBaseTheme') {
   getMuiTheme(themes[str]);

@@ -11,7 +11,7 @@ import MiddleRight from './MiddleRight';
 import BottomCenter from './BottomCenter';
 import BottomLeft from './BottomLeft';
 import BottomRight from './BottomRight';
-import NestedList from './NestedList';
+import Menu from './Menu';
 
 export {
   Footer,
@@ -27,5 +27,5 @@ export {
   BottomCenter,
   BottomLeft,
   BottomRight,
-  NestedList
+  Menu
 };
