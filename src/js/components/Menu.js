@@ -32,7 +32,8 @@ export default class Menu extends React.Component {
   render() {
 
     console.log(svgIcons);
-    let Icon = svgIcons["ActionGrade"];
+    const str = "ActionGrade";
+    let Icon = svgIcons[str];
     return (
         <List>
           <Subheader>
