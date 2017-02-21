@@ -29,45 +29,31 @@ export default class Menu extends React.Component {
     });
   };
 
+  renderListItem(items) {
+    return items.map((item) => {
+      const props = {
+        primaryText: item.key
+      };
+
+      if (item.icon) {
+        const Icon = svgIcons[item.icon];
+        props.leftIcon = <Icon />;
+      };
+      
+
+      return <ListItem {...props} />;
+    });
+  }
+
   render() {
-    const str = "ActionGrade";
-    let Icon = svgIcons[str];
+    const { menu } = this.props;
+
     return (
         <List>
           <Subheader>
             Welcome
           </Subheader>
-          <ListItem primaryText="Sent mail" leftIcon={<Icon />} />
-          <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
-          <ListItem
-              primaryText="Inbox"
-              leftIcon={<ContentInbox />}
-              initiallyOpen={true}
-              primaryTogglesNestedList={true}
-              onNestedListToggle={this.handleToggle}
-              nestedItems={[
-                <ListItem
-                  key={1}
-                  primaryText="Starred"
-                  leftIcon={<ActionGrade />}/>,
-                <ListItem
-                  key={2}
-                  primaryText="Sent Mail"
-                  leftIcon={<ContentSend />}
-                  disabled={true}
-                  nestedItems={[
-                    <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />]}/>,
-                <ListItem
-                  key={3}
-                  primaryText="Inbox"
-                  leftIcon={<ContentInbox />}
-                  open={this.state.open}
-                  onNestedListToggle={this.handleNestedListToggle}
-                  nestedItems={[
-                    <ListItem key={1} primaryText="Drafts" leftIcon={<ContentDrafts />} />]}
-              />
-              ]}
-          />
+          { this.renderListItem(menu) }
         </List>
     );
   }
